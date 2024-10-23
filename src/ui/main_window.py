@@ -1,0 +1,29 @@
+from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
+
+from src.ui.widgets.file_toolbar import FileToolbar
+from src.ui.widgets.text_toolbar import TextToolbar
+from src.ui.widgets.text_edit import TextEdit
+from src.ui.widgets.status_bar import StatusBar
+
+
+class MainWindow(QMainWindow):
+    def __init__(self, parent=None) -> None:
+        super().__init__(parent)
+        self.setWindowTitle("Text Editor")
+        self.setMinimumSize(1200, 800)
+        self.file_toolbar = FileToolbar(self)
+        self.text_toolbar = TextToolbar(self)
+        self.status_bar = StatusBar(self)
+        self.addToolBar(self.file_toolbar)
+        self.addToolBar(self.text_toolbar)
+        self.setStatusBar(self.status_bar)
+        self.create_gui()
+        self.text_edit.setFocus()
+
+    def create_gui(self) -> None:
+        central_widget = QWidget()
+        main_layout = QVBoxLayout()
+        self.text_edit = TextEdit(self)
+        main_layout.addWidget(self.text_edit)
+        central_widget.setLayout(main_layout)
+        self.setCentralWidget(central_widget)

@@ -1,0 +1,35 @@
+QMainWindow {
+    font-family: "Arial";
+    font-size: 12pt;
+    background-color: #444444;
+}
+
+QToolBar {
+    background-color: #444444;
+}
+
+QTextEdit {
+    font-family: "Arial";
+    font-size: 15pt;
+    background-color: #DCDCDC;
+    color: #000000;
+}
+
+QStatusBar {
+    background-color: #444444;
+    color: #000000;
+}
+
+QPushButton {
+    width: 15px;
+    height: 15;
+}
+
+QLineEdit {
+    width: 200px;
+    height: 20px;
+    font-family: "Arial";
+    font-size: 13pt;
+    background-color: #DCDCDC;
+    color: #000000;
+}

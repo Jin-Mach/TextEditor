@@ -10,11 +10,12 @@ class MainWindow(QMainWindow):
     def __init__(self, parent=None) -> None:
         super().__init__(parent)
         self.setWindowTitle("Text Editor")
-        self.setMinimumSize(1200, 800)
+        self.setMinimumSize(1400, 800)
         self.file_toolbar = FileToolbar(self)
         self.text_toolbar = TextToolbar(self)
         self.status_bar = StatusBar(self)
         self.addToolBar(self.file_toolbar)
+        self.addToolBarBreak()
         self.addToolBar(self.text_toolbar)
         self.setStatusBar(self.status_bar)
         self.create_gui()

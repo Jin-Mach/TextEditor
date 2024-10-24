@@ -64,5 +64,6 @@ class FileToolbar(QToolBar):
         find_layout.addWidget(find_label)
         find_layout.addWidget(self.find_input)
         find_layout.addWidget(find_button)
+        find_layout.addStretch()
         find_widget.setLayout(find_layout)
         return find_widget

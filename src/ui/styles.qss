@@ -1,35 +1,122 @@
 QMainWindow {
     font-family: "Arial";
     font-size: 12pt;
-    background-color: #444444;
+    background-color: #DCDCDC;
 }
 
 QToolBar {
-    background-color: #444444;
+    background-color: #DCDCDC;
 }
 
 QTextEdit {
+    border: 2px solid #A9A9A9;
     font-family: "Arial";
-    font-size: 15pt;
-    background-color: #DCDCDC;
+    font-size: 14pt;
+    background-color: #FFFFFF;
     color: #000000;
 }
 
 QStatusBar {
-    background-color: #444444;
+    background-color: #DCDCDC;
     color: #000000;
 }
 
 QPushButton {
-    width: 15px;
-    height: 15;
+    border: 2px solid #87CEFA;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    width: 20px;
+    height: 20;
+}
+
+QPushButton:pressed {
+    background-color: #B0B0B0;
+}
+
+QLabel {
+    font-family: "Arial";
+    font-size: 12pt;
+    color: #000000;
 }
 
 QLineEdit {
     width: 200px;
     height: 20px;
+    border: 2px solid #87CEFA;
+    border-radius: 5px;
     font-family: "Arial";
     font-size: 13pt;
+    background-color: white;
+    color: #000000;
+}
+
+QToolTip {
+    background-color: #F0F0F0;
+    color: #333333;
+    border: 1px solid #87CEFA;
+    border-radius: 5px;
+}
+
+#textColor {
+    width: 25px;
+    height: 25px;
+    border: 2px solid #87CEFA;
+    border-radius: 5px;
+    background-color: #DCDCDC;
+}
+
+#textColor QAbstractItemView {
+    background-color: #DCDCDC;
+}
+
+#backgroundColor {
+    width: 25px;
+    height: 25px;
+    border: 2px solid #87CEFA;
+    border-radius: 5px;
+    background-color: #DCDCDC;
+}
+
+#backgroundColor QAbstractItemView {
+    background-color: #DCDCDC;
+}
+
+#fontSize {
+    width: 25px;
+    height: 25px;
+    border: 2px solid #87CEFA;
+    border-radius: 5px;
+    font-size: 11pt;
     background-color: #DCDCDC;
     color: #000000;
+}
+
+#fontSize QAbstractItemView {
+    background-color: #DCDCDC;
+    color: #000000;
+}
+
+#fontSize:focus {
+    border: 2px solid #87CEFA;
+    background-color: #F0F0F0;
+}
+
+#fontFamily {
+    width: 120px;
+    height: 25px;
+    border: 2px solid #87CEFA;
+    border-radius: 5px;
+    font-size: 12pt;
+    background-color: #DCDCDC;
+    color: #000000;
+}
+
+#fontFamily QAbstractItemView {
+    background-color: #DCDCDC;
+    color: #000000;
+}
+
+#fontFamily:focus {
+    border: 2px solid #87CEFA;
+    background-color: #F0F0F0;
 }

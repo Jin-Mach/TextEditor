@@ -1,0 +1,35 @@
+{
+  "file_tooltips": {
+    "new_file": "Create a new file and reset default font and font size",
+    "open_file": "Open an existing file",
+    "save_as_file": "Save document as new file",
+    "save_file": "Save the current file",
+    "close_file": "Close the current file",
+    "save_as_html": "Save file as HTML",
+    "export_to_pdf": "Save file as PDF",
+    "print_preview": "Print preview",
+    "print_document": "Open print dialog",
+    "search": "Find text in document"
+  },
+  "text_tooltips": {
+    "font": "Change font in document or selected text",
+    "font_size": "Change font size in document or selected text",
+    "bold_text": "Change text to bold",
+    "italic_text": "Change text to italic",
+    "underline_text": "Change text to underline",
+    "strikethrough_text": "Change text to strikethrough",
+    "undo": "Undo the last action",
+    "redo": "Redo the last undone action",
+    "copy": "Copy the selected text to clipboard",
+    "paste": "Paste text from clipboard into document",
+    "cut": "Cut the selected text and copy it to clipboard",
+    "select_all": "Select all text in the document",
+    "delete_text": "Delete all text",
+    "align_left": "Align text to the left",
+    "align_center": "Align text to the center",
+    "align_right": "Align text to the right",
+    "align_justified": "Align text to both left and right margins, creating a clean and even look.",
+    "text_color": "Change the color of text or selected text",
+    "background_color": "Change the background color of the document or selected text"
+  }
+}

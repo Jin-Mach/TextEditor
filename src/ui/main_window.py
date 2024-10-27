@@ -1,3 +1,6 @@
+import pathlib
+
+from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
 
 from src.ui.widgets.file_toolbar import FileToolbar
@@ -7,8 +10,11 @@ from src.ui.widgets.status_bar import StatusBar
 
 
 class MainWindow(QMainWindow):
+    application_icon = pathlib.Path(__file__).parent.parent.joinpath("icons", "application_icon.png")
+
     def __init__(self, parent=None) -> None:
         super().__init__(parent)
+        self.setWindowIcon(QIcon(str(self.application_icon)))
         self.setWindowTitle("Text Editor")
         self.setMinimumSize(1400, 800)
         self.file_toolbar = FileToolbar(self)

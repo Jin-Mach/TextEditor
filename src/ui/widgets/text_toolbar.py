@@ -7,8 +7,8 @@ from PyQt6.QtWidgets import QToolBar, QWidget, QHBoxLayout, QComboBox, QPushButt
 
 
 class TextToolbar(QToolBar):
-    tooltips_path = str(pathlib.Path(__file__).parent.parent.joinpath("tooltips", "tooltips_en.json"))
-    icons_path = pathlib.Path(__file__).parent.parent.joinpath("icons", "text_icons")
+    tooltips_path = str(pathlib.Path(__file__).parent.parent.parent.joinpath("config", "tooltips", "tooltips_en.json"))
+    icons_path = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "text_icons")
     font_list = ["Arial", "Calibri", "Comic Sans MS", "Courier New", "Georgia", "Helvetica", "Palatino", "Tahoma", "Times New Roman", "Verdana"]
     font_sizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
     combobox_colors = ["#000000", "#FFFFFF", "#1E90FF", "#32CD32", "#FF4500", "#FFA500", "#FFFF00", "#9370DB", "#8B4513", "#B22222"]

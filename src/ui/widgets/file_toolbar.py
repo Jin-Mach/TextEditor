@@ -7,8 +7,8 @@ from PyQt6.QtWidgets import QToolBar, QWidget, QPushButton, QHBoxLayout, QLabel,
 
 
 class FileToolbar(QToolBar):
-    tooltips_path = str(pathlib.Path(__file__).parent.parent.joinpath("tooltips", "tooltips_en.json"))
-    icons_path = pathlib.Path(__file__).parent.parent.joinpath("icons", "file_icons")
+    tooltips_path = str(pathlib.Path(__file__).parent.parent.parent.joinpath("config", "tooltips", "tooltips_en.json"))
+    icons_path = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "file_icons")
 
     def __init__(self, parent=None) -> None:
         super().__init__(parent)

@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QToolBar, QWidget, QPushButton, QHBoxLayout, QLabel,
 
 
 class FileToolbar(QToolBar):
-    tooltips_path = str(pathlib.Path(__file__).parent.parent.parent.joinpath("config", "tooltips", "tooltips_en.json"))
+    tooltips_path = pathlib.Path(__file__).parent.parent.parent.joinpath("config", "tooltips", "tooltips_en.json")
     icons_path = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "file_icons")
 
     def __init__(self, parent=None) -> None:
@@ -17,7 +17,7 @@ class FileToolbar(QToolBar):
         self.setOrientation(Qt.Orientation.Horizontal)
         self.setFloatable(False)
         self.setMovable(False)
-        self.tooltips = self.load_tooltips(self.tooltips_path)
+        self.tooltips = self.load_tooltips(str(self.tooltips_path))
         self.addWidget(self.create_file_widget())
         self.addSeparator()
         self.addWidget(self.create_export_widget())
@@ -99,7 +99,7 @@ class FileToolbar(QToolBar):
 
     @staticmethod
     def load_tooltips(tooltips_path: str) -> dict:
-        with open(tooltips_path, "r", encoding="utf-8") as file:
+        with open(str(tooltips_path), "r", encoding="utf-8") as file:
             tooltips = json.load(file)
             return tooltips["file_tooltips"]
 

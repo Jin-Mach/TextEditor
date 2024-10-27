@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QToolBar, QWidget, QHBoxLayout, QComboBox, QPushButt
 
 
 class TextToolbar(QToolBar):
-    tooltips_path = str(pathlib.Path(__file__).parent.parent.parent.joinpath("config", "tooltips", "tooltips_en.json"))
+    tooltips_path = pathlib.Path(__file__).parent.parent.parent.joinpath("config", "tooltips", "tooltips_en.json")
     icons_path = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "text_icons")
     font_list = ["Arial", "Calibri", "Comic Sans MS", "Courier New", "Georgia", "Helvetica", "Palatino", "Tahoma", "Times New Roman", "Verdana"]
     font_sizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
@@ -20,7 +20,7 @@ class TextToolbar(QToolBar):
         self.setOrientation(Qt.Orientation.Horizontal)
         self.setFloatable(False)
         self.setMovable(False)
-        self.tooltips = self.load_tooltips(self.tooltips_path)
+        self.tooltips = self.load_tooltips(str(self.tooltips_path))
         self.addWidget(self.create_font_widget())
         self.addSeparator()
         self.addWidget(self.create_style_widget())

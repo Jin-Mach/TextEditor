@@ -31,5 +31,11 @@
     "align_justified": "Align text to both left and right margins, creating a clean and even look.",
     "text_color": "Change the color of text or selected text",
     "background_color": "Change the background color of the document or selected text"
+  },
+  "messagebox_tooltips": {
+    "application_continue_button": "Opens the editor without styles.",
+    "application_cancel_button": "Closes the dialog and exits the application.",
+    "error_copy_button": "Copy error to clipboard",
+    "error_cancel_button": "Close dialog"
   }
 }

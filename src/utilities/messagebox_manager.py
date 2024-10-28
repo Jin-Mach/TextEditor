@@ -1,61 +1,53 @@
-import json
 import pathlib
 import sys
 
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QMessageBox, QApplication, QWidget
+from PyQt6.QtWidgets import QMessageBox, QApplication, QPushButton
+
+from src.utilities.decoration_manager import DecorationManager
 
 
 class MessageboxManager:
-    icons_path = pathlib.Path(__file__).parent.parent.joinpath("icons")
-    tooltips_path = pathlib.Path(__file__).parent.parent.joinpath("config", "tooltips", "tooltips_en.json")
+    def __init__(self) -> None:
+        self.icons_path = pathlib.Path(__file__).parent.parent.joinpath("icons", "dialog_icons")
 
-    @staticmethod
-    def load_tooltips() -> dict:
-        with open(str(MessageboxManager.tooltips_path), "r", encoding="utf-8") as file:
-            tooltips = json.load(file)
-            return tooltips["messagebox_tooltips"]
-
-    @staticmethod
-    def set_tooltips(widget: QWidget, tooltip_key: str) -> None:
-        tooltips_text = MessageboxManager.load_tooltips().get(tooltip_key)
-        widget.setToolTip(tooltips_text)
-        widget.setToolTipDuration(5000)
-
-    @staticmethod
-    def show_load_error_message(style_file_path: str) -> None:
+    def show_load_error_message(self, style_file_path: str) -> None:
         message_box = QMessageBox()
-        message_box.setWindowIcon(QIcon(str(MessageboxManager.icons_path.joinpath("loading_error_icon.png"))))
+        message_box.setWindowIcon(QIcon(str(self.icons_path.joinpath("loading.png"))))
         message_box.setWindowTitle("Error Loading Styles")
         message_box.setIcon(QMessageBox.Icon.Critical)
         message_box.setText(
             f"Unable to load 'styles.qss'.\n"
             f"Some features (like print preview, printing, etc.) may not work correctly.\n"
             f"Please check the file location: {style_file_path}")
-
-        continue_button = message_box.addButton("Continue", QMessageBox.ButtonRole.AcceptRole)
-        MessageboxManager.set_tooltips(continue_button, "application_continue_button")
-        cancel_button = message_box.addButton("Cancel", QMessageBox.ButtonRole.RejectRole)
-        MessageboxManager.set_tooltips(cancel_button, "application_cancel_button")
-
+        self.continue_button = message_box.addButton("Continue", QMessageBox.ButtonRole.AcceptRole)
+        self.continue_button.setObjectName("applicationContinue")
+        self.cancel_button = message_box.addButton("Cancel", QMessageBox.ButtonRole.RejectRole)
+        self.cancel_button.setObjectName("applicationCancel")
+        self.set_tooltips(message_box)
         message_box.exec()
-
-        if message_box.clickedButton() == cancel_button:
+        if message_box.clickedButton() == self.cancel_button:
             sys.exit(1)
 
-    @staticmethod
-    def show_error_message(error_message: str, parent=None) -> None:
+    def show_error_message(self, error_message: str, parent=None) -> None:
         message_box = QMessageBox(parent)
         message_box.setWindowTitle("Error")
-        message_box.setWindowIcon(QIcon(str(MessageboxManager.icons_path.joinpath("error_icon.png"))))
+        message_box.setWindowIcon(QIcon(str(self.icons_path.joinpath("error.png"))))
         message_box.setText(error_message)
-        copy_button = message_box.addButton("Copy", QMessageBox.ButtonRole.AcceptRole)
-        MessageboxManager.set_tooltips(copy_button, "error_copy_button")
-        cancel_button = message_box.addButton("Cancel", QMessageBox.ButtonRole.RejectRole)
-        MessageboxManager.set_tooltips(cancel_button, "error_cancel_button")
-
+        self.copy_button = message_box.addButton("Copy", QMessageBox.ButtonRole.AcceptRole)
+        self.copy_button.setObjectName("errorCopy")
+        self.cancel_button = message_box.addButton("Cancel", QMessageBox.ButtonRole.RejectRole)
+        self.cancel_button.setObjectName("errorCancel")
+        self.set_tooltips(message_box)
         message_box.exec()
-
-        if message_box.clickedButton() == copy_button:
+        if message_box.clickedButton() == self.copy_button:
             QApplication.clipboard().setText(error_message)
             message_box.close()
+
+    def set_tooltips(self, parent):
+        tooltips = DecorationManager.get_tooltips("messagebox_tooltips")
+        for button in parent.findChildren(QPushButton):
+            if button.objectName() in tooltips:
+                tooltips_text = tooltips.get(button.objectName())
+                button.setToolTip(tooltips_text)
+                button.setToolTipDuration(5000)

@@ -19,7 +19,7 @@ A simple text editor designed for productive work with basic formatting options.
 
 2. Navigate to the project directory:
     ```
-    cd InternetSpeedTest
+    cd TextEditor
     ```
 
 3. Create a virtual environment:

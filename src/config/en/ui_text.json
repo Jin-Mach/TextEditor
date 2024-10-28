@@ -1,0 +1,15 @@
+{
+    "messagebox": {
+        "loadingError": "Loading styles error",
+        "applicationContinue": "Continue",
+        "applicationCancel": "Cancel",
+        "errorMessage": "Error",
+        "errorCopy": "Copy",
+        "errorCancel": "Cancel"
+    },
+    "statusbar": {
+        "characters": "Characters: 0",
+        "lines": "Lines: 1",
+        "cursor": "Cursor position: line: 1, char: 0"
+    }
+}

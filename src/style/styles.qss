@@ -14,10 +14,21 @@ QTextEdit {
     font-size: 14pt;
     background-color: #FFFFFF;
     color: #000000;
+    margin-top: 0;
+    margin-right: 5px;
+    margin-botton: 0;
+    margin-left: 5px;
 }
 
 QStatusBar {
     background-color: #DCDCDC;
+}
+
+QStatusBar QLabel {
+    border: 2px solid #87CEFA;
+    border-radius: 5px;
+    font-size: 13px;
+    font-family: Arial;
     color: #000000;
 }
 
@@ -26,7 +37,7 @@ QPushButton {
     border-radius: 5px;
     background-color: #FFFFFF;
     width: 20px;
-    height: 20;
+    height: 20px;
 }
 
 QPushButton:pressed {

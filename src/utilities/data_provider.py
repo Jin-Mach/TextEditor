@@ -24,3 +24,9 @@ class DataProvider:
         with open(str(pathlib.Path(__file__).parent.parent.joinpath("config", "en", "errors.json")), "r", encoding="utf-8") as file:
             errors = json.load(file)
             return errors
+
+    @staticmethod
+    def get_ui_text(widget_tooltip: str) -> dict:
+        with open(str(pathlib.Path(__file__).parent.parent.joinpath("config", "en", "ui_text.json")), "r", encoding="utf-8") as file:
+            ui_text = json.load(file)[widget_tooltip]
+            return ui_text

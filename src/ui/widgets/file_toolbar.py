@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QToolBar, QWidget, QPushButton, QHBoxLayout, QLabel, QLineEdit
 
-from src.utilities.decoration_manager import DecorationManager
+from src.utilities.data_provider import DataProvider
 
 
 class FileToolbar(QToolBar):
@@ -87,7 +87,7 @@ class FileToolbar(QToolBar):
         return search_widget
 
     def set_icons(self) -> None:
-        icons_dict = DecorationManager.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "file_icons"))
+        icons_dict = DataProvider.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "file_icons"))
         buttons = self.findChildren(QPushButton)
         for button in buttons:
             name = button.objectName()
@@ -96,7 +96,7 @@ class FileToolbar(QToolBar):
                 button.setIconSize(QSize(20, 20))
 
     def set_tooltips(self) -> None:
-        tooltips = DecorationManager.get_tooltips("file_tooltips")
+        tooltips = DataProvider.get_tooltips("file_tooltips")
         for button in self.findChildren(QPushButton):
             if button.objectName() in tooltips:
                 tooltips_text = tooltips.get(button.objectName())

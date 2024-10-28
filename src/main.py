@@ -17,6 +17,6 @@ def create_app() -> None:
     except Exception as e:
         setup_logger().error(str(e))
         messagebox_manager = MessageboxManager()
-        messagebox_manager.show_load_error_message(str(style_file_path))
+        messagebox_manager.show_load_error_message(e, str(style_file_path))
     window.show()
     sys.exit(application.exec())

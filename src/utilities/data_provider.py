@@ -2,11 +2,11 @@ import json
 import pathlib
 
 
-class DecorationManager:
+class DataProvider:
 
     @staticmethod
     def get_tooltips(widget_tooltip: str) -> dict:
-        with open(str(pathlib.Path(__file__).parent.parent.joinpath("config", "tooltips", "tooltips_en.json")), "r", encoding="utf-8") as file:
+        with open(str(pathlib.Path(__file__).parent.parent.joinpath("config", "en", "tooltips.json")), "r", encoding="utf-8") as file:
           tooltips = json.load(file)[widget_tooltip]
           return tooltips
 
@@ -18,3 +18,9 @@ class DecorationManager:
                 key = icon.stem
                 icons_dict[key] = icon
         return icons_dict
+
+    @staticmethod
+    def get_errors() -> dict:
+        with open(str(pathlib.Path(__file__).parent.parent.joinpath("config", "en", "errors.json")), "r", encoding="utf-8") as file:
+            errors = json.load(file)
+            return errors

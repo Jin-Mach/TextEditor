@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon, QColor, QPixmap, QFont
 from PyQt6.QtWidgets import QToolBar, QWidget, QHBoxLayout, QComboBox, QPushButton
 
-from src.utilities.decoration_manager import DecorationManager
+from src.utilities.data_provider import DataProvider
 
 
 class TextToolbar(QToolBar):
@@ -141,7 +141,7 @@ class TextToolbar(QToolBar):
         return colors_widget
 
     def set_icons(self) -> None:
-        icons_dict = DecorationManager.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "text_icons"))
+        icons_dict = DataProvider.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "text_icons"))
         buttons = self.findChildren(QPushButton)
         for button in buttons:
             name = button.objectName()
@@ -155,7 +155,7 @@ class TextToolbar(QToolBar):
         return QIcon(pixmap)
 
     def set_tooltips(self) -> None:
-        tooltips = DecorationManager.get_tooltips("text_tooltips")
+        tooltips = DataProvider.get_tooltips("text_tooltips")
         for button in self.findChildren(QPushButton):
             if button.objectName() in tooltips:
                 tooltips_text = tooltips.get(button.objectName())

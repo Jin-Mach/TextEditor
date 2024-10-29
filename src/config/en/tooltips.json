@@ -1,5 +1,5 @@
 {
-  "file_tooltips": {
+  "fileTooltips": {
     "newFile": "Create a new file and reset default font and font size",
     "openFile": "Open an existing file",
     "saveAs": "Save document as new file",
@@ -11,7 +11,7 @@
     "print": "Open print dialog",
     "search": "Find text in document"
   },
-  "text_tooltips": {
+  "textTooltips": {
     "fontFamily": "Change font in document or selected text",
     "fontSize": "Change font size in document or selected text",
     "bold": "Change text to bold",
@@ -32,7 +32,7 @@
     "textColor": "Change the color of text or selected text",
     "backgroundColor": "Change the background color of the document or selected text"
   },
-  "messagebox_tooltips": {
+  "messageboxTooltips": {
     "applicationContinue": "Opens the editor without styles.",
     "applicationCancel": "Closes the dialog and exits the application.",
     "errorCopy": "Copy error to clipboard",

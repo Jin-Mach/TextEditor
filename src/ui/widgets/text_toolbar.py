@@ -155,7 +155,7 @@ class TextToolbar(QToolBar):
         return QIcon(pixmap)
 
     def set_tooltips(self) -> None:
-        tooltips = DataProvider.get_tooltips("text_tooltips")
+        tooltips = DataProvider.get_tooltips("textTooltips")
         for button in self.findChildren(QPushButton):
             if button.objectName() in tooltips:
                 tooltips_text = tooltips.get(button.objectName())

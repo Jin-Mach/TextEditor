@@ -8,7 +8,7 @@ class StatusBar(QStatusBar):
         super().__init__(parent)
         self.setObjectName("statusBar")
         self.create_gui()
-        self.set_text_labels()
+        self.set_ui_text()
 
     def create_gui(self) -> None:
         self.character_count_label = QLabel()
@@ -20,7 +20,7 @@ class StatusBar(QStatusBar):
         self.addWidget(self.cursor_position_label)
         self.addPermanentWidget(self.document_format)
 
-    def set_text_labels(self) -> None:
+    def set_ui_text(self) -> None:
         ui_text = DataProvider.get_ui_text("statusbar")
         self.character_count_label.setText(ui_text.get("characters"))
         self.line_count_label.setText(ui_text.get("lines"))

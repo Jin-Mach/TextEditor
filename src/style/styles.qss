@@ -16,8 +16,20 @@ QTextEdit {
     color: #000000;
     margin-top: 0;
     margin-right: 5px;
-    margin-botton: 0;
+    margin-bottom: 0;  /* Opravený překlep */
     margin-left: 5px;
+}
+
+QTextEdit QMenu {
+    border: 2px solid #87CEFA;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #000000;
+}
+
+QTextEdit QMenu::item:selected {
+    background-color: #0000FF;
+    color: #FFFFFF;
 }
 
 QStatusBar {

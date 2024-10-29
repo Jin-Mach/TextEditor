@@ -1,4 +1,10 @@
 {
+    "fileToolbar": {
+        "searchLabel": "Search",
+        "searchLineedit": {
+            "placeholderText": "for search write here..."
+        }
+    },
     "messagebox": {
         "loadingError": "Loading styles error",
         "applicationContinue": "Continue",
@@ -11,5 +17,14 @@
         "characters": "Characters: 0",
         "lines": "Lines: 1",
         "cursor": "Cursor position: line: 1, char: 0"
+    },
+    "textedit": {
+        "undoContext": "Undo",
+        "redoContext": "Redo",
+        "cutContext":"Cut",
+        "copyContext": "Copy",
+        "pasteContext": "Paste",
+        "selectContext": "Select all",
+        "deleteContext": "Delete text"
     }
 }

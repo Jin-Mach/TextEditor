@@ -1,5 +1,7 @@
-from PyQt6.QtGui import QTextOption
-from PyQt6.QtWidgets import QTextEdit, QStatusBar
+from PyQt6.QtGui import QTextOption, QAction
+from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu
+
+from src.utilities.data_provider import DataProvider
 
 
 # noinspection PyUnresolvedReferences
@@ -12,6 +14,7 @@ class TextEdit(QTextEdit):
         self.setWordWrapMode(QTextOption.WrapMode.WordWrap)
         self.setTabStopDistance(50)
         self.setAcceptRichText(True)
+        self.set_ui_text()
         self.cursorPositionChanged.connect(self.refresh_count_labels)
 
     def refresh_count_labels(self) -> None:
@@ -20,3 +23,25 @@ class TextEdit(QTextEdit):
         cursor_line = cursor.blockNumber() + 1
         cursor_char = cursor.columnNumber()
         self.status_bar.update_count_labels(len(self.toPlainText()), lines_count, cursor_line, cursor_char)
+
+    def contextMenuEvent(self, event) -> None:
+        context_menu = QMenu(self)
+        context_menu.addAction(self.undo_action)
+        context_menu.addAction(self.redo_action)
+        context_menu.addAction(self.cut_action)
+        context_menu.addAction(self.copy_action)
+        context_menu.addAction(self.paste_action)
+        context_menu.addSeparator()
+        context_menu.addAction(self.select_action)
+        context_menu.addAction(self.delete_action)
+        context_menu.exec(event.globalPos())
+
+    def set_ui_text(self) -> None:
+        ui_text = DataProvider.get_ui_text("textedit")
+        self.undo_action = QAction(ui_text.get("undoContext"), self)
+        self.redo_action = QAction(ui_text.get("redoContext"), self)
+        self.cut_action = QAction(ui_text.get("cutContext"), self)
+        self.copy_action = QAction(ui_text.get("copyContext"), self)
+        self.paste_action = QAction(ui_text.get("pasteContext"), self)
+        self.select_action = QAction(ui_text.get("selectContext"), self)
+        self.delete_action = QAction(ui_text.get("deleteContext"), self)

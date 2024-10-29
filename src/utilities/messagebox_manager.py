@@ -44,7 +44,7 @@ class MessageboxManager:
             message_box.close()
 
     def set_tooltips(self, parent) -> None:
-        tooltips = DataProvider.get_tooltips("messagebox_tooltips")
+        tooltips = DataProvider.get_tooltips("messageboxTooltips")
         for button in parent.findChildren(QPushButton):
             if button.objectName() in tooltips:
                 tooltips_text = tooltips.get(button.objectName())

@@ -17,6 +17,7 @@ class FileToolbar(QToolBar):
         self.setMovable(False)
         self.create_main_gui()
         self.set_icons()
+        self.set_ui_text()
         self.set_tooltips()
 
     def create_main_gui(self) -> None:
@@ -74,12 +75,13 @@ class FileToolbar(QToolBar):
     def create_search_widget(self) -> QWidget:
         search_widget = QWidget()
         search_layout = QHBoxLayout()
-        search_label = QLabel("Search:")
+        self.search_label = QLabel()
+        self.search_label.setObjectName("searchLabel")
         self.search_input = QLineEdit()
-        self.search_input.setPlaceholderText("for search write here...")
+        self.search_input.setObjectName("searchLineedit")
         self.search_button = QPushButton()
         self.search_button.setObjectName("search")
-        search_layout.addWidget(search_label)
+        search_layout.addWidget(self.search_label)
         search_layout.addWidget(self.search_input)
         search_layout.addWidget(self.search_button)
         search_layout.addStretch()
@@ -96,9 +98,14 @@ class FileToolbar(QToolBar):
                 button.setIconSize(QSize(20, 20))
 
     def set_tooltips(self) -> None:
-        tooltips = DataProvider.get_tooltips("file_tooltips")
+        tooltips = DataProvider.get_tooltips("fileTooltips")
         for button in self.findChildren(QPushButton):
             if button.objectName() in tooltips:
                 tooltips_text = tooltips.get(button.objectName())
                 button.setToolTip(tooltips_text)
                 button.setToolTipDuration(5000)
+
+    def set_ui_text(self) -> None:
+        ui_text = DataProvider.get_ui_text("fileToolbar")
+        self.search_label.setText(ui_text.get("searchLabel"))
+        self.search_input.setPlaceholderText(ui_text.get("searchLineedit")["placeholderText"])

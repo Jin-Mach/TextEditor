@@ -16,7 +16,7 @@ class Filemanager:
             if self.text_edit.toPlainText().strip():
                 message = self.messagebox_manager
                 result = message.empty_text_error(self.parent)
-                if result == "continue":
+                if result == "dontSave":
                     self.text_edit.reset_text_edit()
                 elif result == "save_as":
                     print("save_as")

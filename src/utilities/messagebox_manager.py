@@ -45,8 +45,8 @@ class MessageboxManager:
         message_box = QMessageBox(parent)
         message_box.setWindowTitle(self.ui_text.get("emptyTitle"))
         message_box.setText(self.ui_text.get("emptyText"))
-        self.continue_button = QPushButton(self.ui_text.get("continue"))
-        self.continue_button.setObjectName("continue")
+        self.continue_button = QPushButton(self.ui_text.get("dontSave"))
+        self.continue_button.setObjectName("dontSave")
         self.save_as_button = QPushButton(self.ui_text.get("saveAs"))
         self.save_as_button.setObjectName("saveAs")
         self.cancel_button = QPushButton(self.ui_text.get("cancel"))
@@ -58,7 +58,7 @@ class MessageboxManager:
         self.set_tooltips(message_box)
         message_box.exec()
         if message_box.clickedButton() == self.continue_button:
-            return "continue"
+            return "dontSave"
         elif message_box.clickedButton() == self.save_as_button:
             return "save_as"
         elif message_box.clickedButton() == self.cancel_button:

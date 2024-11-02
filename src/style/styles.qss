@@ -14,16 +14,38 @@ QToolBar QPushButton {
     border: 2px solid #87CEFA;
     border-radius: 5px;
     background-color: #FFFFFF;
-    width: 20px;
-    height: 20px;
 }
 
 QToolBar QPushButton:hover {
-    background-color: #90EE90
+    background-color: #90EE90;
 }
 
 QToolBar QPushButton:pressed {
     background-color: #B0B0B0;
+}
+
+QComboBox {
+    border: 2px solid #87CEFA;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #000000;
+    padding: 2px;
+}
+
+QComboBox QAbstractItemView {
+    border: 2px solid #87CEFA;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+QComboBox QAbstractItemView::item:hover {
+    background-color: #0000FF;
+    color: #FFFFFF;
+}
+
+QComboBox::item:selected {
+    background-color: #0000FF;
+    color: #FFFFFF;
 }
 
 QTextEdit {
@@ -34,7 +56,7 @@ QTextEdit {
     color: #000000;
     margin-top: 0;
     margin-right: 5px;
-    margin-bottom: 0;  /* Opravený překlep */
+    margin-bottom: 0;
     margin-left: 5px;
 }
 
@@ -77,6 +99,10 @@ QLineEdit {
     font-size: 13pt;
     background-color: white;
     color: #000000;
+}
+
+QLineEdit:focus {
+    border: 2px solid #87CEFA;
 }
 
 QToolTip {
@@ -163,8 +189,11 @@ QMessageBox QPushButton {
     border-radius: 5px;
     background-color: #FFFFFF;
     color: #000000;
-    padding: 2px;
-    width: 50px;
+    padding: 5px;
+}
+
+QMessageBox QPushButton:hover {
+    background-color: #90EE90;
 }
 
 QMessageBox QPushButton:pressed {

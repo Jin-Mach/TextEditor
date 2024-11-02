@@ -14,7 +14,7 @@
         "errorCancel": "Cancel",
         "emptyTitle": "Unsaved text",
         "emptyText": "Unsaved text. Save?",
-        "continue": "Continue",
+        "dontSave": "Don't Save",
         "saveAs": "Save as",
         "cancel": "Cancel"
     },

@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
         self.status_bar = StatusBar(self)
         self.text_edit = TextEdit(self.status_bar, self)
         self.file_toolbar = FileToolbar(self.text_edit, self)
-        self.text_toolbar = TextToolbar(self)
+        self.text_toolbar = TextToolbar(self.text_edit, self)
         self.addToolBar(self.file_toolbar)
         self.addToolBarBreak()
         self.addToolBar(self.text_toolbar)

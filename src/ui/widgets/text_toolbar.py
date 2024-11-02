@@ -2,7 +2,7 @@ import pathlib
 
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon, QColor, QPixmap, QFont
-from PyQt6.QtWidgets import QToolBar, QWidget, QHBoxLayout, QComboBox, QPushButton
+from PyQt6.QtWidgets import QToolBar, QWidget, QHBoxLayout, QComboBox, QPushButton, QTextEdit
 
 from src.utilities.data_provider import DataProvider
 
@@ -12,8 +12,9 @@ class TextToolbar(QToolBar):
     font_sizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
     combobox_colors = ["#000000", "#FFFFFF", "#1E90FF", "#32CD32", "#FF4500", "#FFA500", "#FFFF00", "#9370DB", "#8B4513", "#B22222"]
 
-    def __init__(self, parent=None) -> None:
+    def __init__(self, text_edit:QTextEdit, parent=None) -> None:
         super().__init__(parent)
+        self.text_edit = text_edit
         self.setObjectName("textToolbar")
         self.setAllowedAreas(Qt.ToolBarArea.TopToolBarArea)
         self.setOrientation(Qt.Orientation.Horizontal)
@@ -147,7 +148,7 @@ class TextToolbar(QToolBar):
             name = button.objectName()
             if name in icons_dict.keys():
                 button.setIcon(QIcon(str(icons_dict[name])))
-                button.setIconSize(QSize(20, 20))
+                button.setIconSize(QSize(25, 25))
 
     def set_tooltips(self) -> None:
         tooltips = DataProvider.get_tooltips("textTooltips")

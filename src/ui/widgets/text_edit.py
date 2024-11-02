@@ -1,5 +1,5 @@
 from PyQt6.QtGui import QTextOption, QAction, QFont
-from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu
+from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu, QToolBar
 
 from src.utilities.data_provider import DataProvider
 
@@ -50,3 +50,10 @@ class TextEdit(QTextEdit):
         self.clear()
         self.setFont(QFont("Arial", 14))
         self.setFocus()
+        text_toolbars = self.parent().findChildren(QToolBar)
+        for toolbar in text_toolbars:
+            if toolbar.objectName() == "fileToolbar":
+                toolbar.save_button.setDisabled(True)
+            elif toolbar.objectName() == "textToolbar":
+                toolbar.font_family_combobox.setCurrentText("Arial")
+                toolbar.font_size_combobox.setCurrentText("14")

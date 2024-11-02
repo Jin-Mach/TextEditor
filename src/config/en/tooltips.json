@@ -37,7 +37,7 @@
     "applicationCancel": "Close the dialog and exit the application.",
     "errorCopy": "Copy the error message to the clipboard.",
     "errorCancel": "Close the error dialog.",
-    "continue": "Clear the document and reset font and font size.",
+    "dontSave": "Clear the document and reset font and font size.",
     "saveAs": "Save the document under a new file name.",
     "cancel": "Close the dialog."
   }

@@ -101,7 +101,7 @@ class FileToolbar(QToolBar):
             name = button.objectName()
             if name in icons_dict.keys():
                 button.setIcon(QIcon(str(icons_dict[name])))
-                button.setIconSize(QSize(20, 20))
+                button.setIconSize(QSize(25, 25))
 
     def set_tooltips(self) -> None:
         tooltips = DataProvider.get_tooltips("fileTooltips")

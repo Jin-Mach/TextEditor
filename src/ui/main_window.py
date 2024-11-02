@@ -1,7 +1,7 @@
 import pathlib
 
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
+from PyQt6.QtWidgets import QMainWindow
 
 from src.ui.widgets.file_toolbar import FileToolbar
 from src.ui.widgets.text_toolbar import TextToolbar
@@ -19,7 +19,7 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(1400, 800)
         self.status_bar = StatusBar(self)
         self.text_edit = TextEdit(self.status_bar, self)
-        self.file_toolbar = FileToolbar(self)
+        self.file_toolbar = FileToolbar(self.text_edit, self)
         self.text_toolbar = TextToolbar(self)
         self.addToolBar(self.file_toolbar)
         self.addToolBarBreak()

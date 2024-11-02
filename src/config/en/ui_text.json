@@ -11,7 +11,12 @@
         "applicationCancel": "Cancel",
         "errorMessage": "Error",
         "errorCopy": "Copy",
-        "errorCancel": "Cancel"
+        "errorCancel": "Cancel",
+        "emptyTitle": "Unsaved text",
+        "emptyText": "Unsaved text. Save?",
+        "continue": "Continue",
+        "saveAs": "Save as",
+        "cancel": "Cancel"
     },
     "statusbar": {
         "characters": "Characters: 0",

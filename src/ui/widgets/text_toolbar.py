@@ -149,11 +149,6 @@ class TextToolbar(QToolBar):
                 button.setIcon(QIcon(str(icons_dict[name])))
                 button.setIconSize(QSize(20, 20))
 
-    def create_color_icon(self, color_hex):
-        pixmap = QPixmap(30, 30)
-        pixmap.fill(QColor(color_hex))
-        return QIcon(pixmap)
-
     def set_tooltips(self) -> None:
         tooltips = DataProvider.get_tooltips("textTooltips")
         for button in self.findChildren(QPushButton):
@@ -166,3 +161,9 @@ class TextToolbar(QToolBar):
                 tooltips_text = tooltips.get(combobox.objectName())
                 combobox.setToolTip(tooltips_text)
                 combobox.setToolTipDuration(5000)
+
+    @staticmethod
+    def create_color_icon(color_hex):
+        pixmap = QPixmap(30, 30)
+        pixmap.fill(QColor(color_hex))
+        return QIcon(pixmap)

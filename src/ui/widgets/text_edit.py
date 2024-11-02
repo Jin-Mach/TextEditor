@@ -1,4 +1,4 @@
-from PyQt6.QtGui import QTextOption, QAction
+from PyQt6.QtGui import QTextOption, QAction, QFont
 from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu
 
 from src.utilities.data_provider import DataProvider
@@ -45,3 +45,8 @@ class TextEdit(QTextEdit):
         self.paste_action = QAction(ui_text.get("pasteContext"), self)
         self.select_action = QAction(ui_text.get("selectContext"), self)
         self.delete_action = QAction(ui_text.get("deleteContext"), self)
+
+    def reset_text_edit(self) -> None:
+        self.clear()
+        self.setFont(QFont("Arial", 14))
+        self.setFocus()

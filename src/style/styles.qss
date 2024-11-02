@@ -6,6 +6,24 @@ QMainWindow {
 
 QToolBar {
     background-color: #DCDCDC;
+    margins: 0;
+    padding: 0;
+}
+
+QToolBar QPushButton {
+    border: 2px solid #87CEFA;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    width: 20px;
+    height: 20px;
+}
+
+QToolBar QPushButton:hover {
+    background-color: #90EE90
+}
+
+QToolBar QPushButton:pressed {
+    background-color: #B0B0B0;
 }
 
 QTextEdit {
@@ -42,18 +60,6 @@ QStatusBar QLabel {
     font-size: 13px;
     font-family: Arial;
     color: #000000;
-}
-
-QPushButton {
-    border: 2px solid #87CEFA;
-    border-radius: 5px;
-    background-color: #FFFFFF;
-    width: 20px;
-    height: 20px;
-}
-
-QPushButton:pressed {
-    background-color: #B0B0B0;
 }
 
 QLabel {
@@ -142,4 +148,25 @@ QToolTip {
 #fontFamily:focus {
     border: 2px solid #87CEFA;
     background-color: #F0F0F0;
+}
+
+QMessageBox {
+    background-color: #F0F0F0;
+    color: #333333;
+    border: 1px solid #87CEFA;
+    font-size: 10pt;
+    border-radius: 5px;
+}
+
+QMessageBox QPushButton {
+    border: 2px solid #87CEFA;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    color: #000000;
+    padding: 2px;
+    width: 50px;
+}
+
+QMessageBox QPushButton:pressed {
+    background-color: #B0B0B0;
 }

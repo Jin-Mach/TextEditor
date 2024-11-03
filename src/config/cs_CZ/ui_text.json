@@ -1,0 +1,39 @@
+{
+    "fileToolbar": {
+        "searchLabel": "Hledat",
+        "searchLineedit": {
+            "placeholderText": "pro vyhledávání pište sem..."
+        }
+    },
+    "messagebox": {
+        "loadingError": "Chyba při načítání stylů",
+        "applicationContinue": "Pokračovat",
+        "applicationCancel": "Zrušit",
+        "errorMessage": "Chyba",
+        "errorCopy": "Kopírovat",
+        "errorCancel": "Zrušit",
+        "emptyTitle": "Neukázněný text",
+        "emptyText": "Neukázněný text. Uložit?",
+        "dontSave": "Neukládat",
+        "saveAs": "Uložit jako",
+        "cancel": "Zrušit"
+    },
+    "statusbar": {
+        "characters": "Znaky: 0",
+        "lines": "Řádky: 1",
+        "cursor": "Pozice kurzoru: řádek: 1, znak: 0"
+    },
+    "textedit": {
+        "undoContext": "Vrátit",
+        "redoContext": "Znovu provést",
+        "cutContext":"Vyjmout",
+        "copyContext": "Kopírovat",
+        "pasteContext": "Vložit",
+        "selectContext": "Vybrat vše",
+        "deleteContext": "Smazat text"
+    },
+    "dialog": {
+        "newfileTitle": "Otevřít nový soubor",
+        "fileFilter": "Textové soubory (*.txt);;HTML soubory (*.html)"
+    }
+}

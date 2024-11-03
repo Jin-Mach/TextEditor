@@ -92,7 +92,7 @@ QLabel {
 
 QLineEdit {
     width: 200px;
-    height: 20px;
+    height: 25px;
     border: 2px solid #87CEFA;
     border-radius: 5px;
     font-family: "Arial";

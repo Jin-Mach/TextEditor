@@ -1,0 +1,44 @@
+{
+  "fileTooltips": {
+    "newFile": "Vytvořit nový soubor a resetovat výchozí písmo a velikost písma",
+    "openFile": "Otevřít existující soubor",
+    "saveAs": "Uložit dokument jako nový soubor",
+    "save": "Uložit aktuální soubor",
+    "close": "Zavřít aktuální soubor",
+    "saveHtml": "Uložit dokument jako HTML",
+    "exportPdf": "Uložit dokument jako PDF",
+    "printPreview": "Náhled tisku",
+    "print": "Otevřít dialog pro tisk",
+    "search": "Najít text v dokumentu"
+  },
+  "textTooltips": {
+    "fontFamily": "Změnit písmo v dokumentu nebo vybraném textu",
+    "fontSize": "Změnit velikost písma v dokumentu nebo vybraném textu",
+    "bold": "Změnit text na tučný",
+    "italic": "Změnit text na kurzívu",
+    "underline": "Změnit text na podtržený",
+    "strikethrough": "Změnit text na přeškrtnutý",
+    "undo": "Vrátit poslední akci",
+    "redo": "Znovu provést poslední zrušenou akci",
+    "copy": "Kopírovat vybraný text do schránky",
+    "paste": "Vložit text ze schránky do dokumentu",
+    "cut": "Vyjmout vybraný text a zkopírovat ho do schránky",
+    "selectAll": "Vybrat všechen text v dokumentu",
+    "deleteText": "Smazat veškerý text",
+    "alignLeft": "Zarovnat text vlevo",
+    "alignCenter": "Zarovnat text na střed",
+    "alignRight": "Zarovnat text vpravo",
+    "alignJustified": "Zarovnat text k oběma okrajům",
+    "textColor": "Změnit barvu textu nebo vybraného textu",
+    "backgroundColor": "Změnit barvu pozadí dokumentu nebo vybraného textu"
+  },
+  "messageboxTooltips": {
+    "applicationContinue": "Otevřít editor bez použití stylů",
+    "applicationCancel": "Zavřít dialog a ukončit aplikaci",
+    "errorCopy": "Kopírovat chybovou zprávu do schránky",
+    "errorCancel": "Zavřít dialog s chybou",
+    "dontSave": "Vymazat dokument a resetovat písmo a velikost písma",
+    "saveAs": "Uložit dokument pod novým názvem souboru",
+    "cancel": "Zavřít dialog"
+  }
+}

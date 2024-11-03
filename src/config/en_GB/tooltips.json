@@ -1,0 +1,44 @@
+{
+  "fileTooltips": {
+    "newFile": "Create a new file and reset default font and font size",
+    "openFile": "Open an existing file",
+    "saveAs": "Save document as new file",
+    "save": "Save the current file",
+    "close": "Close the current file",
+    "saveHtml": "Save document as HTML",
+    "exportPdf": "Save document as PDF",
+    "printPreview": "Print preview",
+    "print": "Open print dialog",
+    "search": "Find text in document"
+  },
+  "textTooltips": {
+    "fontFamily": "Change font in document or selected text",
+    "fontSize": "Change font size in document or selected text",
+    "bold": "Change text to bold",
+    "italic": "Change text to italic",
+    "underline": "Change text to underline",
+    "strikethrough": "Change text to strikethrough",
+    "undo": "Undo the last action",
+    "redo": "Redo the last undone action",
+    "copy": "Copy the selected text to clipboard",
+    "paste": "Paste text from clipboard into document",
+    "cut": "Cut the selected text and copy it to clipboard",
+    "selectAll": "Select all text in the document",
+    "deleteText": "Delete all text",
+    "alignLeft": "Align text to the left",
+    "alignCenter": "Align text to the center",
+    "alignRight": "Align text to the right",
+    "alignJustified": "Align text to both left and right margins, creating a clean and even look",
+    "textColor": "Change the color of text or selected text",
+    "backgroundColor": "Change the background color of the document or selected text"
+  },
+  "messageboxTooltips": {
+    "applicationContinue": "Open the editor without any applied styles",
+    "applicationCancel": "Close the dialog and exit the application",
+    "errorCopy": "Copy the error message to the clipboard",
+    "errorCancel": "Close the error dialog",
+    "dontSave": "Clear the document and reset font and font size",
+    "saveAs": "Save the document under a new file name",
+    "cancel": "Close the dialog"
+  }
+}

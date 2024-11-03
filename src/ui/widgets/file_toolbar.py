@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QToolBar, QWidget, QPushButton, QHBoxLayout, QLabel, QLineEdit, QTextEdit
 from src.utilities.data_provider import DataProvider
-from src.utilities.file_manager import Filemanager
+from src.utilities.file_manager import FileManager
 
 
 # noinspection PyUnresolvedReferences
@@ -13,8 +13,9 @@ class FileToolbar(QToolBar):
 
     def __init__(self, text_edit: QTextEdit, parent=None) -> None:
         super().__init__(parent)
+        self.parent = parent
         self.text_edit = text_edit
-        self.file_manager = Filemanager(self.text_edit, self)
+        self.file_manager = FileManager(self.text_edit, self)
         self.setObjectName("fileToolbar")
         self.setAllowedAreas(Qt.ToolBarArea.TopToolBarArea)
         self.setOrientation(Qt.Orientation.Horizontal)
@@ -24,6 +25,7 @@ class FileToolbar(QToolBar):
         self.set_icons()
         self.set_ui_text()
         self.set_tooltips()
+        self.create_connection()
 
     def create_main_gui(self) -> None:
         self.addWidget(self.create_file_widget())
@@ -39,7 +41,6 @@ class FileToolbar(QToolBar):
         file_layout = QHBoxLayout()
         self.new_file_button = QPushButton()
         self.new_file_button.setObjectName("newFile")
-        self.new_file_button.clicked.connect(self.file_manager.new_file)
         self.open_file_button = QPushButton()
         self.open_file_button.setObjectName("openFile")
         self.save_as_button = QPushButton()
@@ -114,3 +115,7 @@ class FileToolbar(QToolBar):
     def set_ui_text(self) -> None:
         self.search_label.setText(self.ui_text.get("searchLabel"))
         self.search_input.setPlaceholderText(self.ui_text.get("searchLineedit")["placeholderText"])
+
+    def create_connection(self) -> None:
+        self.new_file_button.clicked.connect(self.file_manager.new_file)
+        self.open_file_button.clicked.connect(self.file_manager.open_file)

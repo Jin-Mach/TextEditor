@@ -1,0 +1,12 @@
+{
+    "FileNotFound": "Soubor nebyl nalezen. Zkontrolujte prosím cestu k souboru.",
+    "PermissionDenied": "Nedostatečná oprávnění pro otevření nebo zápis do souboru.",
+    "IsADirectory": "Byl vybrán adresář místo souboru. Zkontrolujte prosím typ souboru.",
+    "IOError": "Došlo k chybě během vstupu/výstupu. Zkontrolujte prosím připojení disku.",
+    "ValueError": "Neplatný formát souboru. Ujistěte se, že používáte podporovaný formát.",
+    "EncodingError": "Chyba při dekódování souboru. Zkontrolujte prosím kódování souboru.",
+    "TypeError": "Neplatný typ argumentu. Zkontrolujte prosím vstupní hodnoty.",
+    "MemoryError": "Nedostatečná paměť při pokusu o otevření nebo zpracování souboru.",
+    "TimeoutError": "Operace vypršela, zatímco se pokoušela otevřít nebo uložit soubor.",
+    "UnexpectedError": "Došlo k neočekávané chybě. Zkuste akci provést znovu."
+}

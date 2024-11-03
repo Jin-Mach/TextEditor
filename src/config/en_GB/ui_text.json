@@ -31,5 +31,9 @@
         "pasteContext": "Paste",
         "selectContext": "Select all",
         "deleteContext": "Delete text"
+    },
+    "dialog": {
+        "newfileTitle": "Open new file",
+        "fileFilter": "Text Files (*.txt);;HTML Files (*.html)"
     }
 }

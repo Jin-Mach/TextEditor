@@ -1,9 +1,10 @@
 import pathlib
+from typing import Optional
 
 from PyQt6.QtWidgets import QFileDialog
 
 from src.utilities.data_provider import DataProvider
-from src.utilities.logging_manager import setup_logger
+from src.utilities.exception_manager import ExceptionManager
 from src.utilities.messagebox_manager import MessageboxManager
 
 
@@ -15,12 +16,22 @@ class DialogManager:
         self.dialog_path = pathlib.Path(__file__).resolve().anchor
         self.ui_text = DataProvider.get_ui_text("dialog")
 
-    def open_file_dialog(self) -> str:
+    def open_file_dialog(self) -> Optional[str]:
         try:
             file_name, _ = QFileDialog.getOpenFileName(self.parent, self.ui_text.get("newfileTitle"), str(self.dialog_path),
                                                        self.ui_text.get("fileFilter"))
             if file_name:
                 return file_name
+            return None
         except Exception as e:
-            setup_logger().error(str(e))
-            self.messagebox_manager.show_error_message(e)
+            ExceptionManager.exception_handler(e)
+
+    def save_document_dialog(self, file_type: str) -> Optional[str]:
+        try:
+            file_name, _ = QFileDialog.getSaveFileName(self.parent, self.ui_text.get("savedocumentTitle"),
+                                                       str(self.dialog_path), file_type)
+            if file_name:
+                return file_name
+            return None
+        except Exception as e:
+            ExceptionManager.exception_handler(e)

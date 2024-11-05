@@ -12,11 +12,13 @@
         "errorMessage": "Chyba",
         "errorCopy": "Kopírovat",
         "errorCancel": "Zrušit",
-        "emptyTitle": "Neukázněný text",
-        "emptyText": "Neukázněný text. Uložit?",
+        "savequestionTitle": "Neuložený text",
+        "savequestionText": "Neuložený text. Uložit?",
         "dontSave": "Neukládat",
         "saveAs": "Uložit jako",
-        "cancel": "Zrušit"
+        "cancel": "Zrušit",
+        "emptytextTitle": "Prázdný dokument",
+        "emptytextText": "Nelze uložit prázdný dokument"
     },
     "statusbar": {
         "characters": "Znaky: 0",
@@ -34,6 +36,7 @@
     },
     "dialog": {
         "newfileTitle": "Otevřít nový soubor",
-        "fileFilter": "Textové soubory (*.txt);;HTML soubory (*.html)"
+        "fileFilter": "Textové soubory (*.txt);;HTML soubory (*.html)",
+        "savedocumenTitle": "Uložit dokument"
     }
 }

@@ -43,10 +43,10 @@ class MessageboxManager:
             QApplication.clipboard().setText(self.set_error_text(exception_error))
             message_box.close()
 
-    def empty_text_error(self) -> str:
+    def show_save_question_message(self) -> str:
         message_box = QMessageBox(self.parent)
-        message_box.setWindowTitle(self.ui_text.get("emptyTitle"))
-        message_box.setText(self.ui_text.get("emptyText"))
+        message_box.setWindowTitle(self.ui_text.get("savequestionTitle"))
+        message_box.setText(self.ui_text.get("savequestionText"))
         self.dont_save_button = QPushButton(self.ui_text.get("dontSave"))
         self.dont_save_button.setObjectName("dontSave")
         self.save_as_button = QPushButton(self.ui_text.get("saveAs"))
@@ -62,9 +62,15 @@ class MessageboxManager:
         if message_box.clickedButton() == self.dont_save_button:
             return "dontSave"
         elif message_box.clickedButton() == self.save_as_button:
-            return "save_as"
+            return "saveAs"
         elif message_box.clickedButton() == self.cancel_button:
             return "cancel"
+
+    def show_empty_document_message(self) -> None:
+        messagebox = QMessageBox(self.parent)
+        messagebox.setWindowTitle(self.ui_text.get("emptytextTitle"))
+        messagebox.setText(self.ui_text.get("emptytextText"))
+        messagebox.exec()
 
     @staticmethod
     def set_tooltips(parent) -> None:

@@ -7,6 +7,10 @@ from src.ui.widgets.file_toolbar import FileToolbar
 from src.ui.widgets.text_toolbar import TextToolbar
 from src.ui.widgets.text_edit import TextEdit
 from src.ui.widgets.status_bar import StatusBar
+from src.utilities.dialog_manager import DialogManager
+from src.utilities.exception_manager import ExceptionManager
+from src.utilities.file_manager import FileManager
+from src.utilities.messagebox_manager import MessageboxManager
 
 
 class MainWindow(QMainWindow):
@@ -31,3 +35,26 @@ class MainWindow(QMainWindow):
     def create_gui(self) -> None:
         central_widget = self.text_edit
         self.setCentralWidget(central_widget)
+
+    def closeEvent(self, event) -> None:
+        try:
+            if self.text_edit.toPlainText():
+                messagebox_manager = MessageboxManager(self)
+                result = messagebox_manager.show_save_question_message()
+                if result == "dontSave":
+                    event.accept()
+                elif result == "saveAs":
+                    dialog = DialogManager(self)
+                    file_path = dialog.save_document_dialog("Textové soubory (*.txt)")
+                    if file_path:
+                        file_manager = FileManager(self.text_edit, self)
+                        file_manager.save_document(file_path, "txt")
+                        event.accept()
+                    else:
+                        event.ignore()
+                elif result == "cancel":
+                    event.ignore()
+            else:
+                event.accept()
+        except Exception as e:
+            ExceptionManager.exception_handler(e)

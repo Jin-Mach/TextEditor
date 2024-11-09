@@ -119,5 +119,7 @@ class FileToolbar(QToolBar):
     def create_connection(self) -> None:
         self.new_file_button.clicked.connect(self.file_manager.new_file)
         self.open_file_button.clicked.connect(self.file_manager.open_file)
-        self.save_as_button.clicked.connect(self.file_manager.save_file_as)
+        self.save_as_button.clicked.connect(lambda: self.file_manager.save_file_as(".txt"))
         self.save_button.clicked.connect(self.file_manager.save_file)
+        self.save_as_html_button.clicked.connect(lambda: self.file_manager.save_file_as(".html"))
+        self.export_pdf_button.clicked.connect(lambda: self.file_manager.save_file_as(".pdf"))

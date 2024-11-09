@@ -2,7 +2,7 @@ import pathlib
 import sys
 
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QMessageBox, QApplication, QPushButton
+from PyQt6.QtWidgets import QMessageBox, QApplication, QPushButton, QTextEdit
 
 from src.utilities.data_provider import DataProvider
 
@@ -66,11 +66,12 @@ class MessageboxManager:
         elif message_box.clickedButton() == self.cancel_button:
             return "cancel"
 
-    def show_empty_document_message(self) -> None:
+    def show_empty_document_message(self, text_edit: QTextEdit) -> None:
         messagebox = QMessageBox(self.parent)
         messagebox.setWindowTitle(self.ui_text.get("emptytextTitle"))
         messagebox.setText(self.ui_text.get("emptytextText"))
         messagebox.exec()
+        text_edit.setFocus()
 
     @staticmethod
     def set_tooltips(parent) -> None:

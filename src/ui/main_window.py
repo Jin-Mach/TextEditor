@@ -7,6 +7,7 @@ from src.ui.widgets.file_toolbar import FileToolbar
 from src.ui.widgets.text_toolbar import TextToolbar
 from src.ui.widgets.text_edit import TextEdit
 from src.ui.widgets.status_bar import StatusBar
+from src.utilities.data_provider import DataProvider
 from src.utilities.dialog_manager import DialogManager
 from src.utilities.exception_manager import ExceptionManager
 from src.utilities.file_manager import FileManager
@@ -21,6 +22,7 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(str(self.application_icon)))
         self.setWindowTitle("Text Editor")
         self.setMinimumSize(1400, 800)
+        self.ui_text = DataProvider.get_ui_text("dialog")
         self.status_bar = StatusBar(self)
         self.text_edit = TextEdit(self.status_bar, self)
         self.file_toolbar = FileToolbar(self.text_edit, self)
@@ -30,7 +32,6 @@ class MainWindow(QMainWindow):
         self.addToolBar(self.text_toolbar)
         self.create_gui()
         self.setStatusBar(self.status_bar)
-        self.text_edit.setFocus()
 
     def create_gui(self) -> None:
         central_widget = self.text_edit
@@ -45,7 +46,7 @@ class MainWindow(QMainWindow):
                     event.accept()
                 elif result == "saveAs":
                     dialog = DialogManager(self)
-                    file_path = dialog.save_document_dialog("Textové soubory (*.txt)")
+                    file_path = dialog.save_document_dialog(f"{self.ui_text.get("fileFilter")}")
                     if file_path:
                         file_manager = FileManager(self.text_edit, self)
                         file_manager.save_document(file_path, "txt")

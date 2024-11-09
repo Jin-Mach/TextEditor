@@ -14,8 +14,8 @@
         "errorCancel": "Cancel",
         "emptyTitle": "Unsaved text",
         "emptyText": "Unsaved text. Save?",
-        "dontSave": "Don't Save",
-        "saveAs": "Save as",
+        "dontSave": "Don't save",
+        "saveAs": "Save",
         "cancel": "Cancel"
     },
     "statusbar": {
@@ -34,6 +34,7 @@
     },
     "dialog": {
         "newfileTitle": "Open new file",
-        "fileFilter": "Text Files (*.txt);;HTML Files (*.html)"
+        "fileFilter": "Files (*.txt);;HTML Files (*.html)",
+        "savefileType": "Files"
     }
 }

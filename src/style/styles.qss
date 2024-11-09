@@ -96,7 +96,7 @@ QLineEdit {
     border: 2px solid #87CEFA;
     border-radius: 5px;
     font-family: "Arial";
-    font-size: 13pt;
+    font-size: 11pt;
     background-color: white;
     color: #000000;
 }

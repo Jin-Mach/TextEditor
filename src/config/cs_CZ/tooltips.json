@@ -2,7 +2,7 @@
   "fileTooltips": {
     "newFile": "Vytvořit nový soubor a resetovat výchozí písmo a velikost písma",
     "openFile": "Otevřít existující soubor",
-    "saveAs": "Uložit dokument jako nový soubor",
+    "saveAs": "Uložit dokument jako textový soubor",
     "save": "Uložit aktuální soubor",
     "close": "Zavřít aktuální soubor",
     "saveHtml": "Uložit dokument jako HTML",
@@ -37,8 +37,8 @@
     "applicationCancel": "Zavřít dialog a ukončit aplikaci",
     "errorCopy": "Kopírovat chybovou zprávu do schránky",
     "errorCancel": "Zavřít dialog s chybou",
-    "dontSave": "Vymazat dokument a resetovat písmo a velikost písma",
-    "saveAs": "Uložit dokument pod novým názvem souboru",
+    "dontSave": "Pokračovat bez uložení",
+    "saveAs": "Uložit dokument",
     "cancel": "Zavřít dialog"
   }
 }

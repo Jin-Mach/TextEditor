@@ -66,10 +66,10 @@ class MessageboxManager:
         elif message_box.clickedButton() == self.cancel_button:
             return "cancel"
 
-    def show_empty_document_message(self, text_edit: QTextEdit) -> None:
+    def show_empty_document_message(self, text_edit: QTextEdit, text: str) -> None:
         messagebox = QMessageBox(self.parent)
         messagebox.setWindowTitle(self.ui_text.get("emptytextTitle"))
-        messagebox.setText(self.ui_text.get("emptytextText"))
+        messagebox.setText(text)
         messagebox.exec()
         text_edit.setFocus()
 

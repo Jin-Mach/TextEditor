@@ -18,7 +18,8 @@ class FileManager:
         self.last_file_path = ""
         self.messagebox_manager = MessageboxManager(self.parent)
         self.dialog_manager = DialogManager(self.parent.parent)
-        self.ui_text = DataProvider.get_ui_text("dialog")
+        self.dialog_ui_text = DataProvider.get_ui_text("dialog")
+        self.messagebox_ui_text = DataProvider.get_ui_text("messagebox")
         self.text_edit = text_edit
 
     def new_file(self) -> None:
@@ -58,9 +59,9 @@ class FileManager:
     def save_file_as(self, file_type: str) -> None:
         try:
             if not self.text_edit.toPlainText():
-                self.messagebox_manager.show_empty_document_message(self.text_edit)
+                self.messagebox_manager.show_empty_document_message(self.text_edit, self.messagebox_ui_text.get("emptytextText"))
             else:
-                file_path = self.dialog_manager.save_document_dialog(f"{self.ui_text.get("filefilterName")} (*{file_type})")
+                file_path = self.dialog_manager.save_document_dialog(f"{self.dialog_ui_text.get("filefilterName")} (*{file_type})")
                 if file_path:
                     self.save_document(file_path, file_type)
                     self.last_file_path = file_path
@@ -72,7 +73,7 @@ class FileManager:
     def save_file(self) -> None:
         try:
             if not self.text_edit.toPlainText():
-                self.messagebox_manager.show_empty_document_message(self.text_edit)
+                self.messagebox_manager.show_empty_document_message(self.text_edit, self.messagebox_ui_text.get("emptytextText"))
             else:
                 file_type = pathlib.Path(self.last_file_path).suffix
                 self.save_document(self.last_file_path, file_type)

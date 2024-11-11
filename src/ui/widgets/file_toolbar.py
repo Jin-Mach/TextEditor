@@ -3,14 +3,14 @@ import pathlib
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QToolBar, QWidget, QPushButton, QHBoxLayout, QLabel, QLineEdit, QTextEdit
+
 from src.utilities.data_provider import DataProvider
 from src.utilities.file_manager import FileManager
+from src.utilities.find_manager import FindManager
 
 
 # noinspection PyUnresolvedReferences
 class FileToolbar(QToolBar):
-    ui_text = DataProvider.get_ui_text("fileToolbar")
-
     def __init__(self, text_edit: QTextEdit, parent=None) -> None:
         super().__init__(parent)
         self.parent = parent
@@ -25,6 +25,7 @@ class FileToolbar(QToolBar):
         self.set_icons()
         self.set_ui_text()
         self.set_tooltips()
+        self.find_manager = FindManager(self.search_input, self.text_edit, self)
         self.create_connection()
 
     def create_main_gui(self) -> None:
@@ -113,8 +114,9 @@ class FileToolbar(QToolBar):
                 button.setToolTipDuration(5000)
 
     def set_ui_text(self) -> None:
-        self.search_label.setText(self.ui_text.get("searchLabel"))
-        self.search_input.setPlaceholderText(self.ui_text.get("searchLineedit")["placeholderText"])
+        ui_text = DataProvider.get_ui_text("fileToolbar")
+        self.search_label.setText(ui_text.get("searchLabel"))
+        self.search_input.setPlaceholderText(ui_text.get("searchLineedit")["placeholderText"])
 
     def create_connection(self) -> None:
         self.new_file_button.clicked.connect(self.file_manager.new_file)
@@ -123,3 +125,4 @@ class FileToolbar(QToolBar):
         self.save_button.clicked.connect(self.file_manager.save_file)
         self.save_as_html_button.clicked.connect(lambda: self.file_manager.save_file_as(".html"))
         self.export_pdf_button.clicked.connect(lambda: self.file_manager.save_file_as(".pdf"))
+        self.search_button.clicked.connect(self.find_manager.find_text)

@@ -57,3 +57,8 @@ class TextEdit(QTextEdit):
             elif toolbar.objectName() == "textToolbar":
                 toolbar.font_family_combobox.setCurrentText("Arial")
                 toolbar.font_size_combobox.setCurrentText("14")
+
+    def mousePressEvent(self, event) -> None:
+        if self.extraSelections():
+            self.setExtraSelections([])
+        super().mousePressEvent(event)

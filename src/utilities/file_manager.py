@@ -5,6 +5,7 @@ from PyQt6.QtPrintSupport import QPrinter
 from PyQt6.QtCore import QMarginsF
 from PyQt6.QtWidgets import QTextEdit
 
+from src.ui.widgets.text_toolbar import TextToolbar
 from src.utilities.data_provider import DataProvider
 from src.utilities.exception_manager import ExceptionManager
 from src.utilities.messagebox_manager import MessageboxManager
@@ -15,12 +16,13 @@ from src.utilities.dialog_manager import DialogManager
 class FileManager:
     def __init__(self, text_edit: QTextEdit, parent=None) -> None:
         self.parent = parent
+        self.text_edit = text_edit
         self.last_file_path = ""
+        self.text_toolbar = TextToolbar(self.text_edit, self.parent)
         self.messagebox_manager = MessageboxManager(self.parent)
         self.dialog_manager = DialogManager(self.parent.parent)
         self.dialog_ui_text = DataProvider.get_ui_text("dialog")
         self.messagebox_ui_text = DataProvider.get_ui_text("messagebox")
-        self.text_edit = text_edit
 
     def new_file(self) -> None:
         try:
@@ -35,6 +37,7 @@ class FileManager:
                     self.text_edit.setFocus()
             else:
                 self.text_edit.reset_text_edit()
+                self.text_toolbar.reset_text_toolbar()
         except Exception as e:
             ExceptionManager.exception_handler(e)
 

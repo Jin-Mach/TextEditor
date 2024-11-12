@@ -38,11 +38,13 @@ class FindManager:
                     selection.cursor = self.text_edit.textCursor()
                     selection.format = char_format
                     extra_selections.append(selection)
-                if not extra_selections:
-                    messagebox_manager = MessageboxManager(self.parent)
-                    messagebox_manager.show_empty_document_message(self.text_edit, ui_text.get("notFound"))
                 self.text_edit.setExtraSelections(extra_selections)
                 cursor.movePosition(QTextCursor.MoveOperation.End, QTextCursor.MoveMode.MoveAnchor)
                 self.text_edit.setTextCursor(cursor)
+                if not extra_selections:
+                    messagebox_manager = MessageboxManager(self.parent)
+                    messagebox_manager.show_empty_document_message(self.text_edit, ui_text.get("notFound"))
+                    self.search_input.setFocus()
+                    return
         except Exception as e:
             ExceptionManager.exception_handler(e)

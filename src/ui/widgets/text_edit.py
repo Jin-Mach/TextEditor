@@ -62,3 +62,12 @@ class TextEdit(QTextEdit):
         if self.extraSelections():
             self.setExtraSelections([])
         super().mousePressEvent(event)
+
+    def get_text_format(self) -> tuple:
+        cursor = self.textCursor()
+        char_format = cursor.charFormat()
+        is_bold = char_format.fontWeight() == QFont.Weight.Bold
+        is_italic = char_format.fontItalic()
+        is_underline = char_format.fontUnderline()
+        is_strikeout = char_format.fontStrikeOut()
+        return is_bold, is_italic, is_underline, is_strikeout

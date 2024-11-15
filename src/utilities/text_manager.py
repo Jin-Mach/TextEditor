@@ -1,19 +1,18 @@
 from PyQt6.QtGui import QFont, QTextCharFormat
-from PyQt6.QtWidgets import QTextEdit, QComboBox
+from PyQt6.QtWidgets import QComboBox
 
+from src.ui.widgets.text_edit import TextEdit
 from src.utilities.exception_manager import ExceptionManager
 
 
 class TextManager:
-    def __init__(self, text_edit: QTextEdit, parent=None) -> None:
+    def __init__(self, text_edit: TextEdit, parent=None) -> None:
         self.parent = parent
         self.text_edit = text_edit
 
     def check_selection(self) -> bool:
         cursor = self.text_edit.textCursor()
-        if cursor.hasSelection():
-            return True
-        return False
+        return cursor.hasSelection()
 
     def set_font_style(self) -> None:
         try:
@@ -26,5 +25,34 @@ class TextManager:
             else:
                 self.text_edit.setFont(QFont(str(font_combobox_text), int(size_combobox_text)))
             self.text_edit.setFocus()
+        except Exception as e:
+            ExceptionManager.exception_handler(e)
+
+    def set_text_format(self, text_format: str) -> None:
+        try:
+            char_format = QTextCharFormat()
+            is_bold, is_italic, is_underline, is_strikeout = self.text_edit.get_text_format()
+            if self.check_selection():
+                if text_format == "bold":
+                    if is_bold:
+                        char_format.setFontWeight(QFont.Weight.Normal)
+                    else:
+                        char_format.setFontWeight(QFont.Weight.Bold)
+                elif text_format == "italic":
+                    if is_italic:
+                        char_format.setFontItalic(False)
+                    else:
+                        char_format.setFontItalic(True)
+                elif text_format == "underline":
+                    if is_underline:
+                        char_format.setFontUnderline(False)
+                    else:
+                        char_format.setFontUnderline(True)
+                elif text_format == "strikeout":
+                    if is_strikeout:
+                        char_format.setFontStrikeOut(False)
+                    else:
+                        char_format.setFontStrikeOut(True)
+                self.text_edit.textCursor().mergeCharFormat(char_format)
         except Exception as e:
             ExceptionManager.exception_handler(e)

@@ -2,8 +2,9 @@ import pathlib
 
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon, QColor, QPixmap, QFont
-from PyQt6.QtWidgets import QToolBar, QWidget, QHBoxLayout, QComboBox, QPushButton, QTextEdit
+from PyQt6.QtWidgets import QToolBar, QWidget, QHBoxLayout, QComboBox, QPushButton
 
+from src.ui.widgets.text_edit import TextEdit
 from src.utilities.data_provider import DataProvider
 from src.utilities.text_manager import TextManager
 
@@ -14,7 +15,7 @@ class TextToolbar(QToolBar):
     font_sizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
     combobox_colors = ["#000000", "#FFFFFF", "#1E90FF", "#32CD32", "#FF4500", "#FFA500", "#FFFF00", "#9370DB", "#8B4513", "#B22222"]
 
-    def __init__(self, text_edit:QTextEdit, parent=None) -> None:
+    def __init__(self, text_edit: TextEdit, parent=None) -> None:
         super().__init__(parent)
         self.setObjectName("textToolbar")
         self.text_edit = text_edit
@@ -26,6 +27,7 @@ class TextToolbar(QToolBar):
         self.create_main_gui()
         self.set_icons()
         self.set_tooltips()
+        self.create_connection()
 
     def create_main_gui(self) -> None:
         self.addWidget(self.create_font_widget())
@@ -47,13 +49,11 @@ class TextToolbar(QToolBar):
             self.font_family_combobox.addItem(font)
             index = self.font_family_combobox.count() - 1
             self.font_family_combobox.setItemData(index, QFont(font), role=Qt.ItemDataRole.FontRole)
-        self.font_family_combobox.currentIndexChanged.connect(self.text_manager.set_font_style)
         self.font_size_combobox = QComboBox()
         self.font_size_combobox.setObjectName("fontSize")
         for size in self.font_sizes:
             self.font_size_combobox.addItem(str(size))
         self.font_size_combobox.setCurrentText("14")
-        self.font_size_combobox.currentIndexChanged.connect(self.text_manager.set_font_style)
         font_layout.addWidget(self.font_family_combobox)
         font_layout.addWidget(self.font_size_combobox)
         font_widget.setLayout(font_layout)
@@ -173,6 +173,14 @@ class TextToolbar(QToolBar):
         pixmap = QPixmap(30, 30)
         pixmap.fill(QColor(color_hex))
         return QIcon(pixmap)
+
+    def create_connection(self) -> None:
+        self.font_family_combobox.currentIndexChanged.connect(self.text_manager.set_font_style)
+        self.font_size_combobox.currentIndexChanged.connect(self.text_manager.set_font_style)
+        self.bold_text_button.clicked.connect(lambda: self.text_manager.set_text_format("bold"))
+        self.italic_text_button.clicked.connect(lambda: self.text_manager.set_text_format("italic"))
+        self.underline_text_button.clicked.connect(lambda: self.text_manager.set_text_format("underline"))
+        self.strikethrough_text_button.clicked.connect(lambda: self.text_manager.set_text_format("strikeout"))
 
     def reset_text_toolbar(self) -> None:
         self.font_family_combobox.setCurrentText("Arial")

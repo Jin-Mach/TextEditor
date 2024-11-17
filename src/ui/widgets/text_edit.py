@@ -1,4 +1,4 @@
-from PyQt6.QtGui import QTextOption, QAction, QFont
+from PyQt6.QtGui import QTextOption, QAction, QFont, QGuiApplication
 from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu, QToolBar
 
 from src.utilities.data_provider import DataProvider
@@ -15,7 +15,9 @@ class TextEdit(QTextEdit):
         self.setTabStopDistance(50)
         self.setAcceptRichText(True)
         self.set_ui_text()
+        self.update_context_actions()
         self.cursorPositionChanged.connect(self.refresh_count_labels)
+        self.cursorPositionChanged.connect(self.update_context_actions)
 
     def refresh_count_labels(self) -> None:
         lines_count = self.document().blockCount()
@@ -39,12 +41,19 @@ class TextEdit(QTextEdit):
     def set_ui_text(self) -> None:
         ui_text = DataProvider.get_ui_text("textedit")
         self.undo_action = QAction(ui_text.get("undoContext"), self)
+        self.undo_action.triggered.connect(self.undo)
         self.redo_action = QAction(ui_text.get("redoContext"), self)
+        self.redo_action.triggered.connect(self.redo)
         self.cut_action = QAction(ui_text.get("cutContext"), self)
+        self.cut_action.triggered.connect(self.cut)
         self.copy_action = QAction(ui_text.get("copyContext"), self)
+        self.copy_action.triggered.connect(self.copy)
         self.paste_action = QAction(ui_text.get("pasteContext"), self)
+        self.paste_action.triggered.connect(self.paste)
         self.select_action = QAction(ui_text.get("selectContext"), self)
+        self.select_action.triggered.connect(self.selectAll)
         self.delete_action = QAction(ui_text.get("deleteContext"), self)
+        self.delete_action.triggered.connect(self.clear)
 
     def reset_text_edit(self) -> None:
         self.clear()
@@ -66,8 +75,19 @@ class TextEdit(QTextEdit):
     def get_text_format(self) -> tuple:
         cursor = self.textCursor()
         char_format = cursor.charFormat()
-        is_bold = char_format.fontWeight() == QFont.Weight.Bold
-        is_italic = char_format.fontItalic()
-        is_underline = char_format.fontUnderline()
-        is_strikeout = char_format.fontStrikeOut()
-        return is_bold, is_italic, is_underline, is_strikeout
+        if cursor and char_format.isValid():
+            is_bold = char_format.fontWeight() == QFont.Weight.Bold
+            is_italic = char_format.fontItalic()
+            is_underline = char_format.fontUnderline()
+            is_strikeout = char_format.fontStrikeOut()
+            return is_bold, is_italic, is_underline, is_strikeout
+        return False, False, False, False
+
+    def update_context_actions(self) -> None:
+        self.undo_action.setEnabled(self.document().isUndoAvailable())
+        self.redo_action.setEnabled(self.document().isRedoAvailable())
+        self.cut_action.setEnabled(self.textCursor().hasSelection())
+        self.copy_action.setEnabled(self.textCursor().hasSelection())
+        self.paste_action.setEnabled(bool(QGuiApplication.clipboard().text()))
+        self.select_action.setEnabled(bool(self.toPlainText()))
+        self.delete_action.setEnabled(bool(self.toPlainText()))

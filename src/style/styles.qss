@@ -24,6 +24,10 @@ QToolBar QPushButton:pressed {
     background-color: #B0B0B0;
 }
 
+QToolBar QPushButton:checked {
+    background-color: #90EE90;
+}
+
 QComboBox {
     border: 2px solid #87CEFA;
     border-radius: 5px;
@@ -70,6 +74,16 @@ QTextEdit QMenu {
 QTextEdit QMenu::item:selected {
     background-color: #0000FF;
     color: #FFFFFF;
+}
+
+QTextEdit QMenu::item:disabled {
+    color: #A9A9A9;
+    background-color: #f0f0f0;
+}
+
+QTextEdit QMenu::item:disabled:selected {
+    background-color: #D3D3D3;
+    color: #A9A9A9;
 }
 
 QStatusBar {

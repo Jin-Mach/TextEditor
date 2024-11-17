@@ -32,13 +32,13 @@
         "cursor": "Pozice kurzoru: řádek: 1, znak: 0"
     },
     "textedit": {
-        "undoContext": "Vrátit",
-        "redoContext": "Znovu provést",
+        "undoContext": "Zpět",
+        "redoContext": "Vpřed",
         "cutContext":"Vyjmout",
         "copyContext": "Kopírovat",
         "pasteContext": "Vložit",
         "selectContext": "Vybrat vše",
-        "deleteContext": "Smazat text"
+        "deleteContext": "Smazat vše"
     },
     "dialog": {
         "newfileTitle": "Otevřít nový soubor",

@@ -17,7 +17,7 @@
     "bold": "Change text to bold",
     "italic": "Change text to italic",
     "underline": "Change text to underline",
-    "strikethrough": "Change text to strikethrough",
+    "strikeout": "Change text to strikethrough",
     "undo": "Undo the last action",
     "redo": "Redo the last undone action",
     "copy": "Copy the selected text to clipboard",

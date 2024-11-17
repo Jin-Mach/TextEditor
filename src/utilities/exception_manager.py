@@ -6,6 +6,7 @@ class ExceptionManager:
 
     @staticmethod
     def exception_handler(exception: Exception) -> None:
-        setup_logger().error(str(exception))
+        logger = setup_logger()
+        logger.error("An error occurred: %s", exception, exc_info=True)
         messagebox_manager = MessageboxManager()
         messagebox_manager.show_error_message(exception)

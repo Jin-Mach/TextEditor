@@ -2,8 +2,9 @@ import pathlib
 
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QToolBar, QWidget, QPushButton, QHBoxLayout, QLabel, QLineEdit, QTextEdit
+from PyQt6.QtWidgets import QToolBar, QWidget, QPushButton, QHBoxLayout, QLabel, QLineEdit
 
+from src.ui.widgets.text_edit import TextEdit
 from src.utilities.data_provider import DataProvider
 from src.utilities.file_manager import FileManager
 from src.utilities.find_manager import FindManager
@@ -11,7 +12,7 @@ from src.utilities.find_manager import FindManager
 
 # noinspection PyUnresolvedReferences
 class FileToolbar(QToolBar):
-    def __init__(self, text_edit: QTextEdit, parent=None) -> None:
+    def __init__(self, text_edit: TextEdit, parent=None) -> None:
         super().__init__(parent)
         self.parent = parent
         self.text_edit = text_edit
@@ -126,3 +127,6 @@ class FileToolbar(QToolBar):
         self.save_as_html_button.clicked.connect(lambda: self.file_manager.save_file_as(".html"))
         self.export_pdf_button.clicked.connect(lambda: self.file_manager.save_file_as(".pdf"))
         self.search_button.clicked.connect(self.find_manager.find_text)
+
+    def reset_file_toolbar(self) -> None:
+        self.save_button.setDisabled(True)

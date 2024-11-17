@@ -1,4 +1,4 @@
-from PyQt6.QtGui import QFont, QTextCharFormat
+from PyQt6.QtGui import QFont, QTextCharFormat, QColor
 from PyQt6.QtWidgets import QComboBox
 
 from src.ui.widgets.text_edit import TextEdit
@@ -18,12 +18,15 @@ class TextManager:
         try:
             font_combobox_text = self.parent.findChild(QComboBox, "fontFamily").currentText()
             size_combobox_text = self.parent.findChild(QComboBox, "fontSize").currentText()
+            char_format = QTextCharFormat()
             if self.check_selection():
-                char_format = QTextCharFormat()
                 char_format.setFont(QFont(str(font_combobox_text), int(size_combobox_text)))
                 self.text_edit.textCursor().mergeCharFormat(char_format)
             else:
-                self.text_edit.setFont(QFont(str(font_combobox_text), int(size_combobox_text)))
+                cursor = self.text_edit.textCursor()
+                char_format.setFont(QFont(str(font_combobox_text), int(size_combobox_text)))
+                cursor.mergeCharFormat(char_format)
+                self.text_edit.setTextCursor(cursor)
             self.text_edit.setFocus()
         except Exception as e:
             ExceptionManager.exception_handler(e)
@@ -54,5 +57,28 @@ class TextManager:
                     else:
                         char_format.setFontStrikeOut(True)
                 self.text_edit.textCursor().mergeCharFormat(char_format)
+        except Exception as e:
+            ExceptionManager.exception_handler(e)
+
+    def set_text_and_background_color(self, combobox: QComboBox) -> None:
+        try:
+            index = combobox.currentIndex()
+            color = combobox.itemData(index)
+            char_format = QTextCharFormat()
+            if self.check_selection():
+                if combobox.objectName() == "textColor":
+                    char_format.setForeground(QColor(color))
+                elif combobox.objectName() == "backgroundColor":
+                    char_format.setBackground(QColor(color))
+                self.text_edit.textCursor().mergeCharFormat(char_format)
+            else:
+                cursor = self.text_edit.textCursor()
+                if combobox.objectName() == "textColor":
+                    char_format.setForeground(QColor(color))
+                elif combobox.objectName() == "backgroundColor":
+                    char_format.setBackground(QColor(color))
+                cursor.mergeCharFormat(char_format)
+                self.text_edit.setTextCursor(cursor)
+            self.text_edit.setFocus()
         except Exception as e:
             ExceptionManager.exception_handler(e)

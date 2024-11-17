@@ -13,7 +13,7 @@ from src.utilities.text_manager import TextManager
 class TextToolbar(QToolBar):
     font_list = ["Arial", "Calibri", "Comic Sans MS", "Courier New", "Georgia", "Impact", "Tahoma", "Times New Roman", "Trebuchet MS", "Verdana"]
     font_sizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
-    combobox_colors = ["#000000", "#FFFFFF", "#1E90FF", "#32CD32", "#FF4500", "#FFA500", "#FFFF00", "#9370DB", "#8B4513", "#B22222"]
+    combobox_colors = ["#000000", "#ffffff", "#1e90ff", "#32cd32", "#ff4500", "#ffa500", "#ffff00", "#9370db", "#8b4513", "#b22222"]
 
     def __init__(self, text_edit: TextEdit, parent=None) -> None:
         super().__init__(parent)
@@ -30,7 +30,7 @@ class TextToolbar(QToolBar):
         self.create_connection()
         self.update_edit_buttons()
         self.text_edit.cursorPositionChanged.connect(self.update_edit_buttons)
-        self.text_edit.cursorPositionChanged.connect(self.update_format_buttons)
+        self.text_edit.selectionChanged.connect(self.update_format_buttons)
 
     def create_main_gui(self) -> None:
         self.addWidget(self.create_font_widget())
@@ -107,7 +107,7 @@ class TextToolbar(QToolBar):
         self.select_all_button.clicked.connect(self.text_edit.selectAll)
         self.delete_text_button = QPushButton()
         self.delete_text_button.setObjectName("deleteText")
-        self.delete_text_button.clicked.connect(self.text_edit.clear)
+        self.delete_text_button.clicked.connect(self.delete_all)
         action_layout.addWidget(self.undo_button)
         action_layout.addWidget(self.redo_button)
         action_layout.addWidget(self.cut_button)
@@ -149,20 +149,28 @@ class TextToolbar(QToolBar):
         colors_layout = QHBoxLayout()
         self.text_color_combobox = QComboBox()
         self.text_color_combobox.setObjectName("textColor")
+        self.text_color_combobox.setFixedWidth(40)
+        self.text_color_combobox.setFixedHeight(30)
         for color in self.combobox_colors:
             icon = self.create_color_icon(color)
-            self.text_color_combobox.addItem(icon, "")
+            self.text_color_combobox.addItem(icon, color)
+            self.text_color_combobox.setItemData(self.text_color_combobox.count() - 1, color)
         default_color = "#000000"
         default_index = self.combobox_colors.index(default_color)
         self.text_color_combobox.setCurrentIndex(default_index)
+        self.text_color_combobox.currentIndexChanged.connect(lambda: self.text_manager.set_text_and_background_color(self.text_color_combobox))
         self.background_color_combobox = QComboBox()
         self.background_color_combobox.setObjectName("backgroundColor")
+        self.background_color_combobox.setFixedWidth(40)
+        self.background_color_combobox.setFixedHeight(30)
         for color in self.combobox_colors:
             icon = self.create_color_icon(color)
-            self.background_color_combobox.addItem(icon, "")
-        default_color = "#FFFFFF"
+            self.background_color_combobox.addItem(icon, color)
+            self.background_color_combobox.setItemData(self.background_color_combobox.count() - 1, color)
+        default_color = "#ffffff"
         default_index = self.combobox_colors.index(default_color)
         self.background_color_combobox.setCurrentIndex(default_index)
+        self.background_color_combobox.currentIndexChanged.connect(lambda: self.text_manager.set_text_and_background_color(self.background_color_combobox))
         colors_layout.addWidget(self.text_color_combobox)
         colors_layout.addWidget(self.background_color_combobox)
         colors_widget.setLayout(colors_layout)
@@ -205,8 +213,14 @@ class TextToolbar(QToolBar):
         self.strikeout_text_button.clicked.connect(lambda: self.text_manager.set_text_format("strikeout"))
 
     def reset_text_toolbar(self) -> None:
+        buttons = [self.bold_text_button, self.italic_text_button, self.underline_text_button, self.strikeout_text_button,
+                   self.align_left_button, self.align_center_button, self.align_right_button, self.align_justified_button]
         self.font_family_combobox.setCurrentText("Arial")
         self.font_size_combobox.setCurrentText("14")
+        for button in buttons:
+            button.setChecked(False)
+        self.text_color_combobox.setCurrentIndex(0)
+        self.background_color_combobox.setCurrentIndex(1)
 
     def update_edit_buttons(self) -> None:
         self.undo_button.setEnabled(self.text_edit.document().isUndoAvailable())
@@ -223,8 +237,9 @@ class TextToolbar(QToolBar):
         for alignmentbutton in alignment_buttons:
             alignmentbutton.setChecked(False)
         widgets = [self.font_family_combobox, self.font_size_combobox, self.bold_text_button, self.italic_text_button,
-                   self.underline_text_button, self.strikeout_text_button, self.findChild(QPushButton, text_format[6])]
-        alignment_button = widgets[-1]
+                   self.underline_text_button, self.strikeout_text_button, self.findChild(QPushButton, text_format[6]),
+                   self.text_color_combobox, self.background_color_combobox]
+        alignment_button = widgets[-3]
         self.block_signals(widgets)
         self.font_family_combobox.setCurrentText(text_format[0])
         self.font_size_combobox.setCurrentText(text_format[1])
@@ -233,6 +248,12 @@ class TextToolbar(QToolBar):
         self.underline_text_button.setChecked(text_format[4])
         self.strikeout_text_button.setChecked(text_format[5])
         alignment_button.setChecked(True)
+        text_color_index = self.text_color_combobox.findData(text_format[-2])
+        background_color_index = self.background_color_combobox.findData(text_format[-1])
+        if text_color_index != -1:
+            self.text_color_combobox.setCurrentIndex(text_color_index)
+        if background_color_index != -1:
+            self.background_color_combobox.setCurrentIndex(background_color_index)
         self.activate_signals(widgets)
 
     def get_text_format(self) -> tuple:
@@ -254,8 +275,16 @@ class TextToolbar(QToolBar):
             is_strikeout = font.strikeOut()
             if alignment:
                 alignment_name = alignment.name[0].lower() + alignment.name[1:]
-            return str(font_family), str(font_size), is_bold, is_italic, is_underline, is_strikeout, alignment_name
-        return "Arial", "14", False, False, False, False, "alignLeft"
+            text_color = char_format.foreground().color().name()
+            background_color = char_format.background().color().name()
+            if background_color == "#000000":
+                    background_color = "#ffffff"
+            return str(font_family), str(font_size), is_bold, is_italic, is_underline, is_strikeout, alignment_name, text_color, background_color
+        return "Arial", "14", False, False, False, False, "alignLeft", "#000000", "#ffffff"
+
+    def delete_all(self) -> None:
+        self.text_edit.clear()
+        self.reset_text_toolbar()
 
     @staticmethod
     def block_signals(widgets: list) -> None:

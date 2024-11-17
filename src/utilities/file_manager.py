@@ -3,9 +3,9 @@ import pathlib
 from PyQt6.QtGui import QPageLayout, QPageSize
 from PyQt6.QtPrintSupport import QPrinter
 from PyQt6.QtCore import QMarginsF
-from PyQt6.QtWidgets import QTextEdit
 
 from src.ui.widgets.text_toolbar import TextToolbar
+from src.ui.widgets.text_edit import TextEdit
 from src.utilities.data_provider import DataProvider
 from src.utilities.exception_manager import ExceptionManager
 from src.utilities.messagebox_manager import MessageboxManager
@@ -14,7 +14,7 @@ from src.utilities.dialog_manager import DialogManager
 
 # noinspection PyUnresolvedReferences
 class FileManager:
-    def __init__(self, text_edit: QTextEdit, parent=None) -> None:
+    def __init__(self, text_edit: TextEdit, parent=None) -> None:
         self.parent = parent
         self.text_edit = text_edit
         self.last_file_path = ""
@@ -29,15 +29,14 @@ class FileManager:
             if self.text_edit.toPlainText().strip():
                 result = self.messagebox_manager.show_save_question_message()
                 if result == "dontSave":
-                    self.text_edit.reset_text_edit()
+                    self.text_edit.reset_document()
                     self.last_file_path = ""
                 elif result == "saveAs":
                     self.save_file_as(".txt")
                 elif result == "cancel":
                     self.text_edit.setFocus()
             else:
-                self.text_edit.reset_text_edit()
-                self.text_toolbar.reset_text_toolbar()
+                self.text_edit.reset_document()
         except Exception as e:
             ExceptionManager.exception_handler(e)
 

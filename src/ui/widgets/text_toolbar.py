@@ -89,25 +89,18 @@ class TextToolbar(QToolBar):
         action_layout = QHBoxLayout()
         self.undo_button = QPushButton()
         self.undo_button.setObjectName("undo")
-        self.undo_button.clicked.connect(self.text_edit.undo)
         self.redo_button = QPushButton()
         self.redo_button.setObjectName("redo")
-        self.redo_button.clicked.connect(self.text_edit.redo)
         self.cut_button = QPushButton()
         self.cut_button.setObjectName("cut")
-        self.cut_button.clicked.connect(self.text_edit.cut)
         self.copy_button = QPushButton()
         self.copy_button.setObjectName("copy")
-        self.copy_button.clicked.connect(self.text_edit.copy)
         self.paste_button = QPushButton()
         self.paste_button.setObjectName("paste")
-        self.paste_button.clicked.connect(self.text_edit.paste)
         self.select_all_button = QPushButton()
         self.select_all_button.setObjectName("selectAll")
-        self.select_all_button.clicked.connect(self.text_edit.selectAll)
         self.delete_text_button = QPushButton()
         self.delete_text_button.setObjectName("deleteText")
-        self.delete_text_button.clicked.connect(self.delete_all)
         action_layout.addWidget(self.undo_button)
         action_layout.addWidget(self.redo_button)
         action_layout.addWidget(self.cut_button)
@@ -124,19 +117,15 @@ class TextToolbar(QToolBar):
         self.align_left_button = QPushButton()
         self.align_left_button.setObjectName("alignLeft")
         self.align_left_button.setCheckable(True)
-        self.align_left_button.clicked.connect(lambda: self.text_edit.setAlignment(Qt.AlignmentFlag.AlignLeft))
         self.align_center_button = QPushButton()
         self.align_center_button.setObjectName("alignCenter")
         self.align_center_button.setCheckable(True)
-        self.align_center_button.clicked.connect(lambda: self.text_edit.setAlignment(Qt.AlignmentFlag.AlignCenter))
         self.align_right_button = QPushButton()
         self.align_right_button.setObjectName("alignRight")
         self.align_right_button.setCheckable(True)
-        self.align_right_button.clicked.connect(lambda: self.text_edit.setAlignment(Qt.AlignmentFlag.AlignRight))
         self.align_justified_button = QPushButton()
         self.align_justified_button.setObjectName("alignJustify")
         self.align_justified_button.setCheckable(True)
-        self.align_justified_button.clicked.connect(lambda: self.text_edit.setAlignment(Qt.AlignmentFlag.AlignJustify))
         align_layout.addWidget(self.align_left_button)
         align_layout.addWidget(self.align_center_button)
         align_layout.addWidget(self.align_right_button)
@@ -158,7 +147,6 @@ class TextToolbar(QToolBar):
         default_color = "#000000"
         default_index = self.combobox_colors.index(default_color)
         self.text_color_combobox.setCurrentIndex(default_index)
-        self.text_color_combobox.currentIndexChanged.connect(lambda: self.text_manager.set_text_and_background_color(self.text_color_combobox))
         self.background_color_combobox = QComboBox()
         self.background_color_combobox.setObjectName("backgroundColor")
         self.background_color_combobox.setFixedWidth(40)
@@ -170,7 +158,6 @@ class TextToolbar(QToolBar):
         default_color = "#ffffff"
         default_index = self.combobox_colors.index(default_color)
         self.background_color_combobox.setCurrentIndex(default_index)
-        self.background_color_combobox.currentIndexChanged.connect(lambda: self.text_manager.set_text_and_background_color(self.background_color_combobox))
         colors_layout.addWidget(self.text_color_combobox)
         colors_layout.addWidget(self.background_color_combobox)
         colors_widget.setLayout(colors_layout)
@@ -211,6 +198,19 @@ class TextToolbar(QToolBar):
         self.italic_text_button.clicked.connect(lambda: self.text_manager.set_text_format("italic"))
         self.underline_text_button.clicked.connect(lambda: self.text_manager.set_text_format("underline"))
         self.strikeout_text_button.clicked.connect(lambda: self.text_manager.set_text_format("strikeout"))
+        self.undo_button.clicked.connect(self.text_edit.undo)
+        self.redo_button.clicked.connect(self.text_edit.redo)
+        self.cut_button.clicked.connect(self.text_edit.cut)
+        self.copy_button.clicked.connect(self.text_edit.copy)
+        self.paste_button.clicked.connect(self.text_edit.paste)
+        self.select_all_button.clicked.connect(self.text_edit.selectAll)
+        self.delete_text_button.clicked.connect(self.text_manager.clear_text_edit)
+        self.align_left_button.clicked.connect(lambda: self.text_edit.setAlignment(Qt.AlignmentFlag.AlignLeft))
+        self.align_center_button.clicked.connect(lambda: self.text_edit.setAlignment(Qt.AlignmentFlag.AlignCenter))
+        self.align_right_button.clicked.connect(lambda: self.text_edit.setAlignment(Qt.AlignmentFlag.AlignRight))
+        self.align_justified_button.clicked.connect(lambda: self.text_edit.setAlignment(Qt.AlignmentFlag.AlignJustify))
+        self.text_color_combobox.currentIndexChanged.connect(lambda: self.text_manager.set_text_and_background_color(self.text_color_combobox))
+        self.background_color_combobox.currentIndexChanged.connect(lambda: self.text_manager.set_text_and_background_color(self.background_color_combobox))
 
     def reset_text_toolbar(self) -> None:
         buttons = [self.bold_text_button, self.italic_text_button, self.underline_text_button, self.strikeout_text_button,
@@ -281,10 +281,6 @@ class TextToolbar(QToolBar):
                     background_color = "#ffffff"
             return str(font_family), str(font_size), is_bold, is_italic, is_underline, is_strikeout, alignment_name, text_color, background_color
         return "Arial", "14", False, False, False, False, "alignLeft", "#000000", "#ffffff"
-
-    def delete_all(self) -> None:
-        self.text_edit.clear()
-        self.reset_text_toolbar()
 
     @staticmethod
     def block_signals(widgets: list) -> None:

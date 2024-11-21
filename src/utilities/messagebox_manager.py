@@ -67,11 +67,27 @@ class MessageboxManager:
             return "cancel"
 
     def show_empty_document_message(self, text_edit: QTextEdit, text: str) -> None:
-        messagebox = QMessageBox(self.parent)
-        messagebox.setWindowTitle(self.ui_text.get("emptytextTitle"))
-        messagebox.setText(text)
-        messagebox.exec()
+        message_box = QMessageBox(self.parent)
+        message_box.setWindowTitle(self.ui_text.get("emptytextTitle"))
+        message_box.setText(text)
+        message_box.exec()
         text_edit.setFocus()
+
+    def document_contains_text(self) -> str:
+        message_box = QMessageBox(self.parent)
+        message_box.setWindowTitle(self.ui_text.get("documentContainsTextTitle"))
+        message_box.setText(self.ui_text.get("documentContainsTextMessage"))
+        self.continue_button = QPushButton(self.ui_text.get("continue"))
+        self.continue_button.setObjectName("continue")
+        self.cancel_button = QPushButton(self.ui_text.get("cancel"))
+        self.cancel_button.setObjectName("cancel")
+        message_box.addButton(self.continue_button, QMessageBox.ButtonRole.ActionRole)
+        message_box.addButton(self.cancel_button, QMessageBox.ButtonRole.RejectRole)
+        self.set_tooltips(message_box)
+        message_box.setDefaultButton(self.cancel_button)
+        message_box.exec()
+        if message_box.clickedButton() == self.continue_button:
+            return "yes"
 
     @staticmethod
     def set_tooltips(parent) -> None:

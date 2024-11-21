@@ -24,7 +24,10 @@
         "emptytextText": "Nelze uložit prázdný dokument",
         "emptySearch": "Zadej text pro vyhledání",
         "emptytextSearch": "Nelze vyhledávat v prázdném dokumentu",
-        "notFound": "Nebyla nalezena žádná shoda"
+        "notFound": "Nebyla nalezena žádná shoda",
+        "documentContainsTextTitle": "Text v dokumentu",
+        "documentContainsTextMessage": "Dokument obsahuje text.\nOpravdu smazat?",
+        "continue": "Pokračovat"
     },
     "statusbar": {
         "characters": "Znaky: 0",

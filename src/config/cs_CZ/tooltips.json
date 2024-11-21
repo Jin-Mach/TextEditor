@@ -39,6 +39,7 @@
     "errorCancel": "Zavřít dialog s chybou",
     "dontSave": "Pokračovat bez uložení",
     "saveAs": "Uložit dokument",
-    "cancel": "Zavřít dialog"
+    "cancel": "Zavřít dialog",
+    "continue": "Smazat text bez uložení"
   }
 }

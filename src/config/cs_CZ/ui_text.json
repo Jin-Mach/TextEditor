@@ -48,5 +48,12 @@
         "fileFilter": "Soubory (*.txt);;HTML soubory (*.html)",
         "savedocumentTitle": "Uložit dokument",
         "filefilterName": "Soubory"
+    },
+    "trayicon": {
+        "newFile": "Nový soubor",
+        "openFile": "Otevřít soubor",
+        "closeApplication": "Zavřít aplikaci",
+        "saveTitle": "TextEditor",
+        "saveText": "Soubor uložen."
     }
 }

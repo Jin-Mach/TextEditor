@@ -14,10 +14,10 @@ from src.utilities.find_manager import FindManager
 class FileToolbar(QToolBar):
     def __init__(self, text_edit: TextEdit, parent=None) -> None:
         super().__init__(parent)
+        self.setObjectName("fileToolbar")
         self.parent = parent
         self.text_edit = text_edit
         self.file_manager = FileManager(self.text_edit, self)
-        self.setObjectName("fileToolbar")
         self.setAllowedAreas(Qt.ToolBarArea.TopToolBarArea)
         self.setOrientation(Qt.Orientation.Horizontal)
         self.setFloatable(False)

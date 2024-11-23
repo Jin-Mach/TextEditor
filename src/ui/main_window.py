@@ -15,7 +15,7 @@ from src.utilities.messagebox_manager import MessageboxManager
 
 
 class MainWindow(QMainWindow):
-    application_icon = pathlib.Path(__file__).parent.parent.joinpath("icons", "application_icon.png")
+    application_icon = pathlib.Path(__file__).parent.parent.joinpath("icons", "applicationIcon.png")
 
     def __init__(self, parent=None) -> None:
         super().__init__(parent)
@@ -49,7 +49,7 @@ class MainWindow(QMainWindow):
                     file_path = dialog.save_document_dialog(f"{self.ui_text.get("fileFilter")}")
                     if file_path:
                         file_manager = FileManager(self.text_edit, self)
-                        file_manager.save_document(file_path, "txt")
+                        file_manager.save_document(file_path, ".txt")
                         event.accept()
                     else:
                         event.ignore()

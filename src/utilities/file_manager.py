@@ -10,6 +10,7 @@ from src.utilities.data_provider import DataProvider
 from src.utilities.exception_manager import ExceptionManager
 from src.utilities.messagebox_manager import MessageboxManager
 from src.utilities.dialog_manager import DialogManager
+from src.utilities.tray_icon import TrayIcon
 
 
 # noinspection PyUnresolvedReferences
@@ -22,7 +23,9 @@ class FileManager:
         self.messagebox_manager = MessageboxManager(self.parent)
         self.dialog_manager = DialogManager(self.parent.parent)
         self.dialog_ui_text = DataProvider.get_ui_text("dialog")
+        self.tray_icon = TrayIcon(self, parent)
         self.messagebox_ui_text = DataProvider.get_ui_text("messagebox")
+        self.tray_icon_ui_text = DataProvider.get_ui_text("trayicon")
 
     def new_file(self) -> None:
         try:
@@ -112,16 +115,14 @@ class FileManager:
                     file.write(self.text_edit.toHtml())
             elif file_type == ".pdf":
                 printer = QPrinter(QPrinter.PrinterMode.HighResolution)
-                printer.setOutputFormat(QPrinter.OutputFormat.PdfFormat)
-                printer.setColorMode(QPrinter.ColorMode.Color)
-                printer.setOutputFileName(file_path)
-                page_layout = QPageLayout()
-                page_layout.setPageSize(QPageSize(QPageSize.PageSizeId.A4))
-                page_layout.setOrientation(page_layout.Orientation.Portrait)
+                printer.setPageSize(QPageSize(QPageSize.PageSizeId.A4))
                 margins = QMarginsF(10, 10, 10, 10)
                 printer.setPageMargins(margins, QPageLayout.Unit.Millimeter)
-                document = self.text_edit.document()
-                document.print(printer)
+                printer.setColorMode(QPrinter.ColorMode.Color)
+                printer.setOutputFormat(QPrinter.OutputFormat.PdfFormat)
+                printer.setOutputFileName(file_path)
+                self.text_edit.document().print(printer)
             self.text_edit.setFocus()
+            self.tray_icon.showMessage(self.tray_icon_ui_text.get("saveTitle"), self.tray_icon_ui_text.get("saveText"))
         except Exception as e:
             ExceptionManager.exception_handler(e)

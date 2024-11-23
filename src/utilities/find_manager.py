@@ -5,13 +5,13 @@ from src.utilities.data_provider import DataProvider
 from src.utilities.exception_manager import ExceptionManager
 from src.utilities.messagebox_manager import MessageboxManager
 
-
+# noinspection PyUnresolvedReferences
 class FindManager:
     def __init__(self, search_input: QLineEdit, text_edit: QTextEdit, parent=None) -> None:
         self.search_input = search_input
         self.text_edit = text_edit
         self.parent = parent
-# noinspection PyUnresolvedReferences
+
     def find_text(self) -> None:
         try:
             ui_text = DataProvider.get_ui_text("messagebox")

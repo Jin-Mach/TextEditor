@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QTextOption, QAction, QFont, QGuiApplication, QColor
+from PyQt6.QtGui import QAction, QFont, QGuiApplication, QColor
 from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu, QToolBar
 
 from src.utilities.data_provider import DataProvider
@@ -9,14 +9,15 @@ from src.utilities.data_provider import DataProvider
 class TextEdit(QTextEdit):
     def __init__(self, status_bar: QStatusBar, parent=None) -> None:
         super().__init__(parent)
-        self.status_bar = status_bar
         self.setObjectName("textEdit")
+        self.status_bar = status_bar
         self.setStyleSheet("color: #000000; background-color: #FFFFFF;")
         self.setFontFamily("Arial")
         self.setFontPointSize(14)
         self.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.setLineWrapMode(QTextEdit.LineWrapMode.WidgetWidth)
-        self.setWordWrapMode(QTextOption.WrapMode.WordWrap)
+        self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.setTabStopDistance(50)
         self.setAcceptRichText(True)
         self.set_ui_text()

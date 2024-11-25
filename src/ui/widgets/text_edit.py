@@ -11,7 +11,8 @@ class TextEdit(QTextEdit):
         super().__init__(parent)
         self.setObjectName("textEdit")
         self.status_bar = status_bar
-        self.setStyleSheet("color: #000000; background-color: #FFFFFF;")
+        self.setTextColor(Qt.GlobalColor.black)
+        self.setStyleSheet("background-color: white;")
         self.setFontFamily("Arial")
         self.setFontPointSize(14)
         self.setAlignment(Qt.AlignmentFlag.AlignLeft)

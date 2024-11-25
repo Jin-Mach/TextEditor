@@ -27,7 +27,9 @@
         "notFound": "Nebyla nalezena žádná shoda",
         "documentContainsTextTitle": "Text v dokumentu",
         "documentContainsTextMessage": "Dokument obsahuje text.\nOpravdu smazat?",
-        "continue": "Pokračovat"
+        "continue": "Pokračovat",
+        "emptyPreview": "Nezle zobrazit náhled pro prázdný dokument",
+        "emptyPrint": "Nelze vytisknout prázdný dokument"
     },
     "statusbar": {
         "characters": "Znaky: 0",

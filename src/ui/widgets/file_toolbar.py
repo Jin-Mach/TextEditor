@@ -8,6 +8,7 @@ from src.ui.widgets.text_edit import TextEdit
 from src.utilities.data_provider import DataProvider
 from src.utilities.file_manager import FileManager
 from src.utilities.find_manager import FindManager
+from src.utilities.print_manager import Printmanager
 
 
 # noinspection PyUnresolvedReferences
@@ -18,6 +19,7 @@ class FileToolbar(QToolBar):
         self.parent = parent
         self.text_edit = text_edit
         self.file_manager = FileManager(self.text_edit, self)
+        self.print_manager = Printmanager(self.text_edit, self.parent)
         self.setAllowedAreas(Qt.ToolBarArea.TopToolBarArea)
         self.setOrientation(Qt.Orientation.Horizontal)
         self.setFloatable(False)
@@ -26,7 +28,7 @@ class FileToolbar(QToolBar):
         self.set_icons()
         self.set_ui_text()
         self.set_tooltips()
-        self.find_manager = FindManager(self.search_input, self.text_edit, self)
+        self.find_manager = FindManager(self.search_input, self.text_edit)
         self.create_connection()
 
     def create_main_gui(self) -> None:
@@ -126,6 +128,8 @@ class FileToolbar(QToolBar):
         self.save_button.clicked.connect(self.file_manager.save_file)
         self.save_as_html_button.clicked.connect(lambda: self.file_manager.save_file_as(".html"))
         self.export_pdf_button.clicked.connect(lambda: self.file_manager.save_file_as(".pdf"))
+        self.print_preview_button.clicked.connect(self.print_manager.show_print_preview)
+        self.print_button.clicked.connect(self.print_manager.print_document)
         self.search_button.clicked.connect(self.find_manager.find_text)
 
     def reset_file_toolbar(self) -> None:

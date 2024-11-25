@@ -40,7 +40,7 @@ class MessageboxManager:
         self.set_tooltips(message_box)
         message_box.exec()
         if message_box.clickedButton() == self.copy_button:
-            QApplication.clipboard().setText(self.set_error_text(exception_error))
+            QApplication.clipboard().setText(str(exception_error))
             message_box.close()
 
     def show_save_question_message(self) -> str:

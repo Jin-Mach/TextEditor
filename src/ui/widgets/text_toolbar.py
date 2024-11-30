@@ -215,12 +215,12 @@ class TextToolbar(QToolBar):
     def reset_text_toolbar(self) -> None:
         buttons = [self.bold_text_button, self.italic_text_button, self.underline_text_button, self.strikeout_text_button,
                    self.align_left_button, self.align_center_button, self.align_right_button, self.align_justified_button]
-        self.font_family_combobox.setCurrentText("Arial")
-        self.font_size_combobox.setCurrentText("14")
+        self.font_family_combobox.setCurrentIndex(self.font_family_combobox.findText("Arial"))
+        self.font_size_combobox.setCurrentIndex(self.font_size_combobox.findText("14"))
         for button in buttons:
             button.setChecked(False)
-        self.text_color_combobox.setCurrentIndex(0)
-        self.background_color_combobox.setCurrentIndex(1)
+        self.text_color_combobox.setCurrentIndex(self.text_color_combobox.findText("#000000"))
+        self.background_color_combobox.setCurrentIndex(self.background_color_combobox.findText("#ffffff"))
 
     def update_edit_buttons(self) -> None:
         self.undo_button.setEnabled(self.text_edit.document().isUndoAvailable())

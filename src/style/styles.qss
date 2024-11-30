@@ -6,6 +6,7 @@ QMainWindow {
 
 QToolBar {
     background-color: #DCDCDC;
+    border: none;
     margins: 0;
     padding: 0;
 }
@@ -251,5 +252,34 @@ QMenu::item:hover {
 
 QMenu::item:focus {
     background-color: #1E90FF;
+    color: #FFFFFF;
+}
+
+QMenuBar {
+    background-color: #DCDCDC;
+    color: #000000;
+    font-family: "Arial";
+    font-size: 13px;
+    border-bottom: 1px solid #87CEFA;
+}
+
+QMenuBar::item {
+    padding: 5px 5px;
+    background-color: #DCDCDC;
+    color: #000000;
+}
+
+QMenuBar::item:hover {
+    background-color: #7EC8E6;
+    color: #FFFFFF;
+}
+
+QMenuBar::item:pressed {
+    background-color: #1E90FF;
+    color: #FFFFFF;
+}
+
+QMenuBar::item:selected {
+    background-color: #0000FF;
     color: #FFFFFF;
 }

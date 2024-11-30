@@ -1,6 +1,6 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QAction, QFont, QGuiApplication, QColor
-from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu, QToolBar
+from PyQt6.QtGui import QAction, QFont, QGuiApplication
+from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu
 
 from src.utilities.data_provider import DataProvider
 
@@ -10,6 +10,7 @@ class TextEdit(QTextEdit):
     def __init__(self, status_bar: QStatusBar, parent=None) -> None:
         super().__init__(parent)
         self.setObjectName("textEdit")
+        self.parent = parent
         self.status_bar = status_bar
         self.setTextColor(Qt.GlobalColor.black)
         self.setStyleSheet("background-color: white;")
@@ -62,17 +63,13 @@ class TextEdit(QTextEdit):
         self.delete_action = QAction(ui_text.get("deleteContext"), self)
         self.delete_action.triggered.connect(self.clear)
 
-    def reset_document(self) -> None:
+    def reset_text_edit(self) -> None:
         self.clear()
-        self.setFont(QFont("Arial", 14))
+        self.setTextColor(Qt.GlobalColor.black)
+        self.setStyleSheet("background-color: white;")
+        self.setFontFamily("Arial")
+        self.setFontPointSize(14)
         self.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        self.setTextColor(QColor("#000000"))
-        self.setTextBackgroundColor(QColor("#FFFFFF"))
-        file_toolbar = self.parent().findChild(QToolBar, "fileToolbar")
-        text_toolbar = self.parent().findChild(QToolBar, "textToolbar")
-        file_toolbar.reset_file_toolbar()
-        text_toolbar.reset_text_toolbar()
-        self.setFocus()
 
     def mousePressEvent(self, event) -> None:
         if self.extraSelections():

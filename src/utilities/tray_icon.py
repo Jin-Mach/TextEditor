@@ -9,8 +9,7 @@ from src.utilities.data_provider import DataProvider
 # noinspection PyUnresolvedReferences
 class TrayIcon(QSystemTrayIcon):
     icons_path = pathlib.Path(__file__).parent.parent.joinpath("icons")
-
-    def __init__(self, file_manager=None, parent=None) -> None:
+    def __init__(self, file_manager, parent=None) -> None:
         super().__init__(parent)
         self.file_manager = file_manager
         self.setIcon(QIcon(str(self.icons_path.joinpath("applicationIcon.png"))))
@@ -39,5 +38,5 @@ class TrayIcon(QSystemTrayIcon):
         self.quit_action.triggered.connect(self.close_app)
 
     def close_app(self) -> None:
-        main_window = self.parent().parent
+        main_window = self.parent()
         main_window.close()

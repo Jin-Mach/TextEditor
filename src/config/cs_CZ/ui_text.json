@@ -57,5 +57,16 @@
         "closeApplication": "Zavřít aplikaci",
         "saveTitle": "TextEditor",
         "saveText": "Soubor uložen."
+    },
+    "menubar": {
+        "newFile": "Nový soubor",
+        "openFile": "Otevřít soubor",
+        "saveAs": "Uložit jako textový soubor",
+        "save": "Uložit",
+        "saveasHtml": "Uložit jako HTML",
+        "saveasPdf": "Uložit jako PDF",
+        "printPreview": "Náhled tisku",
+        "printDocument": "Vytisknout",
+        "closeApplication": "Zavřít aplikaci"
     }
 }

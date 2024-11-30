@@ -4,6 +4,7 @@ from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QMainWindow
 
 from src.ui.widgets.file_toolbar import FileToolbar
+from src.ui.widgets.menu_bar import MenuBar
 from src.ui.widgets.text_toolbar import TextToolbar
 from src.ui.widgets.text_edit import TextEdit
 from src.ui.widgets.status_bar import StatusBar
@@ -12,6 +13,7 @@ from src.utilities.dialog_manager import DialogManager
 from src.utilities.exception_manager import ExceptionManager
 from src.utilities.file_manager import FileManager
 from src.utilities.messagebox_manager import MessageboxManager
+from src.utilities.tray_icon import TrayIcon
 
 
 class MainWindow(QMainWindow):
@@ -25,12 +27,16 @@ class MainWindow(QMainWindow):
         self.ui_text = DataProvider.get_ui_text("dialog")
         self.status_bar = StatusBar(self)
         self.text_edit = TextEdit(self.status_bar, self)
-        self.file_toolbar = FileToolbar(self.text_edit, self)
+        self.file_manager = FileManager(self.text_edit, self)
+        self.tray_icon = TrayIcon(self.file_manager, self)
+        self.menu_bar = MenuBar(self.text_edit, self.file_manager, self.tray_icon,  self)
+        self.file_toolbar = FileToolbar(self.text_edit, self.tray_icon, self)
         self.text_toolbar = TextToolbar(self.text_edit, self)
         self.addToolBar(self.file_toolbar)
         self.addToolBarBreak()
         self.addToolBar(self.text_toolbar)
         self.create_gui()
+        self.setMenuBar(self.menu_bar)
         self.setStatusBar(self.status_bar)
 
     def create_gui(self) -> None:
@@ -48,8 +54,7 @@ class MainWindow(QMainWindow):
                     dialog = DialogManager(self)
                     file_path = dialog.save_document_dialog(f"{self.ui_text.get("fileFilter")}")
                     if file_path:
-                        file_manager = FileManager(self.text_edit, self)
-                        file_manager.save_document(file_path, ".txt")
+                        self.file_manager.save_document(file_path, ".txt")
                         event.accept()
                     else:
                         event.ignore()

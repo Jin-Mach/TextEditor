@@ -1,8 +1,9 @@
 import pathlib
+from typing import Optional
 
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QToolBar, QWidget, QPushButton, QHBoxLayout, QLabel, QLineEdit
+from PyQt6.QtWidgets import QToolBar, QWidget, QPushButton, QHBoxLayout, QLabel, QLineEdit, QSystemTrayIcon
 
 from src.ui.widgets.text_edit import TextEdit
 from src.utilities.data_provider import DataProvider
@@ -13,11 +14,13 @@ from src.utilities.print_manager import Printmanager
 
 # noinspection PyUnresolvedReferences
 class FileToolbar(QToolBar):
-    def __init__(self, text_edit: TextEdit, parent=None) -> None:
+    def __init__(self, text_edit: TextEdit, tray_icon: QSystemTrayIcon, parent=None) -> None:
         super().__init__(parent)
         self.setObjectName("fileToolbar")
+        self.tray_icon_ui_text = DataProvider.get_ui_text("trayicon")
         self.parent = parent
         self.text_edit = text_edit
+        self.tray_icon = tray_icon
         self.file_manager = FileManager(self.text_edit, self)
         self.print_manager = Printmanager(self.text_edit, self.parent)
         self.setAllowedAreas(Qt.ToolBarArea.TopToolBarArea)
@@ -123,14 +126,35 @@ class FileToolbar(QToolBar):
 
     def create_connection(self) -> None:
         self.new_file_button.clicked.connect(self.file_manager.new_file)
-        self.open_file_button.clicked.connect(self.file_manager.open_file)
-        self.save_as_button.clicked.connect(lambda: self.file_manager.save_file_as(".txt"))
-        self.save_button.clicked.connect(self.file_manager.save_file)
-        self.save_as_html_button.clicked.connect(lambda: self.file_manager.save_file_as(".html"))
-        self.export_pdf_button.clicked.connect(lambda: self.file_manager.save_file_as(".pdf"))
+        self.open_file_button.clicked.connect(self.open_file)
+        self.save_as_button.clicked.connect(lambda: self.save_file(".txt"))
+        self.save_button.clicked.connect(lambda: self.save_file(None))
+        self.save_as_html_button.clicked.connect(lambda: self.save_file(".html"))
+        self.export_pdf_button.clicked.connect(lambda: self.save_file(".pdf"))
         self.print_preview_button.clicked.connect(self.print_manager.show_print_preview)
         self.print_button.clicked.connect(self.print_manager.print_document)
         self.search_button.clicked.connect(self.find_manager.find_text)
 
     def reset_file_toolbar(self) -> None:
         self.save_button.setDisabled(True)
+
+    def new_file(self) -> None:
+        self.file_manager.new_file()
+        self.text_edit.reset_text_edit()
+
+    def open_file(self) -> None:
+        self.menu_bar = self.parent.findChild(QToolBar, "menuBar")
+        self.text_toolbar = self.parent.findChild(QToolBar, "textToolbar")
+        result = self.file_manager.open_file()
+        if result:
+            self.save_action.setDisabled(False)
+            self.menu_bar.save_action.setDisabled(False)
+            self.text_toolbar.reset_text_toolbar()
+
+    def save_file(self, file_type: Optional[str]) -> None:
+        if file_type is None:
+            self.file_manager.save_file()
+            self.tray_icon.showMessage(self.tray_icon_ui_text.get("saveTitle"), self.tray_icon_ui_text.get("saveText"))
+        else:
+            if self.file_manager.save_file_as(file_type):
+                self.tray_icon.showMessage(self.tray_icon_ui_text.get("saveTitle"), self.tray_icon_ui_text.get("saveText"))

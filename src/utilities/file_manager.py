@@ -10,7 +10,6 @@ from src.utilities.data_provider import DataProvider
 from src.utilities.exception_manager import ExceptionManager
 from src.utilities.messagebox_manager import MessageboxManager
 from src.utilities.dialog_manager import DialogManager
-from src.utilities.tray_icon import TrayIcon
 
 
 # noinspection PyUnresolvedReferences
@@ -21,25 +20,23 @@ class FileManager:
         self.last_file_path = ""
         self.text_toolbar = TextToolbar(self.text_edit, self.parent)
         self.messagebox_manager = MessageboxManager(self.parent)
-        self.dialog_manager = DialogManager(self.parent.parent)
+        self.dialog_manager = DialogManager(self.parent)
         self.dialog_ui_text = DataProvider.get_ui_text("dialog")
-        self.tray_icon = TrayIcon(self, parent)
         self.messagebox_ui_text = DataProvider.get_ui_text("messagebox")
-        self.tray_icon_ui_text = DataProvider.get_ui_text("trayicon")
 
     def new_file(self) -> None:
         try:
             if self.text_edit.toPlainText().strip():
                 result = self.messagebox_manager.show_save_question_message()
                 if result == "dontSave":
-                    self.text_edit.reset_document()
+                    self.text_edit.reset_text_edit()
                     self.last_file_path = ""
                 elif result == "saveAs":
                     self.save_file_as(".txt")
                 elif result == "cancel":
                     self.text_edit.setFocus()
             else:
-                self.text_edit.reset_document()
+                self.text_edit.reset_text_edit()
         except Exception as e:
             ExceptionManager.exception_handler(e)
 
@@ -61,10 +58,11 @@ class FileManager:
         except Exception as e:
             ExceptionManager.exception_handler(e)
 
-    def save_file_as(self, file_type: str) -> None:
+    def save_file_as(self, file_type: str) -> bool:
         try:
             if not self.text_edit.toPlainText():
                 self.messagebox_manager.show_empty_document_message(self.text_edit, self.messagebox_ui_text.get("emptytextText"))
+                return False
             else:
                 file_path = self.dialog_manager.save_document_dialog(f"{self.dialog_ui_text.get("filefilterName")} (*{file_type})")
                 if file_path:
@@ -97,7 +95,7 @@ class FileManager:
                 with open(file_path, "r", encoding="utf-8") as file:
                     self.text_edit.setPlainText(file.read())
             self.last_file_path = file_path
-            self.parent.save_button.setDisabled(False)
+
             cursor = self.text_edit.textCursor()
             cursor.movePosition(cursor.MoveOperation.End)
             self.text_edit.setTextCursor(cursor)
@@ -123,6 +121,5 @@ class FileManager:
                 printer.setOutputFileName(file_path)
                 self.text_edit.document().print(printer)
             self.text_edit.setFocus()
-            self.tray_icon.showMessage(self.tray_icon_ui_text.get("saveTitle"), self.tray_icon_ui_text.get("saveText"))
         except Exception as e:
             ExceptionManager.exception_handler(e)

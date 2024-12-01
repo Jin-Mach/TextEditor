@@ -1,7 +1,7 @@
 from typing import Optional
 
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QMenuBar, QMenu, QTextEdit, QToolBar, QSystemTrayIcon
+from PyQt6.QtWidgets import QMenuBar, QMenu, QTextEdit, QToolBar
 
 from src.utilities.data_provider import DataProvider
 from src.utilities.file_manager import FileManager
@@ -10,15 +10,12 @@ from src.utilities.print_manager import Printmanager
 
 # noinspection PyUnresolvedReferences
 class MenuBar(QMenuBar):
-    def __init__(self, text_edit: QTextEdit, file_manager: FileManager, tray_icon: QSystemTrayIcon, parent=None):
+    def __init__(self, text_edit: QTextEdit, file_manager: FileManager, parent=None):
         super().__init__(parent)
         self.setObjectName("menuBar")
-        self.tray_icon_ui_text = DataProvider.get_ui_text("trayicon")
         self.parent = parent
         self.text_edit = text_edit
         self.file_manager = file_manager
-        self.tray_icon = tray_icon
-        self.toolbar = self.parent.findChild(QToolBar, "fileToolbar")
         self.create_gui()
         self.set_ui_text()
         self.create_connection()
@@ -75,30 +72,22 @@ class MenuBar(QMenuBar):
         self.close_application_action.triggered.connect(self.close_application)
 
     def new_file(self) -> None:
-        file_toolbar = self.parent.findChild(QToolBar, "fileToolbar")
-        text_toolbar = self.parent.findChild(QToolBar, "textToolbar")
-        self.file_manager.new_file()
+        self.file_manager.new_file(self, self.parent.findChild(QToolBar, "fileToolbar"))
         self.reset_menu_bar()
-        file_toolbar.reset_file_toolbar()
-        text_toolbar.reset_text_toolbar()
-        self.text_edit.reset_text_edit()
+        self.parent.findChild(QToolBar, "fileToolbar").reset_file_toolbar()
+        self.parent.findChild(QToolBar, "textToolbar").reset_text_toolbar()
 
     def open_file(self) -> None:
-        self.file_toolbar = self.parent.findChild(QToolBar, "fileToolbar")
-        self.text_toolbar = self.parent.findChild(QToolBar, "textToolbar")
-        result = self.file_manager.open_file()
-        if result:
-            self.save_action.setDisabled(False)
-            self.file_toolbar.save_button.setDisabled(False)
-            self.text_toolbar.reset_text_toolbar()
+        self.file_manager.open_file(self, self.parent.findChild(QToolBar, "fileToolbar"))
+        self.save_action.setDisabled(False)
+        self.parent.findChild(QToolBar, "fileToolbar").save_button.setDisabled(False)
+        self.parent.findChild(QToolBar, "textToolbar").reset_text_toolbar()
 
     def save_file(self, file_type: Optional[str]) -> None:
         if file_type is None:
             self.file_manager.save_file()
-            self.tray_icon.showMessage(self.tray_icon_ui_text.get("saveTitle"), self.tray_icon_ui_text.get("saveText"))
         else:
-            if self.file_manager.save_file_as(file_type):
-                self.tray_icon.showMessage(self.tray_icon_ui_text.get("saveTitle"), self.tray_icon_ui_text.get("saveText"))
+            self.file_manager.save_file_as(self, self.parent.findChild(QToolBar, "fileToolbar"), file_type)
 
     def close_application(self) -> None:
         main_window = self.parent

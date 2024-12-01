@@ -3,7 +3,7 @@ from typing import Optional
 
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QToolBar, QWidget, QPushButton, QHBoxLayout, QLabel, QLineEdit, QSystemTrayIcon
+from PyQt6.QtWidgets import QToolBar, QWidget, QPushButton, QHBoxLayout, QLabel, QLineEdit, QSystemTrayIcon, QMenuBar
 
 from src.ui.widgets.text_edit import TextEdit
 from src.utilities.data_provider import DataProvider
@@ -21,7 +21,7 @@ class FileToolbar(QToolBar):
         self.parent = parent
         self.text_edit = text_edit
         self.tray_icon = tray_icon
-        self.file_manager = FileManager(self.text_edit, self)
+        self.file_manager = FileManager(self.text_edit, tray_icon, self)
         self.print_manager = Printmanager(self.text_edit, self.parent)
         self.setAllowedAreas(Qt.ToolBarArea.TopToolBarArea)
         self.setOrientation(Qt.Orientation.Horizontal)
@@ -125,7 +125,7 @@ class FileToolbar(QToolBar):
         self.search_input.setPlaceholderText(ui_text.get("searchLineedit")["placeholderText"])
 
     def create_connection(self) -> None:
-        self.new_file_button.clicked.connect(self.file_manager.new_file)
+        self.new_file_button.clicked.connect(self.new_file)
         self.open_file_button.clicked.connect(self.open_file)
         self.save_as_button.clicked.connect(lambda: self.save_file(".txt"))
         self.save_button.clicked.connect(lambda: self.save_file(None))
@@ -139,22 +139,19 @@ class FileToolbar(QToolBar):
         self.save_button.setDisabled(True)
 
     def new_file(self) -> None:
-        self.file_manager.new_file()
-        self.text_edit.reset_text_edit()
+        self.file_manager.new_file(self.parent.findChild(QMenuBar, "menuBar"), self)
+        self.parent.findChild(QMenuBar, "menuBar").reset_menu_bar()
+        self.reset_file_toolbar()
+        self.parent.findChild(QToolBar, "textToolbar").reset_text_toolbar()
 
     def open_file(self) -> None:
-        self.menu_bar = self.parent.findChild(QToolBar, "menuBar")
-        self.text_toolbar = self.parent.findChild(QToolBar, "textToolbar")
-        result = self.file_manager.open_file()
-        if result:
-            self.save_action.setDisabled(False)
-            self.menu_bar.save_action.setDisabled(False)
-            self.text_toolbar.reset_text_toolbar()
+        self.file_manager.open_file(self.parent.findChild(QMenuBar, "menuBar"), self)
+        self.save_button.setDisabled(False)
+        self.parent.findChild(QMenuBar, "menuBar").save_action.setDisabled(False)
+        self.parent.findChild(QToolBar, "textToolbar").reset_text_toolbar()
 
     def save_file(self, file_type: Optional[str]) -> None:
         if file_type is None:
             self.file_manager.save_file()
-            self.tray_icon.showMessage(self.tray_icon_ui_text.get("saveTitle"), self.tray_icon_ui_text.get("saveText"))
         else:
-            if self.file_manager.save_file_as(file_type):
-                self.tray_icon.showMessage(self.tray_icon_ui_text.get("saveTitle"), self.tray_icon_ui_text.get("saveText"))
+            self.file_manager.save_file_as(self.parent.findChild(QMenuBar, "menuBar"), self, file_type)

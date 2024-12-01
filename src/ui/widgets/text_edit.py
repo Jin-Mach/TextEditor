@@ -64,12 +64,15 @@ class TextEdit(QTextEdit):
         self.delete_action.triggered.connect(self.clear)
 
     def reset_text_edit(self) -> None:
+        self.blockSignals(True)
         self.clear()
         self.setTextColor(Qt.GlobalColor.black)
         self.setStyleSheet("background-color: white;")
         self.setFontFamily("Arial")
         self.setFontPointSize(14)
         self.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.setFocus()
+        self.blockSignals(False)
 
     def mousePressEvent(self, event) -> None:
         if self.extraSelections():

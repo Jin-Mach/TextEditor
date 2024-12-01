@@ -27,9 +27,9 @@ class MainWindow(QMainWindow):
         self.ui_text = DataProvider.get_ui_text("dialog")
         self.status_bar = StatusBar(self)
         self.text_edit = TextEdit(self.status_bar, self)
-        self.file_manager = FileManager(self.text_edit, self)
-        self.tray_icon = TrayIcon(self.file_manager, self)
-        self.menu_bar = MenuBar(self.text_edit, self.file_manager, self.tray_icon,  self)
+        self.tray_icon = TrayIcon(self)
+        self.file_manager = FileManager(self.text_edit, self.tray_icon, self)
+        self.menu_bar = MenuBar(self.text_edit, self.file_manager, self)
         self.file_toolbar = FileToolbar(self.text_edit, self.tray_icon, self)
         self.text_toolbar = TextToolbar(self.text_edit, self)
         self.addToolBar(self.file_toolbar)
@@ -38,6 +38,8 @@ class MainWindow(QMainWindow):
         self.create_gui()
         self.setMenuBar(self.menu_bar)
         self.setStatusBar(self.status_bar)
+        self.text_edit.textChanged.connect(self.reset_editor)
+        self.tray_icon.create_connection()
 
     def create_gui(self) -> None:
         central_widget = self.text_edit
@@ -64,3 +66,10 @@ class MainWindow(QMainWindow):
                 event.accept()
         except Exception as e:
             ExceptionManager.exception_handler(e)
+
+    def reset_editor(self) -> None:
+        if not self.text_edit.toPlainText():
+            self.menu_bar.reset_menu_bar()
+            self.file_toolbar.reset_file_toolbar()
+            self.text_toolbar.reset_text_toolbar()
+            self.text_edit.reset_text_edit()

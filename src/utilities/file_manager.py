@@ -3,6 +3,7 @@ import pathlib
 from PyQt6.QtGui import QPageLayout, QPageSize
 from PyQt6.QtPrintSupport import QPrinter
 from PyQt6.QtCore import QMarginsF
+from PyQt6.QtWidgets import QToolBar, QMenuBar, QSystemTrayIcon
 
 from src.ui.widgets.text_toolbar import TextToolbar
 from src.ui.widgets.text_edit import TextEdit
@@ -14,17 +15,19 @@ from src.utilities.dialog_manager import DialogManager
 
 # noinspection PyUnresolvedReferences
 class FileManager:
-    def __init__(self, text_edit: TextEdit, parent=None) -> None:
+    def __init__(self, text_edit: TextEdit, tray_icon: QSystemTrayIcon, parent=None) -> None:
         self.parent = parent
         self.text_edit = text_edit
+        self.tray_icon = tray_icon
         self.last_file_path = ""
         self.text_toolbar = TextToolbar(self.text_edit, self.parent)
         self.messagebox_manager = MessageboxManager(self.parent)
         self.dialog_manager = DialogManager(self.parent)
         self.dialog_ui_text = DataProvider.get_ui_text("dialog")
         self.messagebox_ui_text = DataProvider.get_ui_text("messagebox")
+        self.tray_icon_ui_text = DataProvider.get_ui_text("trayicon")
 
-    def new_file(self) -> None:
+    def new_file(self, menu_bar: QMenuBar, file_toolbar: QToolBar) -> None:
         try:
             if self.text_edit.toPlainText().strip():
                 result = self.messagebox_manager.show_save_question_message()
@@ -32,7 +35,7 @@ class FileManager:
                     self.text_edit.reset_text_edit()
                     self.last_file_path = ""
                 elif result == "saveAs":
-                    self.save_file_as(".txt")
+                    self.save_file_as(menu_bar, file_toolbar, ".txt")
                 elif result == "cancel":
                     self.text_edit.setFocus()
             else:
@@ -40,7 +43,7 @@ class FileManager:
         except Exception as e:
             ExceptionManager.exception_handler(e)
 
-    def open_file(self) -> None:
+    def open_file(self, menu_bar: QMenuBar, file_toolbar: QToolBar) -> None:
         try:
             if self.text_edit.toPlainText():
                 result = self.messagebox_manager.show_save_question_message()
@@ -49,7 +52,7 @@ class FileManager:
                     if selected_file != "":
                         self.load_file_content(selected_file)
                 elif result == "saveAs":
-                    self.save_file_as(".txt")
+                    self.save_file_as(menu_bar, file_toolbar, ".txt")
                 elif result == "cancel":
                     self.text_edit.setFocus()
             else:
@@ -58,7 +61,7 @@ class FileManager:
         except Exception as e:
             ExceptionManager.exception_handler(e)
 
-    def save_file_as(self, file_type: str) -> bool:
+    def save_file_as(self, menu_bar: QMenuBar, file_toolbar: QToolBar,  file_type: str) -> bool:
         try:
             if not self.text_edit.toPlainText():
                 self.messagebox_manager.show_empty_document_message(self.text_edit, self.messagebox_ui_text.get("emptytextText"))
@@ -68,7 +71,8 @@ class FileManager:
                 if file_path:
                     self.save_document(file_path, file_type)
                     self.last_file_path = file_path
-                    self.parent.save_button.setDisabled(False)
+                    menu_bar.save_action.setDisabled(False)
+                    file_toolbar.save_button.setDisabled(False)
                 self.text_edit.setFocus()
         except Exception as e:
             ExceptionManager.exception_handler(e)
@@ -120,6 +124,7 @@ class FileManager:
                 printer.setOutputFormat(QPrinter.OutputFormat.PdfFormat)
                 printer.setOutputFileName(file_path)
                 self.text_edit.document().print(printer)
+            self.tray_icon.showMessage(self.tray_icon_ui_text.get("saveTitle"), self.tray_icon_ui_text.get("saveText"))
             self.text_edit.setFocus()
         except Exception as e:
             ExceptionManager.exception_handler(e)

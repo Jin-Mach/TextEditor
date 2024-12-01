@@ -1,6 +1,6 @@
 import pathlib
 
-from PyQt6.QtWidgets import QSystemTrayIcon, QMenu
+from PyQt6.QtWidgets import QSystemTrayIcon, QMenu, QToolBar
 from PyQt6.QtGui import QAction, QIcon
 
 from src.utilities.data_provider import DataProvider
@@ -9,12 +9,10 @@ from src.utilities.data_provider import DataProvider
 # noinspection PyUnresolvedReferences
 class TrayIcon(QSystemTrayIcon):
     icons_path = pathlib.Path(__file__).parent.parent.joinpath("icons")
-    def __init__(self, file_manager, parent=None) -> None:
+    def __init__(self, parent=None) -> None:
         super().__init__(parent)
-        self.file_manager = file_manager
         self.setIcon(QIcon(str(self.icons_path.joinpath("applicationIcon.png"))))
         self.create_gui()
-        self.create_connection()
 
     def create_gui(self):
         ui_text = DataProvider().get_ui_text("trayicon")
@@ -33,10 +31,9 @@ class TrayIcon(QSystemTrayIcon):
         self.show()
 
     def create_connection(self) -> None:
-        self.new_file_action.triggered.connect(self.file_manager.new_file)
-        self.open_file_action.triggered.connect(self.file_manager.open_file)
+        self.new_file_action.triggered.connect(self.parent().findChild(QToolBar, "fileToolbar").new_file)
+        self.open_file_action.triggered.connect(self.parent().findChild(QToolBar, "fileToolbar").open_file)
         self.quit_action.triggered.connect(self.close_app)
 
     def close_app(self) -> None:
-        main_window = self.parent()
-        main_window.close()
+        self.parent().close()

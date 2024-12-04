@@ -4,19 +4,13 @@ import sys
 from PyQt6.QtWidgets import QApplication
 
 from src.ui.main_window import MainWindow
-from src.utilities.logging_manager import setup_logger
-from src.utilities.messagebox_manager import MessageboxManager
+from src.utilities.default_application_theme import DefaultApplicationTheme
+
+style_file_path = pathlib.Path(__file__).parent.joinpath("style", "styles.qss")
 
 def create_app() -> None:
     application = QApplication(sys.argv)
+    DefaultApplicationTheme.set_light_theme(application, style_file_path)
     window = MainWindow()
-    style_file_path = pathlib.Path(__file__).parent.joinpath("style", "styles.qss")
-    try:
-        with open(style_file_path, "r") as file:
-            application.setStyleSheet(file.read())
-    except Exception as e:
-        setup_logger().error(str(e))
-        messagebox_manager = MessageboxManager()
-        messagebox_manager.show_load_error_message(e, str(style_file_path))
     window.show()
     sys.exit(application.exec())

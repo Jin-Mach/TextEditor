@@ -1,4 +1,4 @@
-from PyQt6.QtGui import QFont, QTextCharFormat, QColor
+from PyQt6.QtGui import QFont, QTextCharFormat, QColor, QTextBlockFormat
 from PyQt6.QtWidgets import QComboBox
 
 from src.ui.widgets.text_edit import TextEdit
@@ -58,6 +58,16 @@ class TextManager:
                     else:
                         char_format.setFontStrikeOut(True)
                 self.text_edit.textCursor().mergeCharFormat(char_format)
+        except Exception as e:
+            ExceptionManager.exception_handler(e)
+
+    def set_alignment(self, alignment) -> None:
+        try:
+            cursor = self.text_edit.textCursor()
+            if self.check_selection():
+                block_format = QTextBlockFormat()
+                block_format.setAlignment(alignment)
+                cursor.mergeBlockFormat(block_format)
         except Exception as e:
             ExceptionManager.exception_handler(e)
 

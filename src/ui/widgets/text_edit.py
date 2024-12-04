@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QAction, QFont, QGuiApplication
+from PyQt6.QtGui import QAction, QFont, QGuiApplication, QMouseEvent
 from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu
 
 from src.utilities.data_provider import DataProvider
@@ -12,10 +12,7 @@ class TextEdit(QTextEdit):
         self.setObjectName("textEdit")
         self.parent = parent
         self.status_bar = status_bar
-        self.setTextColor(Qt.GlobalColor.black)
-        self.setStyleSheet("background-color: white;")
-        self.setFontFamily("Arial")
-        self.setFontPointSize(14)
+        self.setFont(QFont("Arial", 14))
         self.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.setLineWrapMode(QTextEdit.LineWrapMode.WidgetWidth)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
@@ -64,17 +61,12 @@ class TextEdit(QTextEdit):
         self.delete_action.triggered.connect(self.clear)
 
     def reset_text_edit(self) -> None:
-        self.blockSignals(True)
         self.clear()
-        self.setTextColor(Qt.GlobalColor.black)
-        self.setStyleSheet("background-color: white;")
-        self.setFontFamily("Arial")
-        self.setFontPointSize(14)
+        self.setFont(QFont("Arial", 14))
         self.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.setFocus()
-        self.blockSignals(False)
 
-    def mousePressEvent(self, event) -> None:
+    def mousePressEvent(self, event: QMouseEvent) -> None:
         if self.extraSelections():
             self.setExtraSelections([])
         super().mousePressEvent(event)

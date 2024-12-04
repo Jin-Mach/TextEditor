@@ -38,7 +38,6 @@ class MainWindow(QMainWindow):
         self.create_gui()
         self.setMenuBar(self.menu_bar)
         self.setStatusBar(self.status_bar)
-        self.text_edit.textChanged.connect(self.reset_editor)
         self.tray_icon.create_connection()
 
     def create_gui(self) -> None:
@@ -66,10 +65,3 @@ class MainWindow(QMainWindow):
                 event.accept()
         except Exception as e:
             ExceptionManager.exception_handler(e)
-
-    def reset_editor(self) -> None:
-        if not self.text_edit.toPlainText():
-            self.menu_bar.reset_menu_bar()
-            self.file_toolbar.reset_file_toolbar()
-            self.text_toolbar.reset_text_toolbar()
-            self.text_edit.reset_text_edit()

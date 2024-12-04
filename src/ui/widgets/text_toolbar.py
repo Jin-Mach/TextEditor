@@ -117,6 +117,7 @@ class TextToolbar(QToolBar):
         self.align_left_button = QPushButton()
         self.align_left_button.setObjectName("alignLeft")
         self.align_left_button.setCheckable(True)
+        self.align_left_button.setEnabled(True)
         self.align_center_button = QPushButton()
         self.align_center_button.setObjectName("alignCenter")
         self.align_center_button.setCheckable(True)
@@ -205,10 +206,10 @@ class TextToolbar(QToolBar):
         self.paste_button.clicked.connect(self.text_edit.paste)
         self.select_all_button.clicked.connect(self.text_edit.selectAll)
         self.delete_text_button.clicked.connect(self.text_manager.clear_text_edit)
-        self.align_left_button.clicked.connect(lambda: self.text_edit.setAlignment(Qt.AlignmentFlag.AlignLeft))
-        self.align_center_button.clicked.connect(lambda: self.text_edit.setAlignment(Qt.AlignmentFlag.AlignCenter))
-        self.align_right_button.clicked.connect(lambda: self.text_edit.setAlignment(Qt.AlignmentFlag.AlignRight))
-        self.align_justified_button.clicked.connect(lambda: self.text_edit.setAlignment(Qt.AlignmentFlag.AlignJustify))
+        self.align_left_button.clicked.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignLeft))
+        self.align_center_button.clicked.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignCenter))
+        self.align_right_button.clicked.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignRight))
+        self.align_justified_button.clicked.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignJustify))
         self.text_color_combobox.currentIndexChanged.connect(lambda: self.text_manager.set_text_and_background_color(self.text_color_combobox))
         self.background_color_combobox.currentIndexChanged.connect(lambda: self.text_manager.set_text_and_background_color(self.background_color_combobox))
 
@@ -223,6 +224,10 @@ class TextToolbar(QToolBar):
         self.background_color_combobox.setCurrentIndex(self.background_color_combobox.findText("#ffffff"))
 
     def update_edit_buttons(self) -> None:
+        self.bold_text_button.setEnabled(self.text_edit.textCursor().hasSelection())
+        self.italic_text_button.setEnabled(self.text_edit.textCursor().hasSelection())
+        self.underline_text_button.setEnabled(self.text_edit.textCursor().hasSelection())
+        self.strikeout_text_button.setEnabled(self.text_edit.textCursor().hasSelection())
         self.undo_button.setEnabled(self.text_edit.document().isUndoAvailable())
         self.redo_button.setEnabled(self.text_edit.document().isRedoAvailable())
         self.cut_button.setEnabled(self.text_edit.textCursor().hasSelection())
@@ -230,6 +235,10 @@ class TextToolbar(QToolBar):
         self.paste_button.setEnabled(bool(QGuiApplication.clipboard().text()))
         self.select_all_button.setEnabled(bool(self.text_edit.toPlainText()))
         self.delete_text_button.setEnabled(bool(self.text_edit.toPlainText()))
+        self.align_left_button.setEnabled(self.text_edit.textCursor().hasSelection())
+        self.align_center_button.setEnabled(self.text_edit.textCursor().hasSelection())
+        self.align_right_button.setEnabled(self.text_edit.textCursor().hasSelection())
+        self.align_justified_button.setEnabled(self.text_edit.textCursor().hasSelection())
 
     def update_format_buttons(self) -> None:
         text_format = self.get_text_format()
@@ -278,7 +287,7 @@ class TextToolbar(QToolBar):
             text_color = char_format.foreground().color().name()
             background_color = char_format.background().color().name()
             if background_color == "#000000":
-                    background_color = "#ffffff"
+                background_color = "#ffffff"
             return str(font_family), str(font_size), is_bold, is_italic, is_underline, is_strikeout, alignment_name, text_color, background_color
         return "Arial", "14", False, False, False, False, "alignLeft", "#000000", "#ffffff"
 

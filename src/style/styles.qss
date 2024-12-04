@@ -29,6 +29,14 @@ QToolBar QPushButton:checked {
     background-color: #90EE90;
 }
 
+QToolBar#fileToolbar {
+    border-bottom: 1px solid #87CEFA;
+}
+
+QToolBar#textToolbar {
+    border-bottom: 1px solid #87CEFA;
+}
+
 QComboBox {
     border: 2px solid #87CEFA;
     border-radius: 5px;
@@ -55,9 +63,9 @@ QComboBox::item:selected {
 
 QTextEdit {
     border: 2px solid #A9A9A9;
-    margin-top: 0;
+    margin-top: 5px;
     margin-right: 5px;
-    margin-bottom: 0;
+    margin-bottom: 5px;
     margin-left: 5px;
 }
 
@@ -85,6 +93,7 @@ QTextEdit QMenu::item:disabled:selected {
 
 QStatusBar {
     background-color: #DCDCDC;
+    border-top: 1px solid #87CEFA;
 }
 
 QStatusBar QLabel {

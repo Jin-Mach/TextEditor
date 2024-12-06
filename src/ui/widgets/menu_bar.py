@@ -1,28 +1,39 @@
+import pathlib
 from typing import Optional
 
-from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QMenuBar, QMenu, QTextEdit, QToolBar
+from PyQt6.QtGui import QAction, QGuiApplication, QIcon
+from PyQt6.QtWidgets import QMenuBar, QMenu, QToolBar
 
+from src.ui.widgets.text_edit import TextEdit
 from src.utilities.data_provider import DataProvider
 from src.utilities.file_manager import FileManager
 from src.utilities.print_manager import Printmanager
+from src.utilities.text_manager import TextManager
 
 
 # noinspection PyUnresolvedReferences
 class MenuBar(QMenuBar):
-    def __init__(self, text_edit: QTextEdit, file_manager: FileManager, parent=None):
+    def __init__(self, text_edit: TextEdit, file_manager: FileManager, print_manager: Printmanager, text_manager: TextManager, parent=None):
         super().__init__(parent)
         self.setObjectName("menuBar")
         self.parent = parent
         self.text_edit = text_edit
         self.file_manager = file_manager
-        self.create_gui()
-        self.set_ui_text()
+        self.print_manager = print_manager
+        self.text_manager = text_manager
+        self.create_file_menu()
+        self.create_edit_menu()
+        self.set_menus_ui_text()
+        self.set_actions_ui_text()
+        self.set_icons()
         self.create_connection()
+        self.update_edit_menu()
         self.show()
+        self.text_edit.cursorPositionChanged.connect(self.update_edit_menu)
 
-    def create_gui(self) -> None:
-        file_menu = QMenu("Soubor", self)
+    def create_file_menu(self) -> None:
+        self.file_menu = QMenu(self)
+        self.file_menu.setObjectName("fileMenu")
         self.new_file_action = QAction(self)
         self.new_file_action.setObjectName("newFile")
         self.open_file_action = QAction(self)
@@ -33,43 +44,105 @@ class MenuBar(QMenuBar):
         self.save_action.setObjectName("save")
         self.save_action.setDisabled(True)
         self.save_as_html_action = QAction(self)
-        self.save_as_html_action.setObjectName("saveasHtml")
+        self.save_as_html_action.setObjectName("saveHtml")
         self.save_as_pdf_action = QAction(self)
-        self.save_as_pdf_action.setObjectName("saveasPdf")
+        self.save_as_pdf_action.setObjectName("exportPdf")
         self.print_preview_action = QAction(self)
         self.print_preview_action.setObjectName("printPreview")
         self.print_document_action = QAction(self)
-        self.print_document_action.setObjectName("printDocument")
+        self.print_document_action.setObjectName("print")
         self.close_application_action = QAction(self)
         self.close_application_action.setObjectName("closeApplication")
-        file_menu.addAction(self.new_file_action)
-        file_menu.addAction(self.open_file_action)
-        file_menu.addAction(self.save_as_action)
-        file_menu.addAction(self.save_action)
-        file_menu.addAction(self.save_as_html_action)
-        file_menu.addAction(self.save_as_pdf_action)
-        file_menu.addSeparator()
-        file_menu.addAction(self.close_application_action)
-        self.addMenu(file_menu)
+        actions = [self.new_file_action, self.open_file_action, self.save_as_action, self.save_action, self.save_as_html_action,
+                   self.save_as_pdf_action, self.print_preview_action, self.print_document_action, self.close_application_action]
+        for action in actions:
+            if action == self.print_preview_action or action == self.close_application_action:
+                self.file_menu.addSeparator()
+                self.file_menu.addAction(action)
+            else:
+                self.file_menu.addAction(action)
+        self.addMenu(self.file_menu)
 
-    def set_ui_text(self) -> None:
-        actions = [self.new_file_action, self.open_file_action, self.save_as_action, self.save_action, self.save_as_html_action, self.save_as_pdf_action, self.print_preview_action,
-                   self.print_document_action, self.close_application_action]
+    def create_edit_menu(self) -> None:
+        self.edit_menu = QMenu()
+        self.edit_menu.setObjectName("editMenu")
+        self.undo_action = QAction(self)
+        self.undo_action.setObjectName("undo")
+        self.redo_action = QAction(self)
+        self.redo_action.setObjectName("redo")
+        self.cut_action = QAction(self)
+        self.cut_action.setObjectName("cut")
+        self.copy_action = QAction(self)
+        self.copy_action.setObjectName("copy")
+        self.paste_action = QAction(self)
+        self.paste_action.setObjectName("paste")
+        self.select_action = QAction(self)
+        self.select_action.setObjectName("selectAll")
+        self.delete_action = QAction(self)
+        self.delete_action.setObjectName("deleteText")
+        actions = [self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action,self.select_action,
+                   self.delete_action]
+        for action in actions:
+            self.edit_menu.addAction(action)
+        self.addMenu(self.edit_menu)
+
+    def set_menus_ui_text(self) -> None:
+        menus = [self.file_menu, self.edit_menu]
+        ui_text = DataProvider.get_ui_text("menubar")
+        for menu in menus:
+            menu.setTitle(ui_text.get(menu.objectName()))
+
+    def set_actions_ui_text(self) -> None:
+        actions = [self.new_file_action, self.open_file_action, self.save_as_action, self.save_action, self.save_as_html_action,
+                   self.save_as_pdf_action, self.print_preview_action, self.print_document_action, self.close_application_action,
+                   self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action, self.select_action,
+                   self.delete_action]
         ui_text = DataProvider.get_ui_text("menubar")
         for action in actions:
             action.setText(ui_text.get(action.objectName()))
 
+    def set_icons(self) -> None:
+        file_icons_dict = DataProvider.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "file_icons"))
+        edit_icons_dict = DataProvider.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "text_icons"))
+        close_app_icon = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "closeApplication")
+        self.close_application_action.setIcon(QIcon(str(close_app_icon)))
+        file_actions = [self.new_file_action, self.open_file_action, self.save_as_action, self.save_action, self.save_as_html_action,
+                   self.save_as_pdf_action, self.print_preview_action, self.print_document_action, self.close_application_action]
+        for action in file_actions:
+            if action.objectName() in file_icons_dict.keys():
+                action.setIcon(QIcon(str(file_icons_dict[action.objectName()])))
+        edit_actions = [self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action, self.select_action,
+                   self.delete_action]
+        for action in edit_actions:
+            if action.objectName() in edit_icons_dict.keys():
+                action.setIcon(QIcon(str(edit_icons_dict[action.objectName()])))
+
     def create_connection(self) -> None:
-        print_manager = Printmanager(self.parent.findChild(QTextEdit, "textEdit"), self.parent)
         self.new_file_action.triggered.connect(self.new_file)
         self.open_file_action.triggered.connect(self.open_file)
         self.save_as_action.triggered.connect(lambda: self.save_file(".txt"))
         self.save_action.triggered.connect(lambda: self.save_file(None))
         self.save_as_html_action.triggered.connect(lambda: self.save_file(".html"))
         self.save_as_pdf_action.triggered.connect(lambda: self.save_file(".pdf"))
-        self.print_preview_action.triggered.connect(print_manager.show_print_preview)
-        self.print_document_action.triggered.connect(print_manager.print_document)
+        self.print_preview_action.triggered.connect(self.print_manager.show_print_preview)
+        self.print_document_action.triggered.connect(self.print_manager.print_document)
         self.close_application_action.triggered.connect(self.close_application)
+        self.undo_action.triggered.connect(self.text_edit.undo)
+        self.redo_action.triggered.connect(self.text_edit.redo)
+        self.cut_action.triggered.connect(self.text_edit.cut)
+        self.copy_action.triggered.connect(self.text_edit.copy)
+        self.paste_action.triggered.connect(self.text_edit.custom_paste)
+        self.select_action.triggered.connect(self.text_edit.selectAll)
+        self.delete_action.triggered.connect(self.text_manager.clear_text_edit)
+
+    def update_edit_menu(self) -> None:
+        self.undo_action.setEnabled(self.text_edit.document().isUndoAvailable())
+        self.redo_action.setEnabled(self.text_edit.document().isRedoAvailable())
+        self.cut_action.setEnabled(self.text_edit.textCursor().hasSelection())
+        self.copy_action.setEnabled(self.text_edit.textCursor().hasSelection())
+        self.paste_action.setEnabled(bool(QGuiApplication.clipboard().text()))
+        self.select_action.setEnabled(bool(self.text_edit.toPlainText()))
+        self.delete_action.setEnabled(bool(self.text_edit.toPlainText()))
 
     def new_file(self) -> None:
         self.file_manager.new_file(self, self.parent.findChild(QToolBar, "fileToolbar"))

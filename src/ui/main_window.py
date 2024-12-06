@@ -13,6 +13,8 @@ from src.utilities.dialog_manager import DialogManager
 from src.utilities.exception_manager import ExceptionManager
 from src.utilities.file_manager import FileManager
 from src.utilities.messagebox_manager import MessageboxManager
+from src.utilities.print_manager import Printmanager
+from src.utilities.text_manager import TextManager
 from src.utilities.tray_icon import TrayIcon
 
 
@@ -28,9 +30,11 @@ class MainWindow(QMainWindow):
         self.status_bar = StatusBar(self)
         self.text_edit = TextEdit(self.status_bar, self)
         self.tray_icon = TrayIcon(self)
+        self.print_manager = Printmanager(self.text_edit, self)
         self.file_manager = FileManager(self.text_edit, self.tray_icon, self)
-        self.menu_bar = MenuBar(self.text_edit, self.file_manager, self)
-        self.file_toolbar = FileToolbar(self.text_edit, self.tray_icon, self)
+        self.text_manager = TextManager(self.text_edit, self)
+        self.menu_bar = MenuBar(self.text_edit, self.file_manager, self.print_manager, self.text_manager, self)
+        self.file_toolbar = FileToolbar(self.text_edit, self.file_manager, self.print_manager, self.tray_icon, self)
         self.text_toolbar = TextToolbar(self.text_edit, self)
         self.addToolBar(self.file_toolbar)
         self.addToolBarBreak()

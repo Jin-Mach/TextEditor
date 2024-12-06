@@ -1,3 +1,4 @@
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QTextCharFormat, QColor, QTextBlockFormat
 from PyQt6.QtWidgets import QComboBox
 
@@ -61,7 +62,7 @@ class TextManager:
         except Exception as e:
             ExceptionManager.exception_handler(e)
 
-    def set_alignment(self, alignment) -> None:
+    def set_alignment(self, alignment: Qt.AlignmentFlag) -> None:
         try:
             cursor = self.text_edit.textCursor()
             if self.check_selection():

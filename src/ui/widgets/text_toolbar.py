@@ -203,7 +203,7 @@ class TextToolbar(QToolBar):
         self.redo_button.clicked.connect(self.text_edit.redo)
         self.cut_button.clicked.connect(self.text_edit.cut)
         self.copy_button.clicked.connect(self.text_edit.copy)
-        self.paste_button.clicked.connect(self.text_edit.paste)
+        self.paste_button.clicked.connect(self.text_edit.custom_paste)
         self.select_all_button.clicked.connect(self.text_edit.selectAll)
         self.delete_text_button.clicked.connect(self.text_manager.clear_text_edit)
         self.align_left_button.clicked.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignLeft))

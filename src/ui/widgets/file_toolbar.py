@@ -14,15 +14,15 @@ from src.utilities.print_manager import Printmanager
 
 # noinspection PyUnresolvedReferences
 class FileToolbar(QToolBar):
-    def __init__(self, text_edit: TextEdit, tray_icon: QSystemTrayIcon, parent=None) -> None:
+    def __init__(self, text_edit: TextEdit, file_manager: FileManager, print_manager: Printmanager, tray_icon: QSystemTrayIcon, parent=None) -> None:
         super().__init__(parent)
         self.setObjectName("fileToolbar")
         self.tray_icon_ui_text = DataProvider.get_ui_text("trayicon")
         self.parent = parent
         self.text_edit = text_edit
         self.tray_icon = tray_icon
-        self.file_manager = FileManager(self.text_edit, tray_icon, self)
-        self.print_manager = Printmanager(self.text_edit, self.parent)
+        self.file_manager = file_manager
+        self.print_manager = print_manager
         self.setAllowedAreas(Qt.ToolBarArea.TopToolBarArea)
         self.setOrientation(Qt.Orientation.Horizontal)
         self.setFloatable(False)

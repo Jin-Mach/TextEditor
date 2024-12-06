@@ -59,14 +59,23 @@
         "saveText": "Soubor uložen."
     },
     "menubar": {
+        "fileMenu": "Soubor",
         "newFile": "Nový soubor",
         "openFile": "Otevřít soubor",
         "saveAs": "Uložit jako textový soubor",
         "save": "Uložit",
-        "saveasHtml": "Uložit jako HTML",
-        "saveasPdf": "Uložit jako PDF",
+        "saveHtml": "Uložit jako HTML",
+        "exportPdf": "Uložit jako PDF",
         "printPreview": "Náhled tisku",
-        "printDocument": "Vytisknout",
-        "closeApplication": "Zavřít aplikaci"
+        "print": "Vytisknout",
+        "closeApplication": "Zavřít aplikaci",
+        "editMenu": "Upravit",
+        "undo": "Zpět",
+        "redo": "Vpřed",
+        "cut":"Vyjmout",
+        "copy": "Kopírovat",
+        "paste": "Vložit",
+        "selectAll": "Vybrat vše",
+        "deleteText": "Smazat vše"
     }
 }

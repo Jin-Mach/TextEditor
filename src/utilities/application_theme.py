@@ -1,14 +1,17 @@
+import pathlib
+
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPalette, QColor
+from PyQt6.QtWidgets import QApplication
 
 from src.utilities.logging_manager import setup_logger
 from src.utilities.messagebox_manager import MessageboxManager
 
 
-class DefaultApplicationTheme:
+class ApplicationTheme:
 
     @staticmethod
-    def set_light_theme(application, style_file_path):
+    def set_light_theme(application: QApplication, style_file_path: pathlib.Path):
         palette = QPalette()
         palette.setColor(QPalette.ColorRole.Window, QColor("#F0F0F0"))
         palette.setColor(QPalette.ColorRole.WindowText, Qt.GlobalColor.black)

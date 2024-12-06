@@ -1,6 +1,6 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction, QFont, QGuiApplication, QMouseEvent
-from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu
+from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu, QApplication
 
 from src.utilities.data_provider import DataProvider
 
@@ -54,7 +54,7 @@ class TextEdit(QTextEdit):
         self.copy_action = QAction(ui_text.get("copyContext"), self)
         self.copy_action.triggered.connect(self.copy)
         self.paste_action = QAction(ui_text.get("pasteContext"), self)
-        self.paste_action.triggered.connect(self.paste)
+        self.paste_action.triggered.connect(self.custom_paste)
         self.select_action = QAction(ui_text.get("selectContext"), self)
         self.select_action.triggered.connect(self.selectAll)
         self.delete_action = QAction(ui_text.get("deleteContext"), self)
@@ -90,3 +90,7 @@ class TextEdit(QTextEdit):
         self.paste_action.setEnabled(bool(QGuiApplication.clipboard().text()))
         self.select_action.setEnabled(bool(self.toPlainText()))
         self.delete_action.setEnabled(bool(self.toPlainText()))
+
+    def custom_paste(self) -> None:
+        clipboard = QApplication.clipboard()
+        self.insertPlainText(clipboard.text())

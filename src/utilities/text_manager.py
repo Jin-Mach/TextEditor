@@ -3,7 +3,6 @@ from PyQt6.QtGui import QFont, QTextCharFormat, QColor, QTextBlockFormat
 from PyQt6.QtWidgets import QComboBox
 
 from src.ui.widgets.text_edit import TextEdit
-from src.utilities.messagebox_manager import MessageboxManager
 from src.utilities.exception_manager import ExceptionManager
 
 
@@ -91,16 +90,6 @@ class TextManager:
                     char_format.setBackground(QColor(color))
                 cursor.mergeCharFormat(char_format)
                 self.text_edit.setTextCursor(cursor)
-            self.text_edit.setFocus()
-        except Exception as e:
-            ExceptionManager.exception_handler(e)
-
-    def clear_text_edit(self) -> None:
-        try:
-            messagebox_manager = MessageboxManager(self.parent)
-            result = messagebox_manager.document_contains_text()
-            if result == "yes":
-                self.text_edit.clear()
             self.text_edit.setFocus()
         except Exception as e:
             ExceptionManager.exception_handler(e)

@@ -37,13 +37,13 @@
         "cursor": "Pozice kurzoru: řádek: 1, znak: 0"
     },
     "textedit": {
-        "undoContext": "Zpět",
-        "redoContext": "Vpřed",
-        "cutContext":"Vyjmout",
-        "copyContext": "Kopírovat",
-        "pasteContext": "Vložit",
-        "selectContext": "Vybrat vše",
-        "deleteContext": "Smazat vše"
+        "undo": "Zpět",
+        "redo": "Vpřed",
+        "cut":"Vyjmout",
+        "copy": "Kopírovat",
+        "paste": "Vložit",
+        "select": "Vybrat vše",
+        "delete": "Smazat vše"
     },
     "dialog": {
         "newfileTitle": "Otevřít nový soubor",
@@ -76,6 +76,15 @@
         "copy": "Kopírovat",
         "paste": "Vložit",
         "selectAll": "Vybrat vše",
-        "deleteText": "Smazat vše"
+        "deleteText": "Smazat vše",
+        "formatMenu": "Formát",
+        "bold": "Tučný",
+        "italic": "Kurzíva",
+        "underline": "Podrtžené",
+        "strikeout": "Přeškrtnuté",
+        "alignLeft": "Zarovnant vlevo",
+        "alignCenter": "Zarovnat na střed",
+        "alignRight": "Zarovnat vpravo",
+        "alignJustify": "Zarovnat do bloku"
     }
 }

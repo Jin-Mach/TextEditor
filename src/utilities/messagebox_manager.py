@@ -87,7 +87,7 @@ class MessageboxManager:
         message_box.setDefaultButton(self.cancel_button)
         message_box.exec()
         if message_box.clickedButton() == self.continue_button:
-            return "yes"
+            return "continue"
 
     @staticmethod
     def set_tooltips(parent) -> None:

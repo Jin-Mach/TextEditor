@@ -3,6 +3,7 @@ from PyQt6.QtGui import QAction, QFont, QGuiApplication, QMouseEvent
 from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu, QApplication
 
 from src.utilities.data_provider import DataProvider
+from src.utilities.messagebox_manager import MessageboxManager
 
 
 # noinspection PyUnresolvedReferences
@@ -19,7 +20,8 @@ class TextEdit(QTextEdit):
         self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.setTabStopDistance(50)
         self.setAcceptRichText(True)
-        self.set_ui_text()
+        self.create_context_menu()
+        self.create_connection()
         self.update_context_actions()
         self.cursorPositionChanged.connect(self.refresh_count_labels)
         self.cursorPositionChanged.connect(self.update_context_actions)
@@ -32,33 +34,43 @@ class TextEdit(QTextEdit):
         self.status_bar.update_count_labels(len(self.toPlainText()), lines_count, cursor_line, cursor_char)
 
     def contextMenuEvent(self, event) -> None:
+        ui_text = DataProvider.get_ui_text("textedit")
         context_menu = QMenu(self)
-        context_menu.addAction(self.undo_action)
-        context_menu.addAction(self.redo_action)
-        context_menu.addAction(self.cut_action)
-        context_menu.addAction(self.copy_action)
-        context_menu.addAction(self.paste_action)
-        context_menu.addSeparator()
-        context_menu.addAction(self.select_action)
-        context_menu.addAction(self.delete_action)
+        actions = [self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action, self.select_action,
+                   self.delete_action]
+        for action in actions:
+            if action == self.select_action:
+                context_menu.addSeparator()
+                action.setText(ui_text.get(action.objectName()))
+                context_menu.addAction(action)
+            action.setText(ui_text.get(action.objectName()))
+            context_menu.addAction(action)
         context_menu.exec(event.globalPos())
 
-    def set_ui_text(self) -> None:
-        ui_text = DataProvider.get_ui_text("textedit")
-        self.undo_action = QAction(ui_text.get("undoContext"), self)
+    def create_context_menu(self) -> None:
+        self.undo_action = QAction(self)
+        self.undo_action.setObjectName("undo")
+        self.redo_action = QAction(self)
+        self.redo_action.setObjectName("redo")
+        self.cut_action = QAction(self)
+        self.cut_action.setObjectName("cut")
+        self.copy_action = QAction(self)
+        self.copy_action.setObjectName("copy")
+        self.paste_action = QAction(self)
+        self.paste_action.setObjectName("paste")
+        self.select_action = QAction(self)
+        self.select_action.setObjectName("select")
+        self.delete_action = QAction(self)
+        self.delete_action.setObjectName("delete")
+
+    def create_connection(self) -> None:
         self.undo_action.triggered.connect(self.undo)
-        self.redo_action = QAction(ui_text.get("redoContext"), self)
         self.redo_action.triggered.connect(self.redo)
-        self.cut_action = QAction(ui_text.get("cutContext"), self)
         self.cut_action.triggered.connect(self.cut)
-        self.copy_action = QAction(ui_text.get("copyContext"), self)
         self.copy_action.triggered.connect(self.copy)
-        self.paste_action = QAction(ui_text.get("pasteContext"), self)
         self.paste_action.triggered.connect(self.custom_paste)
-        self.select_action = QAction(ui_text.get("selectContext"), self)
         self.select_action.triggered.connect(self.selectAll)
-        self.delete_action = QAction(ui_text.get("deleteContext"), self)
-        self.delete_action.triggered.connect(self.clear)
+        self.delete_action.triggered.connect(self.clear_text_edit)
 
     def reset_text_edit(self) -> None:
         self.clear()
@@ -94,3 +106,13 @@ class TextEdit(QTextEdit):
     def custom_paste(self) -> None:
         clipboard = QApplication.clipboard()
         self.insertPlainText(clipboard.text())
+
+    def clear_text_edit(self) -> None:
+        try:
+            messagebox_manager = MessageboxManager(self.parent)
+            result = messagebox_manager.document_contains_text()
+            if result == "continue":
+                self.clear()
+            self.setFocus()
+        except Exception as e:
+            ExceptionManager.exception_handler(e)

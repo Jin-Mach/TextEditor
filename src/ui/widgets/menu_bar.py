@@ -1,6 +1,7 @@
 import pathlib
 from typing import Optional
 
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction, QGuiApplication, QIcon
 from PyQt6.QtWidgets import QMenuBar, QMenu, QToolBar
 
@@ -23,6 +24,7 @@ class MenuBar(QMenuBar):
         self.text_manager = text_manager
         self.create_file_menu()
         self.create_edit_menu()
+        self.create_format_menu()
         self.set_menus_ui_text()
         self.set_actions_ui_text()
         self.set_icons()
@@ -59,8 +61,7 @@ class MenuBar(QMenuBar):
             if action == self.print_preview_action or action == self.close_application_action:
                 self.file_menu.addSeparator()
                 self.file_menu.addAction(action)
-            else:
-                self.file_menu.addAction(action)
+            self.file_menu.addAction(action)
         self.addMenu(self.file_menu)
 
     def create_edit_menu(self) -> None:
@@ -86,8 +87,36 @@ class MenuBar(QMenuBar):
             self.edit_menu.addAction(action)
         self.addMenu(self.edit_menu)
 
+    def create_format_menu(self) -> None:
+        self.format_menu = QMenu()
+        self.format_menu.setObjectName("formatMenu")
+        self.bold_action = QAction(self)
+        self.bold_action.setObjectName("bold")
+        self.italic_action = QAction(self)
+        self.italic_action.setObjectName("italic")
+        self.underline_action = QAction(self)
+        self.underline_action.setObjectName("underline")
+        self.strikeout_action = QAction(self)
+        self.strikeout_action.setObjectName("strikeout")
+        self.aling_left_action = QAction(self)
+        self.aling_left_action.setObjectName("alignLeft")
+        self.align_center_action = QAction(self)
+        self.align_center_action.setObjectName("alignCenter")
+        self.align_right_action = QAction(self)
+        self.align_right_action.setObjectName("alignRight")
+        self.align_justify_action = QAction(self)
+        self.align_justify_action.setObjectName("alignJustify")
+        actions = [self.bold_action, self.italic_action, self.underline_action, self.strikeout_action, self.aling_left_action,
+                   self.align_center_action, self.align_right_action, self.align_justify_action]
+        for action in actions:
+            if action == self.aling_left_action:
+                self.format_menu.addSeparator()
+                self.format_menu.addAction(action)
+            self.format_menu.addAction(action)
+        self.addMenu(self.format_menu)
+
     def set_menus_ui_text(self) -> None:
-        menus = [self.file_menu, self.edit_menu]
+        menus = [self.file_menu, self.edit_menu, self.format_menu]
         ui_text = DataProvider.get_ui_text("menubar")
         for menu in menus:
             menu.setTitle(ui_text.get(menu.objectName()))
@@ -96,14 +125,15 @@ class MenuBar(QMenuBar):
         actions = [self.new_file_action, self.open_file_action, self.save_as_action, self.save_action, self.save_as_html_action,
                    self.save_as_pdf_action, self.print_preview_action, self.print_document_action, self.close_application_action,
                    self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action, self.select_action,
-                   self.delete_action]
+                   self.delete_action, self.bold_action, self.italic_action, self.underline_action, self.strikeout_action,
+                   self.aling_left_action, self.align_center_action, self.align_right_action, self.align_justify_action]
         ui_text = DataProvider.get_ui_text("menubar")
         for action in actions:
             action.setText(ui_text.get(action.objectName()))
 
     def set_icons(self) -> None:
         file_icons_dict = DataProvider.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "file_icons"))
-        edit_icons_dict = DataProvider.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "text_icons"))
+        text_icons_dict = DataProvider.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "text_icons"))
         close_app_icon = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "closeApplication")
         self.close_application_action.setIcon(QIcon(str(close_app_icon)))
         file_actions = [self.new_file_action, self.open_file_action, self.save_as_action, self.save_action, self.save_as_html_action,
@@ -111,11 +141,12 @@ class MenuBar(QMenuBar):
         for action in file_actions:
             if action.objectName() in file_icons_dict.keys():
                 action.setIcon(QIcon(str(file_icons_dict[action.objectName()])))
-        edit_actions = [self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action, self.select_action,
-                   self.delete_action]
-        for action in edit_actions:
-            if action.objectName() in edit_icons_dict.keys():
-                action.setIcon(QIcon(str(edit_icons_dict[action.objectName()])))
+        text_actions = [self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action, self.select_action,
+                   self.delete_action, self.bold_action, self.italic_action, self.underline_action, self.strikeout_action,
+                        self.aling_left_action, self.align_center_action, self.align_right_action, self.align_justify_action]
+        for action in text_actions:
+            if action.objectName() in text_icons_dict.keys():
+                action.setIcon(QIcon(str(text_icons_dict[action.objectName()])))
 
     def create_connection(self) -> None:
         self.new_file_action.triggered.connect(self.new_file)
@@ -133,13 +164,23 @@ class MenuBar(QMenuBar):
         self.copy_action.triggered.connect(self.text_edit.copy)
         self.paste_action.triggered.connect(self.text_edit.custom_paste)
         self.select_action.triggered.connect(self.text_edit.selectAll)
-        self.delete_action.triggered.connect(self.text_manager.clear_text_edit)
+        self.delete_action.triggered.connect(self.text_edit.clear_text_edit)
+        self.bold_action.triggered.connect(lambda: self.text_manager.set_text_format("bold"))
+        self.italic_action.triggered.connect(lambda: self.text_manager.set_text_format("italic"))
+        self.underline_action.triggered.connect(lambda: self.text_manager.set_text_format("underline"))
+        self.strikeout_action.triggered.connect(lambda: self.text_manager.set_text_format("strikeout"))
+        self.aling_left_action.triggered.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignLeft))
+        self.align_center_action.triggered.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignCenter))
+        self.align_right_action.triggered.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignRight))
+        self.align_justify_action.triggered.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignJustify))
 
     def update_edit_menu(self) -> None:
+        selection_actions = [self.cut_action, self.copy_action, self.bold_action, self.italic_action, self.underline_action,
+        self.strikeout_action, self.aling_left_action, self.align_center_action, self.align_right_action, self.align_justify_action]
+        for action in selection_actions:
+            action.setEnabled(self.text_edit.textCursor().hasSelection())
         self.undo_action.setEnabled(self.text_edit.document().isUndoAvailable())
         self.redo_action.setEnabled(self.text_edit.document().isRedoAvailable())
-        self.cut_action.setEnabled(self.text_edit.textCursor().hasSelection())
-        self.copy_action.setEnabled(self.text_edit.textCursor().hasSelection())
         self.paste_action.setEnabled(bool(QGuiApplication.clipboard().text()))
         self.select_action.setEnabled(bool(self.text_edit.toPlainText()))
         self.delete_action.setEnabled(bool(self.text_edit.toPlainText()))

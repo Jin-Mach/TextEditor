@@ -205,7 +205,7 @@ class TextToolbar(QToolBar):
         self.copy_button.clicked.connect(self.text_edit.copy)
         self.paste_button.clicked.connect(self.text_edit.custom_paste)
         self.select_all_button.clicked.connect(self.text_edit.selectAll)
-        self.delete_text_button.clicked.connect(self.text_manager.clear_text_edit)
+        self.delete_text_button.clicked.connect(self.text_edit.clear_text_edit)
         self.align_left_button.clicked.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignLeft))
         self.align_center_button.clicked.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignCenter))
         self.align_right_button.clicked.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignRight))
@@ -224,21 +224,16 @@ class TextToolbar(QToolBar):
         self.background_color_combobox.setCurrentIndex(self.background_color_combobox.findText("#ffffff"))
 
     def update_edit_buttons(self) -> None:
-        self.bold_text_button.setEnabled(self.text_edit.textCursor().hasSelection())
-        self.italic_text_button.setEnabled(self.text_edit.textCursor().hasSelection())
-        self.underline_text_button.setEnabled(self.text_edit.textCursor().hasSelection())
-        self.strikeout_text_button.setEnabled(self.text_edit.textCursor().hasSelection())
+        selection_actions = [self.bold_text_button, self.italic_text_button, self.underline_text_button, self.strikeout_text_button,
+                             self.cut_button, self.copy_button, self.align_left_button, self.align_center_button, self.align_right_button,
+                             self.align_justified_button]
+        for action in selection_actions:
+            action.setEnabled(self.text_edit.textCursor().hasSelection())
         self.undo_button.setEnabled(self.text_edit.document().isUndoAvailable())
         self.redo_button.setEnabled(self.text_edit.document().isRedoAvailable())
-        self.cut_button.setEnabled(self.text_edit.textCursor().hasSelection())
-        self.copy_button.setEnabled(self.text_edit.textCursor().hasSelection())
         self.paste_button.setEnabled(bool(QGuiApplication.clipboard().text()))
         self.select_all_button.setEnabled(bool(self.text_edit.toPlainText()))
         self.delete_text_button.setEnabled(bool(self.text_edit.toPlainText()))
-        self.align_left_button.setEnabled(self.text_edit.textCursor().hasSelection())
-        self.align_center_button.setEnabled(self.text_edit.textCursor().hasSelection())
-        self.align_right_button.setEnabled(self.text_edit.textCursor().hasSelection())
-        self.align_justified_button.setEnabled(self.text_edit.textCursor().hasSelection())
 
     def update_format_buttons(self) -> None:
         text_format = self.get_text_format()

@@ -20,6 +20,7 @@ class TextEdit(QTextEdit):
         self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.setTabStopDistance(50)
         self.setAcceptRichText(True)
+        self.document().setModified(False)
         self.create_context_menu()
         self.create_connection()
         self.update_context_actions()

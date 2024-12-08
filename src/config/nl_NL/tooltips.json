@@ -1,0 +1,45 @@
+{
+    "fileTooltips": {
+        "newFile": "Maak een nieuw bestand aan en reset het standaard lettertype en de lettergrootte",
+        "openFile": "Open een bestaand bestand",
+        "saveAs": "Sla het document op als een tekstbestand",
+        "save": "Sla het huidige bestand op",
+        "close": "Sluit het huidige bestand",
+        "saveHtml": "Sla het document op als HTML",
+        "exportPdf": "Exporteer het document als PDF",
+        "printPreview": "Voorbeeld van afdrukken",
+        "print": "Open het afdrukdialoogvenster",
+        "search": "Zoek naar tekst in het document"
+    },
+    "textTooltips": {
+        "fontFamily": "Wijzig het lettertype in het document of geselecteerde tekst",
+        "fontSize": "Wijzig de lettergrootte in het document of geselecteerde tekst",
+        "bold": "Maak de tekst vetgedrukt",
+        "italic": "Maak de tekst cursief",
+        "underline": "Onderstreep de tekst",
+        "strikeout": "Doorhaal de tekst",
+        "undo": "Ongedaan maken",
+        "redo": "Opnieuw uitvoeren",
+        "cut": "Knip de geselecteerde tekst en kopieer deze naar het klembord",
+        "copy": "Kopieer de geselecteerde tekst naar het klembord",
+        "paste": "Plak tekst van het klembord in het document",
+        "selectAll": "Selecteer alle tekst in het document",
+        "deleteText": "Verwijder alle tekst",
+        "alignLeft": "Lijn de tekst links uit",
+        "alignCenter": "Centreer de tekst",
+        "alignRight": "Lijn de tekst rechts uit",
+        "alignJustified": "Lijn de tekst uit naar beide marges",
+        "textColor": "Wijzig de kleur van de tekst of geselecteerde tekst",
+        "backgroundColor": "Wijzig de achtergrondkleur van het document of geselecteerde tekst"
+    },
+    "messageboxTooltips": {
+        "applicationContinue": "Open de editor zonder stijlen te gebruiken",
+        "applicationCancel": "Sluit het dialoogvenster en beëindig de applicatie",
+        "errorCopy": "Kopieer het foutbericht naar het klembord",
+        "errorCancel": "Sluit het foutdialoogvenster",
+        "dontSave": "Ga door zonder op te slaan",
+        "saveAs": "Sla het document op",
+        "cancel": "Sluit het dialoogvenster",
+        "continue": "Verwijder tekst zonder op te slaan"
+    }
+}

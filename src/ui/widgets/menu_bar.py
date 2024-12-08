@@ -190,6 +190,7 @@ class MenuBar(QMenuBar):
         self.reset_menu_bar()
         self.parent.findChild(QToolBar, "fileToolbar").reset_file_toolbar()
         self.parent.findChild(QToolBar, "textToolbar").reset_text_toolbar()
+        self.text_edit.reset_text_edit()
 
     def open_file(self) -> None:
         self.file_manager.open_file(self, self.parent.findChild(QToolBar, "fileToolbar"))

@@ -1,0 +1,93 @@
+{
+    "fileToolbar": {
+        "searchLabel": "Zoeken",
+        "searchLineedit": {
+            "placeholderText": "typ om te zoeken..."
+        },
+        "textFile": "Bestanden (*.txt)",
+        "htmlFile": "Bestanden (*.html)",
+        "pdfFile": "Bestanden (*.pdf)"
+    },
+    "messagebox": {
+        "loadingError": "Fout bij het laden van stijlen",
+        "applicationContinue": "Doorgaan",
+        "applicationCancel": "Annuleren",
+        "errorMessage": "Fout",
+        "errorCopy": "Kopiëren",
+        "errorCancel": "Annuleren",
+        "savequestionTitle": "Niet-opgeslagen tekst",
+        "savequestionText": "Niet-opgeslagen tekst. Wilt u opslaan?",
+        "dontSave": "Niet opslaan",
+        "saveAs": "Opslaan",
+        "cancel": "Annuleren",
+        "emptytextTitle": "Leeg document",
+        "emptytextText": "Kan een leeg document niet opslaan",
+        "emptySearch": "Typ tekst om te zoeken",
+        "emptytextSearch": "Kan niet zoeken in een leeg document",
+        "notFound": "Geen overeenkomsten gevonden",
+        "documentContainsTextTitle": "Tekst in document",
+        "documentContainsTextMessage": "Het document bevat tekst.\nWeet je zeker dat je wilt wissen?",
+        "continue": "Doorgaan",
+        "emptyPreview": "Kan geen voorbeeld weergeven voor een leeg document",
+        "emptyPrint": "Kan geen document afdrukken dat leeg is"
+    },
+    "statusbar": {
+        "characters": "Teken: 0",
+        "lines": "Regels: 1",
+        "cursor": "Cursorpositie: regel: 1, teken: 0"
+    },
+    "textedit": {
+        "undo": "Ongedaan maken",
+        "redo": "Opnieuw",
+        "cut":"Snijden",
+        "copy": "Kopiëren",
+        "paste": "Plakken",
+        "select": "Alles selecteren",
+        "delete": "Alles verwijderen"
+    },
+    "dialog": {
+        "newfileTitle": "Open nieuw bestand",
+        "fileFilter": "Bestanden (*.txt);;HTML-bestanden (*.html)",
+        "savedocumentTitle": "Document opslaan",
+        "filefilterName": "Bestanden"
+    },
+    "trayicon": {
+        "newFile": "Nieuw bestand",
+        "openFile": "Bestand openen",
+        "closeApplication": "Toepassing sluiten",
+        "saveTitle": "TextEditor",
+        "saveText": "Bestand opgeslagen.",
+        "errorTitle": "Bestandsfout",
+        "erroropenText": "Bestand niet gevonden of niet geopend",
+        "errorsaveText": "Bestand kan niet worden opgeslagen"
+    },
+    "menubar": {
+        "fileMenu": "Bestand",
+        "newFile": "Nieuw bestand",
+        "openFile": "Bestand openen",
+        "saveAs": "Opslaan als tekstbestand",
+        "save": "Opslaan",
+        "saveHtml": "Opslaan als HTML",
+        "exportPdf": "Opslaan als PDF",
+        "printPreview": "Afdrukvoorbeeld",
+        "print": "Afdrukken",
+        "closeApplication": "Toepassing sluiten",
+        "editMenu": "Bewerken",
+        "undo": "Ongedaan maken",
+        "redo": "Opnieuw",
+        "cut":"Snijden",
+        "copy": "Kopiëren",
+        "paste": "Plakken",
+        "selectAll": "Alles selecteren",
+        "deleteText": "Alles verwijderen",
+        "formatMenu": "Opmaak",
+        "bold": "Vet",
+        "italic": "Cursief",
+        "underline": "Onderstrepen",
+        "strikeout": "Doorhalen",
+        "alignLeft": "Links uitlijnen",
+        "alignCenter": "Centreren",
+        "alignRight": "Rechts uitlijnen",
+        "alignJustify": "Justificeren"
+    }
+}

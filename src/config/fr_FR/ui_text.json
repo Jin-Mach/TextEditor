@@ -1,0 +1,93 @@
+{
+    "fileToolbar": {
+        "searchLabel": "Rechercher",
+        "searchLineedit": {
+            "placeholderText": "Tapez ici pour rechercher..."
+        },
+        "textFile": "Fichiers (*.txt)",
+        "htmlFile": "Fichiers (*.html)",
+        "pdfFile": "Fichiers (*.pdf)"
+    },
+    "messagebox": {
+        "loadingError": "Erreur de chargement des styles",
+        "applicationContinue": "Continuer",
+        "applicationCancel": "Annuler",
+        "errorMessage": "Erreur",
+        "errorCopy": "Copier",
+        "errorCancel": "Annuler",
+        "savequestionTitle": "Texte non enregistré",
+        "savequestionText": "Texte non enregistré. Enregistrer ?",
+        "dontSave": "Ne pas enregistrer",
+        "saveAs": "Enregistrer",
+        "cancel": "Annuler",
+        "emptytextTitle": "Document vide",
+        "emptytextText": "Impossible d'enregistrer un document vide",
+        "emptySearch": "Entrez du texte pour rechercher",
+        "emptytextSearch": "Impossible de rechercher dans un document vide",
+        "notFound": "Aucune correspondance trouvée",
+        "documentContainsTextTitle": "Texte dans le document",
+        "documentContainsTextMessage": "Le document contient du texte.\nVoulez-vous vraiment supprimer ?",
+        "continue": "Continuer",
+        "emptyPreview": "Impossible d'afficher l'aperçu pour un document vide",
+        "emptyPrint": "Impossible d'imprimer un document vide"
+    },
+    "statusbar": {
+        "characters": "Caractères : 0",
+        "lines": "Lignes : 1",
+        "cursor": "Position du curseur : ligne : 1, caractère : 0"
+    },
+    "textedit": {
+        "undo": "Annuler",
+        "redo": "Rétablir",
+        "cut": "Couper",
+        "copy": "Copier",
+        "paste": "Coller",
+        "select": "Tout sélectionner",
+        "delete": "Tout supprimer"
+    },
+    "dialog": {
+        "newfileTitle": "Ouvrir un nouveau fichier",
+        "fileFilter": "Fichiers (*.txt);;Fichiers HTML (*.html)",
+        "savedocumentTitle": "Enregistrer le document",
+        "filefilterName": "Fichiers"
+    },
+    "trayicon": {
+        "newFile": "Nouveau fichier",
+        "openFile": "Ouvrir un fichier",
+        "closeApplication": "Fermer l'application",
+        "saveTitle": "TextEditor",
+        "saveText": "Fichier enregistré.",
+        "errorTitle": "Erreur de fichier",
+        "erroropenText": "Le fichier n'a pas été trouvé ou n'a pas pu être ouvert",
+        "errorsaveText": "Le fichier n'a pas pu être enregistré"
+    },
+    "menubar": {
+        "fileMenu": "Fichier",
+        "newFile": "Nouveau fichier",
+        "openFile": "Ouvrir un fichier",
+        "saveAs": "Enregistrer sous fichier texte",
+        "save": "Enregistrer",
+        "saveHtml": "Enregistrer sous HTML",
+        "exportPdf": "Enregistrer sous PDF",
+        "printPreview": "Aperçu avant impression",
+        "print": "Imprimer",
+        "closeApplication": "Fermer l'application",
+        "editMenu": "Édition",
+        "undo": "Annuler",
+        "redo": "Rétablir",
+        "cut": "Couper",
+        "copy": "Copier",
+        "paste": "Coller",
+        "selectAll": "Tout sélectionner",
+        "deleteText": "Tout supprimer",
+        "formatMenu": "Format",
+        "bold": "Gras",
+        "italic": "Italique",
+        "underline": "Souligné",
+        "strikeout": "Barré",
+        "alignLeft": "Aligner à gauche",
+        "alignCenter": "Aligner au centre",
+        "alignRight": "Aligner à droite",
+        "alignJustify": "Justifier"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "FileNotFound": "Die Datei wurde nicht gefunden. Bitte überprüfen Sie den Pfad zur Datei.",
+    "PermissionDenied": "Unzureichende Berechtigungen zum Öffnen oder Schreiben der Datei.",
+    "IsADirectory": "Es wurde ein Verzeichnis anstelle einer Datei ausgewählt. Bitte überprüfen Sie den Dateityp.",
+    "IOError": "Ein Fehler ist beim Ein-/Ausgabevorgang aufgetreten. Bitte überprüfen Sie die Festplattenverbindung.",
+    "ValueError": "Ungültiges Dateiformat. Stellen Sie sicher, dass Sie ein unterstütztes Format verwenden.",
+    "EncodingError": "Fehler beim Dekodieren der Datei. Bitte überprüfen Sie die Kodierung der Datei.",
+    "TypeError": "Ungültiger Argumenttyp. Bitte überprüfen Sie die Eingabewerte.",
+    "MemoryError": "Nicht genügend Speicher, um die Datei zu öffnen oder zu verarbeiten.",
+    "TimeoutError": "Der Vorgang ist abgelaufen, während versucht wurde, die Datei zu öffnen oder zu speichern.",
+    "JSONDecodeError": "Die Datei ist kein gültiges JSON. Bitte überprüfen Sie das Dateiformat.",
+    "UnexpectedError": "Ein unerwarteter Fehler ist aufgetreten. Versuchen Sie die Aktion erneut."
+}

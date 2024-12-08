@@ -1,0 +1,45 @@
+{
+  "fileTooltips": {
+    "newFile": "Crear un nuevo archivo y restablecer la fuente y el tamaño predeterminados",
+    "openFile": "Abrir un archivo existente",
+    "saveAs": "Guardar el documento como un archivo de texto",
+    "save": "Guardar el archivo actual",
+    "close": "Cerrar el archivo actual",
+    "saveHtml": "Guardar el documento como HTML",
+    "exportPdf": "Guardar el documento como PDF",
+    "printPreview": "Vista previa de impresión",
+    "print": "Abrir el cuadro de diálogo de impresión",
+    "search": "Buscar texto en el documento"
+  },
+  "textTooltips": {
+    "fontFamily": "Cambiar la fuente en el documento o en el texto seleccionado",
+    "fontSize": "Cambiar el tamaño de la fuente en el documento o en el texto seleccionado",
+    "bold": "Cambiar el texto a negrita",
+    "italic": "Cambiar el texto a cursiva",
+    "underline": "Cambiar el texto a subrayado",
+    "strikeout": "Cambiar el texto a tachado",
+    "undo": "Deshacer",
+    "redo": "Rehacer",
+    "cut": "Cortar el texto seleccionado y copiarlo al portapapeles",
+    "copy": "Copiar el texto seleccionado al portapapeles",
+    "paste": "Pegar el texto desde el portapapeles en el documento",
+    "selectAll": "Seleccionar todo el texto en el documento",
+    "deleteText": "Eliminar todo el texto",
+    "alignLeft": "Alinear el texto a la izquierda",
+    "alignCenter": "Alinear el texto al centro",
+    "alignRight": "Alinear el texto a la derecha",
+    "alignJustified": "Alinear el texto a ambos márgenes",
+    "textColor": "Cambiar el color del texto o del texto seleccionado",
+    "backgroundColor": "Cambiar el color de fondo del documento o del texto seleccionado"
+  },
+  "messageboxTooltips": {
+    "applicationContinue": "Abrir el editor sin aplicar estilos",
+    "applicationCancel": "Cerrar el cuadro de diálogo y salir de la aplicación",
+    "errorCopy": "Copiar el mensaje de error al portapapeles",
+    "errorCancel": "Cerrar el cuadro de diálogo de error",
+    "dontSave": "Continuar sin guardar",
+    "saveAs": "Guardar el documento",
+    "cancel": "Cerrar el cuadro de diálogo",
+    "continue": "Eliminar el texto sin guardar"
+  }
+}

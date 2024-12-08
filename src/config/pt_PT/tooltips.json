@@ -1,0 +1,45 @@
+{
+  "fileTooltips": {
+    "newFile": "Criar um novo ficheiro e redefinir a fonte e o tamanho de fonte padrão",
+    "openFile": "Abrir um ficheiro existente",
+    "saveAs": "Guardar o documento como ficheiro de texto",
+    "save": "Guardar o ficheiro atual",
+    "close": "Fechar o ficheiro atual",
+    "saveHtml": "Guardar o documento como HTML",
+    "exportPdf": "Guardar o documento como PDF",
+    "printPreview": "Pré-visualizar impressão",
+    "print": "Abrir o diálogo de impressão",
+    "search": "Procurar texto no documento"
+  },
+  "textTooltips": {
+    "fontFamily": "Alterar a fonte no documento ou no texto selecionado",
+    "fontSize": "Alterar o tamanho da fonte no documento ou no texto selecionado",
+    "bold": "Tornar o texto em negrito",
+    "italic": "Tornar o texto em itálico",
+    "underline": "Tornar o texto sublinhado",
+    "strikeout": "Tornar o texto riscado",
+    "undo": "Desfazer",
+    "redo": "Refazer",
+    "cut": "Cortar o texto selecionado e copiá-lo para a área de transferência",
+    "copy": "Copiar o texto selecionado para a área de transferência",
+    "paste": "Colar texto da área de transferência no documento",
+    "selectAll": "Selecionar todo o texto no documento",
+    "deleteText": "Apagar todo o texto",
+    "alignLeft": "Alinhar o texto à esquerda",
+    "alignCenter": "Alinhar o texto ao centro",
+    "alignRight": "Alinhar o texto à direita",
+    "alignJustified": "Justificar o texto",
+    "textColor": "Alterar a cor do texto ou do texto selecionado",
+    "backgroundColor": "Alterar a cor de fundo do documento ou do texto selecionado"
+  },
+  "messageboxTooltips": {
+    "applicationContinue": "Abrir o editor sem utilizar estilos",
+    "applicationCancel": "Fechar o diálogo e sair da aplicação",
+    "errorCopy": "Copiar a mensagem de erro para a área de transferência",
+    "errorCancel": "Fechar o diálogo de erro",
+    "dontSave": "Continuar sem guardar",
+    "saveAs": "Guardar o documento",
+    "cancel": "Fechar o diálogo",
+    "continue": "Apagar o texto sem guardar"
+  }
+}

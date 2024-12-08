@@ -50,7 +50,7 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event) -> None:
         try:
-            if self.text_edit.toPlainText():
+            if self.text_edit.document().isModified():
                 messagebox_manager = MessageboxManager(self)
                 result = messagebox_manager.show_save_question_message()
                 if result == "dontSave":

@@ -1,0 +1,93 @@
+{
+    "fileToolbar": {
+        "searchLabel": "Procurar",
+        "searchLineedit": {
+            "placeholderText": "escreva aqui para procurar..."
+        },
+        "textFile": "Ficheiros (*.txt)",
+        "htmlFile": "Ficheiros (*.html)",
+        "pdfFile": "Ficheiros (*.pdf)"
+    },
+    "messagebox": {
+        "loadingError": "Erro ao carregar os estilos",
+        "applicationContinue": "Continuar",
+        "applicationCancel": "Cancelar",
+        "errorMessage": "Erro",
+        "errorCopy": "Copiar",
+        "errorCancel": "Cancelar",
+        "savequestionTitle": "Texto não guardado",
+        "savequestionText": "Texto não guardado. Deseja guardar?",
+        "dontSave": "Não guardar",
+        "saveAs": "Guardar",
+        "cancel": "Cancelar",
+        "emptytextTitle": "Documento vazio",
+        "emptytextText": "Não é possível guardar um documento vazio",
+        "emptySearch": "Introduza texto para procurar",
+        "emptytextSearch": "Não é possível procurar num documento vazio",
+        "notFound": "Nenhuma correspondência encontrada",
+        "documentContainsTextTitle": "Texto no documento",
+        "documentContainsTextMessage": "O documento contém texto.\nDeseja realmente apagar?",
+        "continue": "Continuar",
+        "emptyPreview": "Não é possível visualizar um documento vazio",
+        "emptyPrint": "Não é possível imprimir um documento vazio"
+    },
+    "statusbar": {
+        "characters": "Caracteres: 0",
+        "lines": "Linhas: 1",
+        "cursor": "Posição do cursor: linha: 1, carácter: 0"
+    },
+    "textedit": {
+        "undo": "Desfazer",
+        "redo": "Refazer",
+        "cut": "Cortar",
+        "copy": "Copiar",
+        "paste": "Colar",
+        "select": "Selecionar tudo",
+        "delete": "Apagar tudo"
+    },
+    "dialog": {
+        "newfileTitle": "Abrir novo ficheiro",
+        "fileFilter": "Ficheiros (*.txt);;Ficheiros HTML (*.html)",
+        "savedocumentTitle": "Guardar documento",
+        "filefilterName": "Ficheiros"
+    },
+    "trayicon": {
+        "newFile": "Novo ficheiro",
+        "openFile": "Abrir ficheiro",
+        "closeApplication": "Fechar aplicação",
+        "saveTitle": "Editor de Texto",
+        "saveText": "Ficheiro guardado.",
+        "errorTitle": "Erro de ficheiro",
+        "erroropenText": "O ficheiro não foi encontrado ou não pode ser aberto",
+        "errorsaveText": "O ficheiro não pôde ser guardado"
+    },
+    "menubar": {
+        "fileMenu": "Ficheiro",
+        "newFile": "Novo ficheiro",
+        "openFile": "Abrir ficheiro",
+        "saveAs": "Guardar como ficheiro de texto",
+        "save": "Guardar",
+        "saveHtml": "Guardar como HTML",
+        "exportPdf": "Guardar como PDF",
+        "printPreview": "Pré-visualizar impressão",
+        "print": "Imprimir",
+        "closeApplication": "Fechar aplicação",
+        "editMenu": "Editar",
+        "undo": "Desfazer",
+        "redo": "Refazer",
+        "cut": "Cortar",
+        "copy": "Copiar",
+        "paste": "Colar",
+        "selectAll": "Selecionar tudo",
+        "deleteText": "Apagar tudo",
+        "formatMenu": "Formatar",
+        "bold": "Negrito",
+        "italic": "Itálico",
+        "underline": "Sublinhado",
+        "strikeout": "Riscado",
+        "alignLeft": "Alinhar à esquerda",
+        "alignCenter": "Alinhar ao centro",
+        "alignRight": "Alinhar à direita",
+        "alignJustify": "Justificar"
+    }
+}

@@ -1,0 +1,45 @@
+{
+  "fileTooltips": {
+    "newFile": "Erstellen Sie eine neue Datei und setzen Sie die Standardschriftart und -größe zurück",
+    "openFile": "Öffnen Sie eine bestehende Datei",
+    "saveAs": "Speichern Sie das Dokument als Textdatei",
+    "save": "Speichern Sie die aktuelle Datei",
+    "close": "Schließen Sie die aktuelle Datei",
+    "saveHtml": "Speichern Sie das Dokument als HTML",
+    "exportPdf": "Speichern Sie das Dokument als PDF",
+    "printPreview": "Druckvorschau",
+    "print": "Öffnen Sie den Druckdialog",
+    "search": "Suchen Sie Text im Dokument"
+  },
+  "textTooltips": {
+    "fontFamily": "Ändern Sie die Schriftart im Dokument oder im ausgewählten Text",
+    "fontSize": "Ändern Sie die Schriftgröße im Dokument oder im ausgewählten Text",
+    "bold": "Machen Sie den Text fett",
+    "italic": "Machen Sie den Text kursiv",
+    "underline": "Machen Sie den Text unterstrichen",
+    "strikeout": "Machen Sie den Text durchgestrichen",
+    "undo": "Rückgängig",
+    "redo": "Wiederherstellen",
+    "cut": "Schneiden Sie den ausgewählten Text und kopieren Sie ihn in die Zwischenablage",
+    "copy": "Kopieren Sie den ausgewählten Text in die Zwischenablage",
+    "paste": "Fügen Sie den Text aus der Zwischenablage in das Dokument ein",
+    "selectAll": "Wählen Sie allen Text im Dokument aus",
+    "deleteText": "Löschen Sie allen Text",
+    "alignLeft": "Text linksbündig ausrichten",
+    "alignCenter": "Text zentrieren",
+    "alignRight": "Text rechtsbündig ausrichten",
+    "alignJustified": "Text im Blocksatz ausrichten",
+    "textColor": "Ändern Sie die Textfarbe oder die Farbe des ausgewählten Texts",
+    "backgroundColor": "Ändern Sie die Hintergrundfarbe des Dokuments oder des ausgewählten Texts"
+  },
+  "messageboxTooltips": {
+    "applicationContinue": "Öffnen Sie den Editor ohne Verwendung von Stilen",
+    "applicationCancel": "Schließen Sie das Dialogfeld und beenden Sie die Anwendung",
+    "errorCopy": "Kopieren Sie die Fehlermeldung in die Zwischenablage",
+    "errorCancel": "Schließen Sie das Fehlerdialogfeld",
+    "dontSave": "Fortfahren ohne zu speichern",
+    "saveAs": "Speichern Sie das Dokument",
+    "cancel": "Schließen Sie das Dialogfeld",
+    "continue": "Löschen Sie den Text ohne zu speichern"
+  }
+}

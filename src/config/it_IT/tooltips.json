@@ -1,0 +1,45 @@
+{
+  "fileTooltips": {
+    "newFile": "Crea un nuovo file e resetta il carattere e la dimensione del carattere predefiniti",
+    "openFile": "Apri un file esistente",
+    "saveAs": "Salva il documento come file di testo",
+    "save": "Salva il file corrente",
+    "close": "Chiudi il file corrente",
+    "saveHtml": "Salva il documento come HTML",
+    "exportPdf": "Salva il documento come PDF",
+    "printPreview": "Anteprima di stampa",
+    "print": "Apri la finestra di dialogo per la stampa",
+    "search": "Trova il testo nel documento"
+  },
+  "textTooltips": {
+    "fontFamily": "Cambia il carattere nel documento o nel testo selezionato",
+    "fontSize": "Cambia la dimensione del carattere nel documento o nel testo selezionato",
+    "bold": "Cambia il testo in grassetto",
+    "italic": "Cambia il testo in corsivo",
+    "underline": "Cambia il testo in sottolineato",
+    "strikeout": "Cambia il testo in barrato",
+    "undo": "Annulla",
+    "redo": "Ripeti",
+    "cut": "Taglia il testo selezionato e copialo negli appunti",
+    "copy": "Copia il testo selezionato negli appunti",
+    "paste": "Incolla il testo dagli appunti nel documento",
+    "selectAll": "Seleziona tutto il testo nel documento",
+    "deleteText": "Elimina tutto il testo",
+    "alignLeft": "Allinea il testo a sinistra",
+    "alignCenter": "Allinea il testo al centro",
+    "alignRight": "Allinea il testo a destra",
+    "alignJustified": "Giustifica il testo ai margini",
+    "textColor": "Cambia il colore del testo o del testo selezionato",
+    "backgroundColor": "Cambia il colore di sfondo del documento o del testo selezionato"
+  },
+  "messageboxTooltips": {
+    "applicationContinue": "Apri l'editor senza usare gli stili",
+    "applicationCancel": "Chiudi la finestra di dialogo e termina l'applicazione",
+    "errorCopy": "Copia il messaggio di errore negli appunti",
+    "errorCancel": "Chiudi la finestra di dialogo dell'errore",
+    "dontSave": "Continua senza salvare",
+    "saveAs": "Salva il documento",
+    "cancel": "Chiudi la finestra di dialogo",
+    "continue": "Elimina il testo senza salvare"
+  }
+}

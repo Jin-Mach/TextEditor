@@ -1,0 +1,45 @@
+{
+  "fileTooltips": {
+    "newFile": "Créer un nouveau fichier et réinitialiser la police et la taille par défaut",
+    "openFile": "Ouvrir un fichier existant",
+    "saveAs": "Enregistrer le document sous forme de fichier texte",
+    "save": "Enregistrer le fichier actuel",
+    "close": "Fermer le fichier actuel",
+    "saveHtml": "Enregistrer le document sous HTML",
+    "exportPdf": "Enregistrer le document sous PDF",
+    "printPreview": "Aperçu avant impression",
+    "print": "Ouvrir la boîte de dialogue d'impression",
+    "search": "Trouver du texte dans le document"
+  },
+  "textTooltips": {
+    "fontFamily": "Changer la police dans le document ou le texte sélectionné",
+    "fontSize": "Changer la taille de la police dans le document ou le texte sélectionné",
+    "bold": "Mettre le texte en gras",
+    "italic": "Mettre le texte en italique",
+    "underline": "Souligner le texte",
+    "strikeout": "Rayer le texte",
+    "undo": "Annuler",
+    "redo": "Rétablir",
+    "cut": "Couper le texte sélectionné et le copier dans le presse-papiers",
+    "copy": "Copier le texte sélectionné dans le presse-papiers",
+    "paste": "Coller le texte du presse-papiers dans le document",
+    "selectAll": "Sélectionner tout le texte du document",
+    "deleteText": "Supprimer tout le texte",
+    "alignLeft": "Aligner le texte à gauche",
+    "alignCenter": "Centrer le texte",
+    "alignRight": "Aligner le texte à droite",
+    "alignJustified": "Justifier le texte",
+    "textColor": "Changer la couleur du texte ou du texte sélectionné",
+    "backgroundColor": "Changer la couleur de fond du document ou du texte sélectionné"
+  },
+  "messageboxTooltips": {
+    "applicationContinue": "Ouvrir l'éditeur sans utiliser les styles",
+    "applicationCancel": "Fermer la boîte de dialogue et quitter l'application",
+    "errorCopy": "Copier le message d'erreur dans le presse-papiers",
+    "errorCancel": "Fermer la boîte de dialogue d'erreur",
+    "dontSave": "Continuer sans enregistrer",
+    "saveAs": "Enregistrer le document",
+    "cancel": "Fermer la boîte de dialogue",
+    "continue": "Supprimer le texte sans enregistrer"
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "FileNotFound": "Archivo no encontrado. Por favor, revise la ruta del archivo.",
+    "PermissionDenied": "Permisos insuficientes para abrir o escribir en el archivo.",
+    "IsADirectory": "Se seleccionó un directorio en lugar de un archivo. Por favor, revise el tipo de archivo.",
+    "IOError": "Se produjo un error de entrada/salida. Por favor, verifique la conexión del disco.",
+    "ValueError": "Formato de archivo no válido. Asegúrese de usar un formato compatible.",
+    "EncodingError": "Error al decodificar el archivo. Por favor, verifique la codificación del archivo.",
+    "TypeError": "Tipo de argumento no válido. Por favor, revise los valores de entrada.",
+    "MemoryError": "Memoria insuficiente al intentar abrir o procesar el archivo.",
+    "TimeoutError": "La operación excedió el tiempo de espera al intentar abrir o guardar el archivo.",
+    "JSONDecodeError": "El archivo no es un JSON válido. Por favor, verifique el formato del archivo.",
+    "UnexpectedError": "Se produjo un error inesperado. Intente realizar la acción nuevamente."
+}

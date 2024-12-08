@@ -1,0 +1,93 @@
+{
+  "fileToolbar": {
+    "searchLabel": "Szukaj",
+    "searchLineedit": {
+      "placeholderText": "Wpisz tutaj, aby wyszukać..."
+    },
+    "textFile": "Pliki (*.txt)",
+    "htmlFile": "Pliki (*.html)",
+    "pdfFile": "Pliki (*.pdf)"
+  },
+  "messagebox": {
+    "loadingError": "Błąd ładowania stylów",
+    "applicationContinue": "Kontynuować",
+    "applicationCancel": "Anulować",
+    "errorMessage": "Błąd",
+    "errorCopy": "Kopiuj",
+    "errorCancel": "Anulować",
+    "savequestionTitle": "Niezapisany tekst",
+    "savequestionText": "Niezapisany tekst. Zapisz?",
+    "dontSave": "Nie zapisuj",
+    "saveAs": "Zapisz",
+    "cancel": "Anulować",
+    "emptytextTitle": "Pusty dokument",
+    "emptytextText": "Nie można zapisać pustego dokumentu",
+    "emptySearch": "Wprowadź tekst, aby wyszukać",
+    "emptytextSearch": "Nie można wyszukiwać w pustym dokumencie",
+    "notFound": "Nie znaleziono żadnych dopasowań",
+    "documentContainsTextTitle": "Tekst w dokumencie",
+    "documentContainsTextMessage": "Dokument zawiera tekst.\nCzy na pewno chcesz usunąć?",
+    "continue": "Kontynuować",
+    "emptyPreview": "Nie można wyświetlić podglądu pustego dokumentu",
+    "emptyPrint": "Nie można wydrukować pustego dokumentu"
+  },
+  "statusbar": {
+    "characters": "Znaki: 0",
+    "lines": "Wiersze: 1",
+    "cursor": "Pozycja kursora: wiersz: 1, znak: 0"
+  },
+  "textedit": {
+    "undo": "Cofnij",
+    "redo": "Ponów",
+    "cut":"Wytnij",
+    "copy": "Kopiuj",
+    "paste": "Wklej",
+    "select": "Zaznacz wszystko",
+    "delete": "Usuń wszystko"
+  },
+  "dialog": {
+    "newfileTitle": "Otwórz nowy plik",
+    "fileFilter": "Pliki (*.txt);;Pliki HTML (*.html)",
+    "savedocumentTitle": "Zapisz dokument",
+    "filefilterName": "Pliki"
+  },
+  "trayicon": {
+    "newFile": "Nowy plik",
+    "openFile": "Otwórz plik",
+    "closeApplication": "Zamknij aplikację",
+    "saveTitle": "TextEditor",
+    "saveText": "Plik zapisany.",
+    "errorTitle": "Błąd pliku",
+    "erroropenText": "Nie znaleziono pliku lub nie udało się go otworzyć",
+    "errorsaveText": "Nie udało się zapisać pliku"
+  },
+  "menubar": {
+    "fileMenu": "Plik",
+    "newFile": "Nowy plik",
+    "openFile": "Otwórz plik",
+    "saveAs": "Zapisz jako plik tekstowy",
+    "save": "Zapisz",
+    "saveHtml": "Zapisz jako HTML",
+    "exportPdf": "Zapisz jako PDF",
+    "printPreview": "Podgląd wydruku",
+    "print": "Drukuj",
+    "closeApplication": "Zamknij aplikację",
+    "editMenu": "Edycja",
+    "undo": "Cofnij",
+    "redo": "Ponów",
+    "cut":"Wytnij",
+    "copy": "Kopiuj",
+    "paste": "Wklej",
+    "selectAll": "Zaznacz wszystko",
+    "deleteText": "Usuń wszystko",
+    "formatMenu": "Format",
+    "bold": "Pogrubienie",
+    "italic": "Kursywa",
+    "underline": "Podkreślenie",
+    "strikeout": "Przekreślenie",
+    "alignLeft": "Wyrównaj do lewej",
+    "alignCenter": "Wyrównaj do środka",
+    "alignRight": "Wyrównaj do prawej",
+    "alignJustify": "Justuj"
+  }
+}

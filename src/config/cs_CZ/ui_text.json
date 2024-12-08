@@ -56,7 +56,10 @@
         "openFile": "Otevřít soubor",
         "closeApplication": "Zavřít aplikaci",
         "saveTitle": "TextEditor",
-        "saveText": "Soubor uložen."
+        "saveText": "Soubor uložen.",
+        "errorTitle": "Chyba souboru",
+        "erroropenText": "Soubor nebyl nalezen nebo nebylo možné jej otevřít",
+        "errorsaveText": "Soubor se nepodařilo uložit"
     },
     "menubar": {
         "fileMenu": "Soubor",

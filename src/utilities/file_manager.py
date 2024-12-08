@@ -40,16 +40,17 @@ class FileManager:
                     self.text_edit.setFocus()
             else:
                 self.text_edit.reset_text_edit()
+            self.text_edit.document().setModified(False)
         except Exception as e:
             ExceptionManager.exception_handler(e)
 
     def open_file(self, menu_bar: QMenuBar, file_toolbar: QToolBar) -> None:
         try:
-            if self.text_edit.toPlainText():
+            if self.text_edit.document().isModified():
                 result = self.messagebox_manager.show_save_question_message()
                 if result == "dontSave":
                     selected_file = str(self.dialog_manager.open_file_dialog())
-                    if selected_file != "":
+                    if selected_file and pathlib.Path(selected_file).exists():
                         self.load_file_content(selected_file)
                 elif result == "saveAs":
                     self.save_file_as(menu_bar, file_toolbar, ".txt")
@@ -91,6 +92,7 @@ class FileManager:
         try:
             if not file_path or not pathlib.Path(file_path).exists():
                 self.text_edit.setFocus()
+                self.tray_icon.showMessage(self.tray_icon_ui_text.get("errorTitle"), self.tray_icon_ui_text.get("erroropenText"))
                 return
             if file_path.endswith(".html"):
                 with open(file_path, "r", encoding="utf-8") as file:
@@ -99,11 +101,11 @@ class FileManager:
                 with open(file_path, "r", encoding="utf-8") as file:
                     self.text_edit.setPlainText(file.read())
             self.last_file_path = file_path
-
             cursor = self.text_edit.textCursor()
             cursor.movePosition(cursor.MoveOperation.End)
             self.text_edit.setTextCursor(cursor)
             self.text_edit.setFocus()
+            self.text_edit.document().setModified(False)
         except Exception as e:
             ExceptionManager.exception_handler(e)
 
@@ -124,7 +126,11 @@ class FileManager:
                 printer.setOutputFormat(QPrinter.OutputFormat.PdfFormat)
                 printer.setOutputFileName(file_path)
                 self.text_edit.document().print(printer)
-            self.tray_icon.showMessage(self.tray_icon_ui_text.get("saveTitle"), self.tray_icon_ui_text.get("saveText"))
+            if pathlib.Path(file_path).exists():
+                self.tray_icon.showMessage(self.tray_icon_ui_text.get("saveTitle"), self.tray_icon_ui_text.get("errorsaveText"))
+            else:
+                self.tray_icon.showMessage(self.tray_icon_ui_text.get("errorTitle"), self.tray_icon_ui_text.get("saveText"))
+                self.text_edit.document().setModified(False)
             self.text_edit.setFocus()
         except Exception as e:
             ExceptionManager.exception_handler(e)

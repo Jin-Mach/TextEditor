@@ -1,0 +1,45 @@
+{
+  "fileTooltips": {
+    "newFile": "Utwórz nowy plik i zresetuj domyślną czcionkę oraz rozmiar czcionki",
+    "openFile": "Otwórz istniejący plik",
+    "saveAs": "Zapisz dokument jako plik tekstowy",
+    "save": "Zapisz bieżący plik",
+    "close": "Zamknij bieżący plik",
+    "saveHtml": "Zapisz dokument jako HTML",
+    "exportPdf": "Zapisz dokument jako PDF",
+    "printPreview": "Podgląd wydruku",
+    "print": "Otwórz okno dialogowe drukowania",
+    "search": "Znajdź tekst w dokumencie"
+  },
+  "textTooltips": {
+    "fontFamily": "Zmień czcionkę w dokumencie lub w wybranym tekście",
+    "fontSize": "Zmień rozmiar czcionki w dokumencie lub w wybranym tekście",
+    "bold": "Zmień tekst na pogrubiony",
+    "italic": "Zmień tekst na kursywę",
+    "underline": "Zmień tekst na podkreślony",
+    "strikeout": "Zmień tekst na przekreślony",
+    "undo": "Cofnij",
+    "redo": "Ponów",
+    "cut": "Wytnij zaznaczony tekst i skopiuj go do schowka",
+    "copy": "Skopiuj zaznaczony tekst do schowka",
+    "paste": "Wklej tekst ze schowka do dokumentu",
+    "selectAll": "Zaznacz cały tekst w dokumencie",
+    "deleteText": "Usuń cały tekst",
+    "alignLeft": "Wyrównaj tekst do lewej",
+    "alignCenter": "Wyrównaj tekst do środka",
+    "alignRight": "Wyrównaj tekst do prawej",
+    "alignJustified": "Wyrównaj tekst do obu marginesów",
+    "textColor": "Zmień kolor tekstu lub zaznaczonego tekstu",
+    "backgroundColor": "Zmień kolor tła dokumentu lub zaznaczonego tekstu"
+  },
+  "messageboxTooltips": {
+    "applicationContinue": "Otwórz edytor bez użycia stylów",
+    "applicationCancel": "Zamknij okno dialogowe i zamknij aplikację",
+    "errorCopy": "Skopiuj komunikat o błędzie do schowka",
+    "errorCancel": "Zamknij okno dialogowe z błędem",
+    "dontSave": "Kontynuuj bez zapisywania",
+    "saveAs": "Zapisz dokument",
+    "cancel": "Zamknij okno dialogowe",
+    "continue": "Usuń tekst bez zapisywania"
+  }
+}

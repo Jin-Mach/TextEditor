@@ -1,0 +1,13 @@
+{
+    "FileNotFound": "Bestand niet gevonden. Controleer het pad naar het bestand.",
+    "PermissionDenied": "Onvoldoende rechten om het bestand te openen of te schrijven.",
+    "IsADirectory": "Er is een map geselecteerd in plaats van een bestand. Controleer het bestandstype.",
+    "IOError": "Er is een fout opgetreden tijdens invoer/uitvoer. Controleer de schijfverbinding.",
+    "ValueError": "Ongeldig bestandstype. Zorg ervoor dat u een ondersteund formaat gebruikt.",
+    "EncodingError": "Fout bij het decoderen van het bestand. Controleer de bestandscodering.",
+    "TypeError": "Ongeldig argumenttype. Controleer de ingevoerde waarden.",
+    "MemoryError": "Onvoldoende geheugen bij het openen of verwerken van het bestand.",
+    "TimeoutError": "De bewerking is verlopen tijdens het openen of opslaan van het bestand.",
+    "JSONDecodeError": "Het bestand is geen geldige JSON. Controleer het bestandformaat alstublieft.",
+    "UnexpectedError": "Er is een onverwachte fout opgetreden. Probeer de actie opnieuw."
+}

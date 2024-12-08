@@ -2,39 +2,92 @@
     "fileToolbar": {
         "searchLabel": "Search",
         "searchLineedit": {
-            "placeholderText": "for search write here..."
-        }
+            "placeholderText": "Type here to search..."
+        },
+        "textFile": "Files (*.txt)",
+        "htmlFile": "Files (*.html)",
+        "pdfFile": "Files (*.pdf)"
     },
     "messagebox": {
-        "loadingError": "Loading styles error",
+        "loadingError": "Error loading styles",
         "applicationContinue": "Continue",
         "applicationCancel": "Cancel",
         "errorMessage": "Error",
         "errorCopy": "Copy",
         "errorCancel": "Cancel",
-        "emptyTitle": "Unsaved text",
-        "emptyText": "Unsaved text. Save?",
-        "dontSave": "Don't save",
+        "savequestionTitle": "Unsaved text",
+        "savequestionText": "There is unsaved text. Save?",
+        "dontSave": "Don't Save",
         "saveAs": "Save",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "emptytextTitle": "Empty document",
+        "emptytextText": "Cannot save an empty document",
+        "emptySearch": "Enter text to search",
+        "emptytextSearch": "Cannot search in an empty document",
+        "notFound": "No matches found",
+        "documentContainsTextTitle": "Text in document",
+        "documentContainsTextMessage": "The document contains text.\nAre you sure you want to delete?",
+        "continue": "Continue",
+        "emptyPreview": "Cannot preview an empty document",
+        "emptyPrint": "Cannot print an empty document"
     },
     "statusbar": {
         "characters": "Characters: 0",
         "lines": "Lines: 1",
-        "cursor": "Cursor position: line: 1, char: 0"
+        "cursor": "Cursor position: line: 1, character: 0"
     },
     "textedit": {
-        "undoContext": "Undo",
-        "redoContext": "Redo",
-        "cutContext":"Cut",
-        "copyContext": "Copy",
-        "pasteContext": "Paste",
-        "selectContext": "Select all",
-        "deleteContext": "Delete text"
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "select": "Select all",
+        "delete": "Delete all"
     },
     "dialog": {
         "newfileTitle": "Open new file",
-        "fileFilter": "Files (*.txt);;HTML Files (*.html)",
-        "savefileType": "Files"
+        "fileFilter": "Files (*.txt);;HTML files (*.html)",
+        "savedocumentTitle": "Save document",
+        "filefilterName": "Files"
+    },
+    "trayicon": {
+        "newFile": "New file",
+        "openFile": "Open file",
+        "closeApplication": "Close application",
+        "saveTitle": "TextEditor",
+        "saveText": "File saved.",
+        "errorTitle": "File error",
+        "erroropenText": "File not found or could not be opened",
+        "errorsaveText": "File could not be saved"
+    },
+    "menubar": {
+        "fileMenu": "File",
+        "newFile": "New file",
+        "openFile": "Open file",
+        "saveAs": "Save as text file",
+        "save": "Save",
+        "saveHtml": "Save as HTML",
+        "exportPdf": "Save as PDF",
+        "printPreview": "Print preview",
+        "print": "Print",
+        "closeApplication": "Close application",
+        "editMenu": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select all",
+        "deleteText": "Delete all",
+        "formatMenu": "Format",
+        "bold": "Bold",
+        "italic": "Italic",
+        "underline": "Underline",
+        "strikeout": "Strikeout",
+        "alignLeft": "Align left",
+        "alignCenter": "Align center",
+        "alignRight": "Align right",
+        "alignJustify": "Align justify"
     }
 }

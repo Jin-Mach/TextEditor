@@ -17,12 +17,12 @@ class FileToolbar(QToolBar):
     def __init__(self, text_edit: TextEdit, file_manager: FileManager, print_manager: Printmanager, tray_icon: QSystemTrayIcon, parent=None) -> None:
         super().__init__(parent)
         self.setObjectName("fileToolbar")
-        self.tray_icon_ui_text = DataProvider.get_ui_text("trayicon")
         self.parent = parent
         self.text_edit = text_edit
         self.tray_icon = tray_icon
         self.file_manager = file_manager
         self.print_manager = print_manager
+        self.tray_icon_ui_text = DataProvider.get_ui_text("trayicon")
         self.setAllowedAreas(Qt.ToolBarArea.TopToolBarArea)
         self.setOrientation(Qt.Orientation.Horizontal)
         self.setFloatable(False)
@@ -143,6 +143,7 @@ class FileToolbar(QToolBar):
         self.parent.findChild(QMenuBar, "menuBar").reset_menu_bar()
         self.reset_file_toolbar()
         self.parent.findChild(QToolBar, "textToolbar").reset_text_toolbar()
+        self.text_edit.reset_text_edit()
 
     def open_file(self) -> None:
         self.file_manager.open_file(self.parent.findChild(QMenuBar, "menuBar"), self)

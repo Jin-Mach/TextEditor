@@ -1,0 +1,93 @@
+{
+    "fileToolbar": {
+        "searchLabel": "Suchen",
+        "searchLineedit": {
+            "placeholderText": "Tippen Sie hier, um zu suchen..."
+        },
+        "textFile": "Dateien (*.txt)",
+        "htmlFile": "Dateien (*.html)",
+        "pdfFile": "Dateien (*.pdf)"
+    },
+    "messagebox": {
+        "loadingError": "Fehler beim Laden der Stile",
+        "applicationContinue": "Fortfahren",
+        "applicationCancel": "Abbrechen",
+        "errorMessage": "Fehler",
+        "errorCopy": "Kopieren",
+        "errorCancel": "Abbrechen",
+        "savequestionTitle": "Nicht gespeicherter Text",
+        "savequestionText": "Nicht gespeicherter Text. Speichern?",
+        "dontSave": "Nicht speichern",
+        "saveAs": "Speichern",
+        "cancel": "Abbrechen",
+        "emptytextTitle": "Leeres Dokument",
+        "emptytextText": "Leeres Dokument kann nicht gespeichert werden",
+        "emptySearch": "Geben Sie Text zum Suchen ein",
+        "emptytextSearch": "Es kann nicht im leeren Dokument gesucht werden",
+        "notFound": "Keine Übereinstimmungen gefunden",
+        "documentContainsTextTitle": "Text im Dokument",
+        "documentContainsTextMessage": "Das Dokument enthält Text.\nWirklich löschen?",
+        "continue": "Fortfahren",
+        "emptyPreview": "Vorschau für leeres Dokument nicht verfügbar",
+        "emptyPrint": "Leeres Dokument kann nicht gedruckt werden"
+    },
+    "statusbar": {
+        "characters": "Zeichen: 0",
+        "lines": "Zeilen: 1",
+        "cursor": "Cursposition: Zeile: 1, Zeichen: 0"
+    },
+    "textedit": {
+        "undo": "Rückgängig",
+        "redo": "Wiederherstellen",
+        "cut": "Ausschneiden",
+        "copy": "Kopieren",
+        "paste": "Einfügen",
+        "select": "Alles auswählen",
+        "delete": "Alles löschen"
+    },
+    "dialog": {
+        "newfileTitle": "Neue Datei öffnen",
+        "fileFilter": "Dateien (*.txt);;HTML-Dateien (*.html)",
+        "savedocumentTitle": "Dokument speichern",
+        "filefilterName": "Dateien"
+    },
+    "trayicon": {
+        "newFile": "Neue Datei",
+        "openFile": "Datei öffnen",
+        "closeApplication": "Anwendung schließen",
+        "saveTitle": "TextEditor",
+        "saveText": "Datei gespeichert.",
+        "errorTitle": "Dateifehler",
+        "erroropenText": "Datei nicht gefunden oder konnte nicht geöffnet werden",
+        "errorsaveText": "Datei konnte nicht gespeichert werden"
+    },
+    "menubar": {
+        "fileMenu": "Datei",
+        "newFile": "Neue Datei",
+        "openFile": "Datei öffnen",
+        "saveAs": "Als Textdatei speichern",
+        "save": "Speichern",
+        "saveHtml": "Als HTML speichern",
+        "exportPdf": "Als PDF speichern",
+        "printPreview": "Druckvorschau",
+        "print": "Drucken",
+        "closeApplication": "Anwendung schließen",
+        "editMenu": "Bearbeiten",
+        "undo": "Rückgängig",
+        "redo": "Wiederherstellen",
+        "cut": "Ausschneiden",
+        "copy": "Kopieren",
+        "paste": "Einfügen",
+        "selectAll": "Alles auswählen",
+        "deleteText": "Alles löschen",
+        "formatMenu": "Format",
+        "bold": "Fett",
+        "italic": "Kursiv",
+        "underline": "Unterstrichen",
+        "strikeout": "Durchgestrichen",
+        "alignLeft": "Linksbündig",
+        "alignCenter": "Zentriert",
+        "alignRight": "Rechtsbündig",
+        "alignJustify": "Blocksatz"
+    }
+}

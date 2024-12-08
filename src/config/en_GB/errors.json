@@ -3,10 +3,11 @@
     "PermissionDenied": "Insufficient permissions to open or write to the file.",
     "IsADirectory": "A directory was selected instead of a file. Please check the file type.",
     "IOError": "An error occurred during input/output. Please check the disk connection.",
-    "ValueError": "Invalid file format. Please ensure you are using a supported format.",
+    "ValueError": "Invalid file format. Ensure you're using a supported format.",
     "EncodingError": "Error decoding the file. Please check the file encoding.",
     "TypeError": "Invalid argument type. Please check the input values.",
     "MemoryError": "Insufficient memory when trying to open or process the file.",
-    "TimeoutError": "The operation timed out while trying to open or save the file.",
+    "TimeoutError": "Operation timed out while trying to open or save the file.",
+    "JSONDecodeError": "The file is not a valid JSON. Please check the file format.",
     "UnexpectedError": "An unexpected error occurred. Please try the action again."
 }

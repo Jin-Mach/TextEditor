@@ -1,0 +1,13 @@
+{
+  "FileNotFound": "Nie znaleziono pliku. Sprawdź ścieżkę do pliku.",
+  "PermissionDenied": "Brak wystarczających uprawnień do otwarcia lub zapisania pliku.",
+  "IsADirectory": "Został wybrany katalog zamiast pliku. Sprawdź typ pliku.",
+  "IOError": "Wystąpił błąd wejścia/wyjścia. Sprawdź połączenie z dyskiem.",
+  "ValueError": "Nieprawidłowy format pliku. Upewnij się, że używasz obsługiwanego formatu.",
+  "EncodingError": "Błąd dekodowania pliku. Sprawdź kodowanie pliku.",
+  "TypeError": "Nieprawidłowy typ argumentu. Sprawdź dane wejściowe.",
+  "MemoryError": "Brak pamięci podczas próby otwarcia lub przetworzenia pliku.",
+  "TimeoutError": "Operacja przekroczyła limit czasu podczas próby otwarcia lub zapisania pliku.",
+  "JSONDecodeError": "Plik nie jest prawidłowym JSON. Proszę sprawdzić format pliku.",
+  "UnexpectedError": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie."
+}

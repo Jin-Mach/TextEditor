@@ -1,0 +1,93 @@
+{
+    "fileToolbar": {
+        "searchLabel": "Поиск",
+        "searchLineedit": {
+            "placeholderText": "Введите сюда для поиска..."
+        },
+        "textFile": "Файлы (*.txt)",
+        "htmlFile": "Файлы (*.html)",
+        "pdfFile": "Файлы (*.pdf)"
+    },
+    "messagebox": {
+        "loadingError": "Ошибка при загрузке стилей",
+        "applicationContinue": "Продолжить",
+        "applicationCancel": "Отмена",
+        "errorMessage": "Ошибка",
+        "errorCopy": "Копировать",
+        "errorCancel": "Отмена",
+        "savequestionTitle": "Несохранённый текст",
+        "savequestionText": "Несохранённый текст. Сохранить?",
+        "dontSave": "Не сохранять",
+        "saveAs": "Сохранить",
+        "cancel": "Отмена",
+        "emptytextTitle": "Пустой документ",
+        "emptytextText": "Невозможно сохранить пустой документ",
+        "emptySearch": "Введите текст для поиска",
+        "emptytextSearch": "Невозможно выполнить поиск в пустом документе",
+        "notFound": "Совпадений не найдено",
+        "documentContainsTextTitle": "Текст в документе",
+        "documentContainsTextMessage": "Документ содержит текст.\nДействительно удалить?",
+        "continue": "Продолжить",
+        "emptyPreview": "Невозможно показать предпросмотр для пустого документа",
+        "emptyPrint": "Невозможно напечатать пустой документ"
+    },
+    "statusbar": {
+        "characters": "Символы: 0",
+        "lines": "Строки: 1",
+        "cursor": "Позиция курсора: строка: 1, символ: 0"
+    },
+    "textedit": {
+        "undo": "Отменить",
+        "redo": "Повторить",
+        "cut":"Вырезать",
+        "copy": "Копировать",
+        "paste": "Вставить",
+        "select": "Выбрать все",
+        "delete": "Удалить все"
+    },
+    "dialog": {
+        "newfileTitle": "Открыть новый файл",
+        "fileFilter": "Файлы (*.txt);;HTML файлы (*.html)",
+        "savedocumentTitle": "Сохранить документ",
+        "filefilterName": "Файлы"
+    },
+    "trayicon": {
+        "newFile": "Новый файл",
+        "openFile": "Открыть файл",
+        "closeApplication": "Закрыть приложение",
+        "saveTitle": "TextEditor",
+        "saveText": "Файл сохранен.",
+        "errorTitle": "Ошибка файла",
+        "erroropenText": "Файл не найден или не удалось его открыть",
+        "errorsaveText": "Не удалось сохранить файл"
+    },
+    "menubar": {
+        "fileMenu": "Файл",
+        "newFile": "Новый файл",
+        "openFile": "Открыть файл",
+        "saveAs": "Сохранить как текстовый файл",
+        "save": "Сохранить",
+        "saveHtml": "Сохранить как HTML",
+        "exportPdf": "Сохранить как PDF",
+        "printPreview": "Предпросмотр печати",
+        "print": "Печать",
+        "closeApplication": "Закрыть приложение",
+        "editMenu": "Правка",
+        "undo": "Отменить",
+        "redo": "Повторить",
+        "cut":"Вырезать",
+        "copy": "Копировать",
+        "paste": "Вставить",
+        "selectAll": "Выбрать все",
+        "deleteText": "Удалить все",
+        "formatMenu": "Формат",
+        "bold": "Жирный",
+        "italic": "Курсив",
+        "underline": "Подчеркнутый",
+        "strikeout": "Зачеркнутый",
+        "alignLeft": "Выравнивание по левому краю",
+        "alignCenter": "Выравнивание по центру",
+        "alignRight": "Выравнивание по правому краю",
+        "alignJustify": "Выравнивание по ширине"
+    }
+}

@@ -10,10 +10,11 @@ from src.utilities.messagebox_manager import MessageboxManager
 
 
 class Printmanager:
-    def __init__(self, text_edit: TextEdit, parent=None) -> None:
+    def __init__(self, language_code: str, text_edit: TextEdit, parent=None) -> None:
+        self.language_code = language_code
         self.text_edit = text_edit
         self.parent = parent
-        self.ui_text = DataProvider.get_ui_text("messagebox")
+        self.ui_text = DataProvider.get_ui_text("messagebox", self.language_code)
 
     def show_print_preview(self) -> None:
         try:

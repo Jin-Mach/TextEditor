@@ -4,9 +4,11 @@ from src.utilities.data_provider import DataProvider
 
 
 class StatusBar(QStatusBar):
-    def __init__(self, parent=None) -> None:
+    def __init__(self, language_code: str, parent=None) -> None:
         super().__init__(parent)
         self.setObjectName("statusBar")
+        self.language_code = language_code
+        self.parent = parent
         self.create_gui()
         self.set_ui_text()
 
@@ -21,7 +23,7 @@ class StatusBar(QStatusBar):
         self.addPermanentWidget(self.document_format)
 
     def set_ui_text(self) -> None:
-        ui_text = DataProvider.get_ui_text("statusbar")
+        ui_text = DataProvider.get_ui_text("statusbar", self.language_code)
         self.character_count_label.setText(ui_text.get("characters"))
         self.line_count_label.setText(ui_text.get("lines"))
         self.cursor_position_label.setText(ui_text.get("cursor"))

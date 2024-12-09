@@ -9,13 +9,14 @@ from src.utilities.data_provider import DataProvider
 # noinspection PyUnresolvedReferences
 class TrayIcon(QSystemTrayIcon):
     icons_path = pathlib.Path(__file__).parent.parent.joinpath("icons")
-    def __init__(self, parent=None) -> None:
+    def __init__(self, language_code: str, parent=None) -> None:
         super().__init__(parent)
+        self.language_code = language_code
         self.setIcon(QIcon(str(self.icons_path.joinpath("applicationIcon.png"))))
         self.create_gui()
 
     def create_gui(self):
-        ui_text = DataProvider().get_ui_text("trayicon")
+        ui_text = DataProvider().get_ui_text("trayicon", self.language_code)
         tray_menu = QMenu()
         self.new_file_action = QAction(ui_text.get("newFile"), self)
         self.new_file_action.setIcon(QIcon(str(self.icons_path.joinpath("file_icons", "newFile.png"))))

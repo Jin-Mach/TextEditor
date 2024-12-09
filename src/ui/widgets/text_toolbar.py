@@ -15,9 +15,10 @@ class TextToolbar(QToolBar):
     font_sizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
     combobox_colors = ["#000000", "#ffffff", "#1e90ff", "#32cd32", "#ff4500", "#ffa500", "#ffff00", "#9370db", "#8b4513", "#b22222"]
 
-    def __init__(self, text_edit: TextEdit, parent=None) -> None:
+    def __init__(self, language_code: str, text_edit: TextEdit, parent=None) -> None:
         super().__init__(parent)
         self.setObjectName("textToolbar")
+        self.language_code = language_code
         self.text_edit = text_edit
         self.text_manager = TextManager(self.text_edit, self)
         self.setAllowedAreas(Qt.ToolBarArea.TopToolBarArea)
@@ -174,7 +175,7 @@ class TextToolbar(QToolBar):
                 button.setIconSize(QSize(25, 25))
 
     def set_tooltips(self) -> None:
-        tooltips = DataProvider.get_tooltips("textTooltips")
+        tooltips = DataProvider.get_tooltips("textTooltips", self.language_code)
         for button in self.findChildren(QPushButton):
             if button.objectName() in tooltips:
                 tooltips_text = tooltips.get(button.objectName())

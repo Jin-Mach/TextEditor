@@ -12,9 +12,10 @@ from src.utilities.messagebox_manager import MessageboxManager
 class DialogManager:
     def __init__(self, parent=None) -> None:
         self.parent = parent
+        language_code = self.parent.language_code
         self.messagebox_manager = MessageboxManager(self.parent)
         self.dialog_path = pathlib.Path(__file__).resolve().anchor
-        self.ui_text = DataProvider.get_ui_text("dialog")
+        self.ui_text = DataProvider.get_ui_text("dialog", language_code)
 
     def open_file_dialog(self) -> Optional[str]:
         try:

@@ -14,15 +14,16 @@ from src.utilities.print_manager import Printmanager
 
 # noinspection PyUnresolvedReferences
 class FileToolbar(QToolBar):
-    def __init__(self, text_edit: TextEdit, file_manager: FileManager, print_manager: Printmanager, tray_icon: QSystemTrayIcon, parent=None) -> None:
+    def __init__(self, language_code: str, text_edit: TextEdit, file_manager: FileManager, print_manager: Printmanager, tray_icon: QSystemTrayIcon, parent=None) -> None:
         super().__init__(parent)
         self.setObjectName("fileToolbar")
+        self.language_code = language_code
         self.parent = parent
         self.text_edit = text_edit
         self.tray_icon = tray_icon
         self.file_manager = file_manager
         self.print_manager = print_manager
-        self.tray_icon_ui_text = DataProvider.get_ui_text("trayicon")
+        self.tray_icon_ui_text = DataProvider.get_ui_text("trayicon", self.language_code)
         self.setAllowedAreas(Qt.ToolBarArea.TopToolBarArea)
         self.setOrientation(Qt.Orientation.Horizontal)
         self.setFloatable(False)
@@ -112,7 +113,7 @@ class FileToolbar(QToolBar):
                 button.setIconSize(QSize(25, 25))
 
     def set_tooltips(self) -> None:
-        tooltips = DataProvider.get_tooltips("fileTooltips")
+        tooltips = DataProvider.get_tooltips("fileTooltips", self.language_code)
         for button in self.findChildren(QPushButton):
             if button.objectName() in tooltips:
                 tooltips_text = tooltips.get(button.objectName())
@@ -120,7 +121,7 @@ class FileToolbar(QToolBar):
                 button.setToolTipDuration(5000)
 
     def set_ui_text(self) -> None:
-        ui_text = DataProvider.get_ui_text("fileToolbar")
+        ui_text = DataProvider.get_ui_text("fileToolbar", self.language_code)
         self.search_label.setText(ui_text.get("searchLabel"))
         self.search_input.setPlaceholderText(ui_text.get("searchLineedit")["placeholderText"])
 
@@ -143,7 +144,6 @@ class FileToolbar(QToolBar):
         self.parent.findChild(QMenuBar, "menuBar").reset_menu_bar()
         self.reset_file_toolbar()
         self.parent.findChild(QToolBar, "textToolbar").reset_text_toolbar()
-        self.text_edit.reset_text_edit()
 
     def open_file(self) -> None:
         self.file_manager.open_file(self.parent.findChild(QMenuBar, "menuBar"), self)

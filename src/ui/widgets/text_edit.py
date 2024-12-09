@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QAction, QFont, QGuiApplication, QMouseEvent
+from PyQt6.QtGui import QAction, QFont, QGuiApplication, QMouseEvent, QTextDocument
 from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu, QApplication
 
 from src.utilities.data_provider import DataProvider
@@ -8,9 +8,10 @@ from src.utilities.messagebox_manager import MessageboxManager
 
 # noinspection PyUnresolvedReferences
 class TextEdit(QTextEdit):
-    def __init__(self, status_bar: QStatusBar, parent=None) -> None:
+    def __init__(self, language_code: str, status_bar: QStatusBar, parent=None) -> None:
         super().__init__(parent)
         self.setObjectName("textEdit")
+        self.language_code = language_code
         self.parent = parent
         self.status_bar = status_bar
         self.setFont(QFont("Arial", 14))
@@ -35,7 +36,7 @@ class TextEdit(QTextEdit):
         self.status_bar.update_count_labels(len(self.toPlainText()), lines_count, cursor_line, cursor_char)
 
     def contextMenuEvent(self, event) -> None:
-        ui_text = DataProvider.get_ui_text("textedit")
+        ui_text = DataProvider.get_ui_text("textedit", self.language_code)
         context_menu = QMenu(self)
         actions = [self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action, self.select_action,
                    self.delete_action]
@@ -75,9 +76,9 @@ class TextEdit(QTextEdit):
 
     def reset_text_edit(self) -> None:
         self.clear()
-        self.setFont(QFont("Arial", 14))
-        self.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        self.setFocus()
+        new_document = QTextDocument()
+        new_document.setDefaultFont(QFont("Arial", 14))
+        self.setDocument(new_document)
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
         if self.extraSelections():

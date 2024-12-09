@@ -14,9 +14,10 @@ from src.utilities.text_manager import TextManager
 
 # noinspection PyUnresolvedReferences
 class MenuBar(QMenuBar):
-    def __init__(self, text_edit: TextEdit, file_manager: FileManager, print_manager: Printmanager, text_manager: TextManager, parent=None):
+    def __init__(self, language_code: str, text_edit: TextEdit, file_manager: FileManager, print_manager: Printmanager, text_manager: TextManager, parent=None):
         super().__init__(parent)
         self.setObjectName("menuBar")
+        self.language_code = language_code
         self.parent = parent
         self.text_edit = text_edit
         self.file_manager = file_manager
@@ -117,7 +118,7 @@ class MenuBar(QMenuBar):
 
     def set_menus_ui_text(self) -> None:
         menus = [self.file_menu, self.edit_menu, self.format_menu]
-        ui_text = DataProvider.get_ui_text("menubar")
+        ui_text = DataProvider.get_ui_text("menubar", self.language_code)
         for menu in menus:
             menu.setTitle(ui_text.get(menu.objectName()))
 
@@ -127,7 +128,7 @@ class MenuBar(QMenuBar):
                    self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action, self.select_action,
                    self.delete_action, self.bold_action, self.italic_action, self.underline_action, self.strikeout_action,
                    self.aling_left_action, self.align_center_action, self.align_right_action, self.align_justify_action]
-        ui_text = DataProvider.get_ui_text("menubar")
+        ui_text = DataProvider.get_ui_text("menubar", self.language_code)
         for action in actions:
             action.setText(ui_text.get(action.objectName()))
 
@@ -190,7 +191,6 @@ class MenuBar(QMenuBar):
         self.reset_menu_bar()
         self.parent.findChild(QToolBar, "fileToolbar").reset_file_toolbar()
         self.parent.findChild(QToolBar, "textToolbar").reset_text_toolbar()
-        self.text_edit.reset_text_edit()
 
     def open_file(self) -> None:
         self.file_manager.open_file(self, self.parent.findChild(QToolBar, "fileToolbar"))

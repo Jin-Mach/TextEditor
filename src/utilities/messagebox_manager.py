@@ -10,7 +10,8 @@ from src.utilities.data_provider import DataProvider
 class MessageboxManager:
     def __init__(self, parent=None):
         self.parent = parent
-        self.ui_text = DataProvider.get_ui_text("messagebox")
+        self.language_code = self.parent.language_code
+        self.ui_text = DataProvider.get_ui_text("messagebox", self.language_code)
         self.icons_path = pathlib.Path(__file__).parent.parent.joinpath("icons", "dialog_icons")
 
     def show_load_error_message(self, exception_error: Exception, style_file_path: str) -> None:
@@ -89,18 +90,16 @@ class MessageboxManager:
         if message_box.clickedButton() == self.continue_button:
             return "continue"
 
-    @staticmethod
-    def set_tooltips(parent) -> None:
-        tooltips = DataProvider.get_tooltips("messageboxTooltips")
+    def set_tooltips(self, parent) -> None:
+        tooltips = DataProvider.get_tooltips("messageboxTooltips", self.language_code)
         for button in parent.findChildren(QPushButton):
             if button.objectName() in tooltips:
                 tooltips_text = tooltips.get(button.objectName())
                 button.setToolTip(tooltips_text)
                 button.setToolTipDuration(5000)
 
-    @staticmethod
-    def set_error_text(exception_error: Exception) -> str:
-        errors = DataProvider.get_errors()
+    def set_error_text(self, exception_error: Exception) -> str:
+        errors = DataProvider.get_errors(self.language_code)
         if isinstance(exception_error, FileNotFoundError):
             return errors.get("FileNotFound")
         elif isinstance(exception_error, PermissionError):

@@ -26,16 +26,17 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(str(self.application_icon)))
         self.setWindowTitle("Text Editor")
         self.setMinimumSize(1400, 800)
-        self.ui_text = DataProvider.get_ui_text("dialog")
-        self.status_bar = StatusBar(self)
-        self.text_edit = TextEdit(self.status_bar, self)
-        self.tray_icon = TrayIcon(self)
-        self.print_manager = Printmanager(self.text_edit, self)
-        self.file_manager = FileManager(self.text_edit, self.tray_icon, self)
+        self.language_code = DataProvider().get_language_code()
+        self.ui_text = DataProvider.get_ui_text("dialog", self.language_code)
+        self.status_bar = StatusBar(self.language_code, self)
+        self.text_edit = TextEdit(self.language_code, self.status_bar, self)
+        self.tray_icon = TrayIcon(self.language_code, self)
+        self.print_manager = Printmanager(self.language_code, self.text_edit, self)
+        self.file_manager = FileManager(self.language_code, self.text_edit, self.tray_icon, self)
         self.text_manager = TextManager(self.text_edit, self)
-        self.menu_bar = MenuBar(self.text_edit, self.file_manager, self.print_manager, self.text_manager, self)
-        self.file_toolbar = FileToolbar(self.text_edit, self.file_manager, self.print_manager, self.tray_icon, self)
-        self.text_toolbar = TextToolbar(self.text_edit, self)
+        self.menu_bar = MenuBar(self.language_code, self.text_edit, self.file_manager, self.print_manager, self.text_manager, self)
+        self.file_toolbar = FileToolbar(self.language_code, self.text_edit, self.file_manager, self.print_manager, self.tray_icon, self)
+        self.text_toolbar = TextToolbar(self.language_code, self.text_edit, self)
         self.addToolBar(self.file_toolbar)
         self.addToolBarBreak()
         self.addToolBar(self.text_toolbar)
@@ -50,7 +51,9 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event) -> None:
         try:
-            if self.text_edit.document().isModified():
+            if not self.text_edit.document().isModified() or not self.text_edit.toPlainText().strip():
+                event.accept()
+            else:
                 messagebox_manager = MessageboxManager(self)
                 result = messagebox_manager.show_save_question_message()
                 if result == "dontSave":
@@ -65,7 +68,5 @@ class MainWindow(QMainWindow):
                         event.ignore()
                 elif result == "cancel":
                     event.ignore()
-            else:
-                event.accept()
         except Exception as e:
             ExceptionManager.exception_handler(e)

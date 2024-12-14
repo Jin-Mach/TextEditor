@@ -11,7 +11,8 @@ from src.utilities.messagebox_manager import MessageboxManager
 class ApplicationTheme:
 
     @staticmethod
-    def set_light_theme(application: QApplication, style_file_path: pathlib.Path):
+    def set_light_theme(application: QApplication, parent=None):
+        style_file_path = pathlib.Path(__file__).parent.parent.joinpath("style", "styles.qss")
         palette = QPalette()
         palette.setColor(QPalette.ColorRole.Window, QColor("#F0F0F0"))
         palette.setColor(QPalette.ColorRole.WindowText, Qt.GlobalColor.black)
@@ -26,9 +27,9 @@ class ApplicationTheme:
         palette.setColor(QPalette.ColorRole.HighlightedText, Qt.GlobalColor.black)
         application.setPalette(palette)
         try:
-            with open(style_file_path, "r") as file:
+            with open(style_file_path, "r", encoding="utf-8") as file:
                 application.setStyleSheet(file.read())
         except Exception as e:
             setup_logger().error(str(e))
-            messagebox_manager = MessageboxManager()
+            messagebox_manager = MessageboxManager(parent)
             messagebox_manager.show_load_error_message(e, str(style_file_path))

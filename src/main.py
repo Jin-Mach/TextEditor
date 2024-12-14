@@ -5,12 +5,11 @@ from PyQt6.QtWidgets import QApplication
 
 from src.ui.main_window import MainWindow
 from src.utilities.application_theme import ApplicationTheme
-
-style_file_path = pathlib.Path(__file__).parent.joinpath("style", "styles.qss")
+from src.utilities.data_provider import DataProvider
 
 def create_app() -> None:
     application = QApplication(sys.argv)
-    ApplicationTheme.set_light_theme(application, style_file_path)
-    window = MainWindow()
+    window = MainWindow(DataProvider.get_language_code())
+    ApplicationTheme.set_light_theme(application, window)
     window.show()
     sys.exit(application.exec())

@@ -21,12 +21,12 @@ from src.utilities.tray_icon import TrayIcon
 class MainWindow(QMainWindow):
     application_icon = pathlib.Path(__file__).parent.parent.joinpath("icons", "applicationIcon.png")
 
-    def __init__(self, parent=None) -> None:
+    def __init__(self, language_code: str, parent=None) -> None:
         super().__init__(parent)
         self.setWindowIcon(QIcon(str(self.application_icon)))
         self.setWindowTitle("Text Editor")
         self.setMinimumSize(1400, 800)
-        self.language_code = DataProvider().get_language_code()
+        self.language_code = language_code
         self.ui_text = DataProvider.get_ui_text("dialog", self.language_code)
         self.status_bar = StatusBar(self.language_code, self)
         self.text_edit = TextEdit(self.language_code, self.status_bar, self)

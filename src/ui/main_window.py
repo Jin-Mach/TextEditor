@@ -1,5 +1,6 @@
 import pathlib
 
+from PyQt6.QtCore import QSize
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QMainWindow
 
@@ -14,18 +15,20 @@ from src.utilities.exception_manager import ExceptionManager
 from src.utilities.file_manager import FileManager
 from src.utilities.messagebox_manager import MessageboxManager
 from src.utilities.print_manager import Printmanager
+from src.utilities.settings_manager import SettingsManager
 from src.utilities.text_manager import TextManager
 from src.utilities.tray_icon import TrayIcon
 
 
 class MainWindow(QMainWindow):
+    default_window_size = QSize(1400, 800)
     application_icon = pathlib.Path(__file__).parent.parent.joinpath("icons", "applicationIcon.png")
 
     def __init__(self, language_code: str, parent=None) -> None:
         super().__init__(parent)
         self.setWindowIcon(QIcon(str(self.application_icon)))
         self.setWindowTitle("Text Editor")
-        self.setMinimumSize(1400, 800)
+        self.setMinimumSize(self.default_window_size)
         self.language_code = language_code
         self.ui_text = DataProvider.get_ui_text("dialog", self.language_code)
         self.status_bar = StatusBar(self.language_code, self)
@@ -44,6 +47,7 @@ class MainWindow(QMainWindow):
         self.setMenuBar(self.menu_bar)
         self.setStatusBar(self.status_bar)
         self.tray_icon.create_connection()
+        SettingsManager.load_settings(self, self.default_window_size)
 
     def create_gui(self) -> None:
         central_widget = self.text_edit
@@ -53,17 +57,20 @@ class MainWindow(QMainWindow):
         try:
             if not self.text_edit.document().isModified() or not self.text_edit.toPlainText().strip():
                 event.accept()
+                SettingsManager.save_settings(self)
             else:
                 messagebox_manager = MessageboxManager(self)
                 result = messagebox_manager.show_save_question_message()
                 if result == "dontSave":
                     event.accept()
+                    SettingsManager.save_settings(self)
                 elif result == "saveAs":
                     dialog = DialogManager(self)
                     file_path = dialog.save_document_dialog(f"{self.ui_text.get("fileFilter")}")
                     if file_path:
                         self.file_manager.save_document(file_path, ".txt")
                         event.accept()
+                        SettingsManager.save_settings(self)
                     else:
                         event.ignore()
                 elif result == "cancel":

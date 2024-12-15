@@ -10,9 +10,10 @@ from src.utilities.data_provider import DataProvider
 class MessageboxManager:
     def __init__(self, parent=None):
         self.parent = parent
-        self.language_code = self.parent.language_code
+        self.language_code = self.set_language()
         self.ui_text = DataProvider.get_ui_text("messagebox", self.language_code)
         self.icons_path = pathlib.Path(__file__).parent.parent.joinpath("icons", "dialog_icons")
+        self.set_language()
 
     def show_load_error_message(self, exception_error: Exception, style_file_path: str) -> None:
         message_box = QMessageBox()
@@ -118,3 +119,10 @@ class MessageboxManager:
             return errors.get("TimeoutError")
         else:
             return errors.get("UnexpectedError")
+
+    def set_language(self) -> str:
+        if self.parent:
+            language_code = self.parent.language_code
+        else:
+            language_code = DataProvider.get_language_code()
+        return language_code

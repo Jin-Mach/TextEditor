@@ -9,5 +9,5 @@
     "MemoryError": "Mémoire insuffisante lors de l'ouverture ou du traitement du fichier.",
     "TimeoutError": "L'opération a expiré lors de la tentative d'ouverture ou d'enregistrement du fichier.",
     "JSONDecodeError": "Le fichier n'est pas un JSON valide. Veuillez vérifier le format du fichier.",
-    "UnexpectedError": "Une erreur inattendue est survenue. Essayez de répéter l'action."
+    "UnexpectedError": "Une erreur inattendue est survenue."
 }

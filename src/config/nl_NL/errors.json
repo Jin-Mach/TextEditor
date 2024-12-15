@@ -9,5 +9,5 @@
     "MemoryError": "Onvoldoende geheugen bij het openen of verwerken van het bestand.",
     "TimeoutError": "De bewerking is verlopen tijdens het openen of opslaan van het bestand.",
     "JSONDecodeError": "Het bestand is geen geldige JSON. Controleer het bestandformaat alstublieft.",
-    "UnexpectedError": "Er is een onverwachte fout opgetreden. Probeer de actie opnieuw."
+    "UnexpectedError": "Er is een onverwachte fout opgetreden."
 }

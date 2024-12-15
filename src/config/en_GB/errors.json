@@ -9,5 +9,5 @@
     "MemoryError": "Insufficient memory when trying to open or process the file.",
     "TimeoutError": "Operation timed out while trying to open or save the file.",
     "JSONDecodeError": "The file is not a valid JSON. Please check the file format.",
-    "UnexpectedError": "An unexpected error occurred. Please try the action again."
+    "UnexpectedError": "An unexpected error occurred."
 }

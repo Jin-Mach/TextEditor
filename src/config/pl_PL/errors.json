@@ -9,5 +9,5 @@
   "MemoryError": "Brak pamięci podczas próby otwarcia lub przetworzenia pliku.",
   "TimeoutError": "Operacja przekroczyła limit czasu podczas próby otwarcia lub zapisania pliku.",
   "JSONDecodeError": "Plik nie jest prawidłowym JSON. Proszę sprawdzić format pliku.",
-  "UnexpectedError": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie."
+  "UnexpectedError": "Wystąpił nieoczekiwany błąd."
 }

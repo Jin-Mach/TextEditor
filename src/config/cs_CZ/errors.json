@@ -9,5 +9,5 @@
     "MemoryError": "Nedostatečná paměť při pokusu o otevření nebo zpracování souboru.",
     "TimeoutError": "Operace vypršela, zatímco se pokoušela otevřít nebo uložit soubor.",
     "JSONDecodeError": "Soubor není platný JSON. Zkontrolujte prosím formát souboru.",
-    "UnexpectedError": "Došlo k neočekávané chybě. Zkuste akci provést znovu."
+    "UnexpectedError": "Došlo k neočekávané chybě."
 }

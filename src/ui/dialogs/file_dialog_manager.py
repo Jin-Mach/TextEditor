@@ -5,11 +5,11 @@ from PyQt6.QtWidgets import QFileDialog
 
 from src.utilities.data_provider import DataProvider
 from src.utilities.exception_manager import ExceptionManager
-from src.utilities.messagebox_manager import MessageboxManager
+from src.ui.dialogs.messagebox_manager import MessageboxManager
 
 
 # noinspection PyUnresolvedReferences
-class DialogManager:
+class FileDialogManager:
     def __init__(self, parent=None) -> None:
         self.parent = parent
         language_code = self.parent.language_code

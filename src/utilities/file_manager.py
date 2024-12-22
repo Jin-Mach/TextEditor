@@ -9,8 +9,8 @@ from src.ui.widgets.text_toolbar import TextToolbar
 from src.ui.widgets.text_edit import TextEdit
 from src.utilities.data_provider import DataProvider
 from src.utilities.exception_manager import ExceptionManager
-from src.utilities.messagebox_manager import MessageboxManager
-from src.utilities.dialog_manager import DialogManager
+from src.ui.dialogs.messagebox_manager import MessageboxManager
+from src.ui.dialogs.file_dialog_manager import FileDialogManager
 
 
 # noinspection PyUnresolvedReferences
@@ -23,7 +23,7 @@ class FileManager:
         self.last_file_path = ""
         self.text_toolbar = TextToolbar(self.language_code, self.text_edit, self.parent)
         self.messagebox_manager = MessageboxManager(self.parent)
-        self.dialog_manager = DialogManager(self.parent)
+        self.dialog_manager = FileDialogManager(self.parent)
         self.dialog_ui_text = DataProvider.get_ui_text("dialog", self.language_code)
         self.messagebox_ui_text = DataProvider.get_ui_text("messagebox", self.language_code)
         self.tray_icon_ui_text = DataProvider.get_ui_text("trayicon", self.language_code)

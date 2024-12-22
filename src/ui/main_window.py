@@ -10,10 +10,10 @@ from src.ui.widgets.text_toolbar import TextToolbar
 from src.ui.widgets.text_edit import TextEdit
 from src.ui.widgets.status_bar import StatusBar
 from src.utilities.data_provider import DataProvider
-from src.utilities.dialog_manager import DialogManager
+from src.ui.dialogs.file_dialog_manager import FileDialogManager
 from src.utilities.exception_manager import ExceptionManager
 from src.utilities.file_manager import FileManager
-from src.utilities.messagebox_manager import MessageboxManager
+from src.ui.dialogs.messagebox_manager import MessageboxManager
 from src.utilities.print_manager import Printmanager
 from src.utilities.settings_manager import SettingsManager
 from src.utilities.text_manager import TextManager
@@ -65,7 +65,7 @@ class MainWindow(QMainWindow):
                     event.accept()
                     SettingsManager.save_settings(self)
                 elif result == "saveAs":
-                    dialog = DialogManager(self)
+                    dialog = FileDialogManager(self)
                     file_path = dialog.save_document_dialog(f"{self.ui_text.get("fileFilter")}")
                     if file_path:
                         self.file_manager.save_document(file_path, ".txt")

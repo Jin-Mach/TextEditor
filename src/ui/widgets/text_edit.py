@@ -3,7 +3,7 @@ from PyQt6.QtGui import QAction, QFont, QGuiApplication, QMouseEvent, QTextDocum
 from PyQt6.QtWidgets import QTextEdit, QStatusBar, QMenu, QApplication
 
 from src.utilities.data_provider import DataProvider
-from src.utilities.messagebox_manager import MessageboxManager
+from src.ui.dialogs.messagebox_manager import MessageboxManager
 
 
 # noinspection PyUnresolvedReferences

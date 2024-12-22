@@ -5,7 +5,7 @@ class ExceptionManager:
 
     @staticmethod
     def exception_handler(exception: Exception) -> None:
-        from src.utilities.messagebox_manager import MessageboxManager
+        from src.ui.dialogs.messagebox_manager import MessageboxManager
         logger = setup_logger()
         logger.error("An error occurred: %s", exception, exc_info=True)
         messagebox_manager = MessageboxManager()

@@ -6,7 +6,7 @@ from PyQt6.QtWidgets import QApplication
 from src.ui.widgets.text_edit import TextEdit
 from src.utilities.data_provider import DataProvider
 from src.utilities.exception_manager import ExceptionManager
-from src.utilities.messagebox_manager import MessageboxManager
+from src.ui.dialogs.messagebox_manager import MessageboxManager
 
 
 class Printmanager:

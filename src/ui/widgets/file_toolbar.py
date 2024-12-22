@@ -32,7 +32,7 @@ class FileToolbar(QToolBar):
         self.set_icons()
         self.set_ui_text()
         self.set_tooltips()
-        self.find_manager = FindManager(self.search_input, self.text_edit)
+        self.find_manager = FindManager(self.language_code, self.search_input, self.text_edit)
         self.create_connection()
 
     def create_main_gui(self) -> None:

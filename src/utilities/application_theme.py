@@ -5,7 +5,7 @@ from PyQt6.QtGui import QPalette, QColor
 from PyQt6.QtWidgets import QApplication
 
 from src.utilities.logging_manager import setup_logger
-from src.utilities.messagebox_manager import MessageboxManager
+from src.ui.dialogs.messagebox_manager import MessageboxManager
 
 
 class ApplicationTheme:

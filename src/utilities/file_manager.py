@@ -51,6 +51,9 @@ class FileManager:
                 if selected_file and pathlib.Path(selected_file).exists():
                     self.text_edit.reset_text_edit()
                     self.load_file_content(selected_file)
+                    self.last_file_path = selected_file
+                else:
+                    self.last_file_path = ""
             else:
                 result = self.messagebox_manager.show_save_question_message()
                 if result == "dontSave":
@@ -62,6 +65,8 @@ class FileManager:
                     self.save_file_as(menu_bar, file_toolbar, ".txt")
                 elif result == "cancel":
                     self.text_edit.setFocus()
+            menu_bar.save_action.setDisabled(not bool(self.last_file_path))
+            file_toolbar.save_button.setDisabled(not bool(self.last_file_path))
             self.text_edit.setFocus()
         except Exception as e:
             ExceptionManager.exception_handler(e)

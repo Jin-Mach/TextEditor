@@ -147,8 +147,6 @@ class FileToolbar(QToolBar):
 
     def open_file(self) -> None:
         self.file_manager.open_file(self.parent.findChild(QMenuBar, "menuBar"), self)
-        self.save_button.setDisabled(False)
-        self.parent.findChild(QMenuBar, "menuBar").save_action.setDisabled(False)
         self.parent.findChild(QToolBar, "textToolbar").reset_text_toolbar()
 
     def save_file(self, file_type: Optional[str]) -> None:

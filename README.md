@@ -1,5 +1,8 @@
 # Text Editor
 
+![Text Editor Screenshot](src/data/images/texteditor.png)
+*Screenshot of the main window of the Text Editor showing text formatting options.*
+
 ## Project Description
 A simple text editor designed for productive work with basic formatting options.
 

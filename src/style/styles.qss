@@ -269,6 +269,7 @@ QMenuBar {
     color: #000000;
     font-family: "Arial";
     font-size: 13px;
+    border-top: 1px solid #87CEFA;
     border-bottom: 1px solid #87CEFA;
 }
 
@@ -276,6 +277,7 @@ QMenuBar::item {
     padding: 5px 5px;
     background-color: #DCDCDC;
     color: #000000;
+    border-top: 1px solid #87CEFA;
 }
 
 QMenuBar::item:hover {

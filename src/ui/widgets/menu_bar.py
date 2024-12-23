@@ -2,7 +2,7 @@ import pathlib
 from typing import Optional
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QAction, QGuiApplication, QIcon
+from PyQt6.QtGui import QAction, QGuiApplication, QIcon, QKeySequence
 from PyQt6.QtWidgets import QMenuBar, QMenu, QToolBar
 
 from src.ui.widgets.text_edit import TextEdit
@@ -30,6 +30,7 @@ class MenuBar(QMenuBar):
         self.set_actions_ui_text()
         self.set_icons()
         self.create_connection()
+        self.set_shortcuts()
         self.update_edit_menu()
         self.show()
         self.text_edit.cursorPositionChanged.connect(self.update_edit_menu)
@@ -99,18 +100,18 @@ class MenuBar(QMenuBar):
         self.underline_action.setObjectName("underline")
         self.strikeout_action = QAction(self)
         self.strikeout_action.setObjectName("strikeout")
-        self.aling_left_action = QAction(self)
-        self.aling_left_action.setObjectName("alignLeft")
+        self.align_left_action = QAction(self)
+        self.align_left_action.setObjectName("alignLeft")
         self.align_center_action = QAction(self)
         self.align_center_action.setObjectName("alignCenter")
         self.align_right_action = QAction(self)
         self.align_right_action.setObjectName("alignRight")
         self.align_justify_action = QAction(self)
         self.align_justify_action.setObjectName("alignJustify")
-        actions = [self.bold_action, self.italic_action, self.underline_action, self.strikeout_action, self.aling_left_action,
+        actions = [self.bold_action, self.italic_action, self.underline_action, self.strikeout_action, self.align_left_action,
                    self.align_center_action, self.align_right_action, self.align_justify_action]
         for action in actions:
-            if action == self.aling_left_action:
+            if action == self.align_left_action:
                 self.format_menu.addSeparator()
                 self.format_menu.addAction(action)
             self.format_menu.addAction(action)
@@ -127,7 +128,7 @@ class MenuBar(QMenuBar):
                    self.save_as_pdf_action, self.print_preview_action, self.print_document_action, self.close_application_action,
                    self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action, self.select_action,
                    self.delete_action, self.bold_action, self.italic_action, self.underline_action, self.strikeout_action,
-                   self.aling_left_action, self.align_center_action, self.align_right_action, self.align_justify_action]
+                   self.align_left_action, self.align_center_action, self.align_right_action, self.align_justify_action]
         ui_text = DataProvider.get_ui_text("menubar", self.language_code)
         for action in actions:
             action.setText(ui_text.get(action.objectName()))
@@ -143,8 +144,8 @@ class MenuBar(QMenuBar):
             if action.objectName() in file_icons_dict.keys():
                 action.setIcon(QIcon(str(file_icons_dict[action.objectName()])))
         text_actions = [self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action, self.select_action,
-                   self.delete_action, self.bold_action, self.italic_action, self.underline_action, self.strikeout_action,
-                        self.aling_left_action, self.align_center_action, self.align_right_action, self.align_justify_action]
+                        self.delete_action, self.bold_action, self.italic_action, self.underline_action, self.strikeout_action,
+                        self.align_left_action, self.align_center_action, self.align_right_action, self.align_justify_action]
         for action in text_actions:
             if action.objectName() in text_icons_dict.keys():
                 action.setIcon(QIcon(str(text_icons_dict[action.objectName()])))
@@ -170,14 +171,40 @@ class MenuBar(QMenuBar):
         self.italic_action.triggered.connect(lambda: self.text_manager.set_text_format("italic"))
         self.underline_action.triggered.connect(lambda: self.text_manager.set_text_format("underline"))
         self.strikeout_action.triggered.connect(lambda: self.text_manager.set_text_format("strikeout"))
-        self.aling_left_action.triggered.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignLeft))
+        self.align_left_action.triggered.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignLeft))
         self.align_center_action.triggered.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignCenter))
         self.align_right_action.triggered.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignRight))
         self.align_justify_action.triggered.connect(lambda: self.text_manager.set_alignment(Qt.AlignmentFlag.AlignJustify))
 
+    def set_shortcuts(self) -> None:
+        self.new_file_action.setShortcut(QKeySequence("Ctrl+N"))
+        self.open_file_action.setShortcut(QKeySequence("Ctrl+O"))
+        self.save_as_action.setShortcut(QKeySequence("Ctrl+Shift+S"))
+        self.save_action.setShortcut(QKeySequence("Ctrl+S"))
+        self.save_as_html_action.setShortcut(QKeySequence("Ctrl+Alt+H"))
+        self.save_as_pdf_action.setShortcut(QKeySequence("Ctrl+Alt+P"))
+        self.print_preview_action.setShortcut(QKeySequence("Ctrl+Shift+P"))
+        self.print_document_action.setShortcut(QKeySequence("Ctrl+P"))
+        self.close_application_action.setShortcut(QKeySequence("Ctrl+Q"))
+        self.undo_action.setShortcut(QKeySequence("Ctrl+Z"))
+        self.redo_action.setShortcut(QKeySequence("Ctrl+Y"))
+        self.cut_action.setShortcut(QKeySequence("Ctrl+X"))
+        self.copy_action.setShortcut(QKeySequence("Ctrl+C"))
+        self.paste_action.setShortcut(QKeySequence("Ctrl+V"))
+        self.select_action.setShortcut(QKeySequence("Ctrl+A"))
+        self.delete_action.setShortcut(QKeySequence("Ctrl+Shift+Delete"))
+        self.bold_action.setShortcut(QKeySequence("Ctrl+B"))
+        self.italic_action.setShortcut(QKeySequence("Ctrl+I"))
+        self.underline_action.setShortcut(QKeySequence("Ctrl+U"))
+        self.strikeout_action.setShortcut(QKeySequence("Ctrl+Shift+X"))
+        self.align_left_action.setShortcut(QKeySequence("Ctrl+L"))
+        self.align_center_action.setShortcut(QKeySequence("Ctrl+E"))
+        self.align_right_action.setShortcut(QKeySequence("Ctrl+R"))
+        self.align_justify_action.setShortcut(QKeySequence("Ctrl+J"))
+
     def update_edit_menu(self) -> None:
         selection_actions = [self.cut_action, self.copy_action, self.bold_action, self.italic_action, self.underline_action,
-        self.strikeout_action, self.aling_left_action, self.align_center_action, self.align_right_action, self.align_justify_action]
+                             self.strikeout_action, self.align_left_action, self.align_center_action, self.align_right_action, self.align_justify_action]
         for action in selection_actions:
             action.setEnabled(self.text_edit.textCursor().hasSelection())
         self.undo_action.setEnabled(self.text_edit.document().isUndoAvailable())

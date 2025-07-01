@@ -9,7 +9,7 @@ from src.utilities.exception_manager import ExceptionManager
 from src.ui.dialogs.messagebox_manager import MessageboxManager
 
 
-class Printmanager:
+class PrintManager:
     def __init__(self, language_code: str, text_edit: TextEdit, parent=None) -> None:
         self.language_code = language_code
         self.text_edit = text_edit

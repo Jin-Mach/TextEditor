@@ -7,7 +7,7 @@ QMainWindow {
 QToolBar {
     background-color: #DCDCDC;
     border: none;
-    margins: 0;
+    margin: 0;
     padding: 0;
 }
 
@@ -99,14 +99,14 @@ QStatusBar {
 QStatusBar QLabel {
     border: 2px solid #87CEFA;
     border-radius: 5px;
-    font-size: 13px;
+    font-size: 15px;
     font-family: Arial;
     color: #000000;
 }
 
 QLabel {
     font-family: "Arial";
-    font-size: 12pt;
+    font-size: 15pt;
     color: #000000;
 }
 
@@ -116,7 +116,7 @@ QLineEdit {
     border: 2px solid #87CEFA;
     border-radius: 5px;
     font-family: "Arial";
-    font-size: 11pt;
+    font-size: 15pt;
     background-color: white;
     color: #000000;
 }
@@ -130,6 +130,8 @@ QToolTip {
     color: #333333;
     border: 1px solid #87CEFA;
     border-radius: 5px;
+    font-family: "Arial";
+    font-size: 14pt;
 }
 
 #textColor {
@@ -230,7 +232,7 @@ QMenu {
 QMenu::item {
     padding: 5px 20px;
     font-family: "Arial";
-    font-size: 10pt;
+    font-size: 15pt;
 }
 
 QMenu::item:selected {
@@ -268,7 +270,7 @@ QMenuBar {
     background-color: #DCDCDC;
     color: #000000;
     font-family: "Arial";
-    font-size: 13px;
+    font-size: 15px;
     border-top: 1px solid #87CEFA;
     border-bottom: 1px solid #87CEFA;
 }

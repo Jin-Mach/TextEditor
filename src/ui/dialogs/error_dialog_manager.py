@@ -13,20 +13,20 @@ from src.utilities.logging_manager import setup_logger
 class ErrorDialogManager:
     def __init__(self, parent=None) -> None:
         self.parent = parent
-        self.window_icon = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "dialog_icons", "loading.png")
 
-    def show_language_error_dialog(self, supported_languages: list) -> str:
+    def show_language_error_dialog(self, supported_languages: list) -> str | None:
         if not supported_languages:
-            self.show_empty_languages_warning()
+            ErrorDialogManager.show_empty_languages_warning()
+            return None
         else:
             dialog = QDialog()
-            dialog.setWindowIcon(QIcon(str(self.window_icon)))
+            ErrorDialogManager.set_existing_icon(dialog)
             dialog.setWindowTitle("Language error")
             dialog.setFixedSize(400, 150)
             main_layout = QVBoxLayout()
             text_label = QLabel("Application doesn't support OS language.\n"
                                 "Select supported language or exit application")
-            text_label.setFont(QFont("Arial", 11))
+            text_label.setFont(QFont("Arial", 15))
             text_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             select_layout = QFormLayout()
             form_text = QLabel("Selected language:")
@@ -56,24 +56,32 @@ class ErrorDialogManager:
             else:
                 sys.exit(0)
 
-    def show_empty_languages_warning(self) -> None:
+    @staticmethod
+    def show_empty_languages_warning() -> None:
         message_box = QMessageBox()
-        message_box.setWindowIcon(QIcon(self.window_icon))
+        ErrorDialogManager.set_existing_icon(message_box)
         message_box.setWindowTitle("Supported languages not found")
         message_box.setText("Could not find a supported language. "
                         "Please check the <a href='https://github.com/Jin-Mach/TextEditor'>please visit our GitHub repository</a> for more information.")
         message_box.exec()
 
-    def show_simple_error_messagebox(self, exception: Exception) -> None:
+    @staticmethod
+    def show_simple_error_messagebox(exception: Exception) -> None:
         message_box = QMessageBox()
-        message_box.setWindowIcon(QIcon(self.window_icon))
+        ErrorDialogManager.set_existing_icon(message_box)
         message_box.setWindowTitle("Unexpected error")
         message_box.setText(f"Error: {str(exception)}")
         if message_box.exec():
             sys.exit(1)
 
     @staticmethod
-    def set_language_name(languages: list) -> dict:
+    def set_existing_icon(dialog: QDialog | QMessageBox) -> None:
+        window_icon = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "dialog_icons", "loading.png")
+        if window_icon.exists():
+            dialog.setWindowIcon(QIcon(window_icon))
+
+    @staticmethod
+    def set_language_name(languages: list) -> dict | None:
         try:
             language_dict = {}
             for language in languages:
@@ -85,4 +93,5 @@ class ErrorDialogManager:
         except Exception as e:
             logger = setup_logger()
             logger.error("An error occurred: %s", e, exc_info=True)
-            self.show_empty_languages_warning(e)
+            ErrorDialogManager.show_empty_languages_warning(e)
+            return None

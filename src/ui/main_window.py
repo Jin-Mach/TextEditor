@@ -1,7 +1,4 @@
-import pathlib
-
 from PyQt6.QtCore import QSize
-from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QMainWindow
 
 from src.ui.widgets.file_toolbar import FileToolbar
@@ -14,7 +11,7 @@ from src.ui.dialogs.file_dialog_manager import FileDialogManager
 from src.utilities.exception_manager import ExceptionManager
 from src.utilities.file_manager import FileManager
 from src.ui.dialogs.messagebox_manager import MessageboxManager
-from src.utilities.print_manager import Printmanager
+from src.utilities.print_manager import PrintManager
 from src.utilities.settings_manager import SettingsManager
 from src.utilities.text_manager import TextManager
 from src.utilities.tray_icon import TrayIcon
@@ -22,11 +19,9 @@ from src.utilities.tray_icon import TrayIcon
 
 class MainWindow(QMainWindow):
     default_window_size = QSize(1400, 800)
-    application_icon = pathlib.Path(__file__).parent.parent.joinpath("icons", "applicationIcon.png")
 
     def __init__(self, language_code: str, parent=None) -> None:
         super().__init__(parent)
-        self.setWindowIcon(QIcon(str(self.application_icon)))
         self.setWindowTitle("Text Editor")
         self.setMinimumSize(self.default_window_size)
         self.language_code = language_code
@@ -34,7 +29,7 @@ class MainWindow(QMainWindow):
         self.status_bar = StatusBar(self.language_code, self)
         self.text_edit = TextEdit(self.language_code, self.status_bar, self)
         self.tray_icon = TrayIcon(self.language_code, self)
-        self.print_manager = Printmanager(self.language_code, self.text_edit, self)
+        self.print_manager = PrintManager(self.language_code, self.text_edit, self)
         self.file_manager = FileManager(self.language_code, self.text_edit, self.tray_icon, self)
         self.text_manager = TextManager(self.text_edit, self)
         self.menu_bar = MenuBar(self.language_code, self.text_edit, self.file_manager, self.print_manager, self.text_manager, self)

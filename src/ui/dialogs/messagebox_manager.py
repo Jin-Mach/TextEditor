@@ -12,12 +12,11 @@ class MessageboxManager:
         self.parent = parent
         self.language_code = self.set_language()
         self.ui_text = DataProvider.get_ui_text("messagebox", self.language_code)
-        self.icons_path = pathlib.Path(__file__).parent.parent.joinpath("icons", "dialog_icons")
         self.set_language()
 
     def show_load_error_message(self, exception_error: Exception, style_file_path: str) -> None:
         message_box = QMessageBox()
-        message_box.setWindowIcon(QIcon(str(self.icons_path.joinpath("loading.png"))))
+        MessageboxManager.set_existing_icon(message_box, "loading.png")
         message_box.setWindowTitle(self.ui_text.get("loadingError"))
         message_box.setIcon(QMessageBox.Icon.Critical)
         message_box.setText(self.set_error_text(exception_error) + "\n" + style_file_path)
@@ -33,7 +32,7 @@ class MessageboxManager:
     def show_error_message(self, exception_error: Exception) -> None:
         message_box = QMessageBox(self.parent)
         message_box.setWindowTitle(self.ui_text.get("errorMessage"))
-        message_box.setWindowIcon(QIcon(str(self.icons_path.joinpath("error.png"))))
+        MessageboxManager.set_existing_icon(message_box, "error.png")
         message_box.setText(self.set_error_text(exception_error))
         self.copy_button = message_box.addButton(self.ui_text.get("errorCopy"), QMessageBox.ButtonRole.AcceptRole)
         self.copy_button.setObjectName("errorCopy")
@@ -45,7 +44,7 @@ class MessageboxManager:
             QApplication.clipboard().setText(str(exception_error))
             message_box.close()
 
-    def show_save_question_message(self) -> str:
+    def show_save_question_message(self) -> str | None:
         message_box = QMessageBox(self.parent)
         message_box.setWindowTitle(self.ui_text.get("savequestionTitle"))
         message_box.setText(self.ui_text.get("savequestionText"))
@@ -67,6 +66,7 @@ class MessageboxManager:
             return "saveAs"
         elif message_box.clickedButton() == self.cancel_button:
             return "cancel"
+        return None
 
     def show_empty_document_message(self, text_edit: QTextEdit, text: str) -> None:
         message_box = QMessageBox(self.parent)
@@ -75,7 +75,13 @@ class MessageboxManager:
         message_box.exec()
         text_edit.setFocus()
 
-    def document_contains_text(self) -> str:
+    @staticmethod
+    def set_existing_icon(message_box: QMessageBox, icon_name: str) -> None:
+        icons_path = pathlib.Path(__file__).parent.parent.joinpath("icons", "dialog_icons")
+        if icons_path.exists():
+            message_box.setWindowIcon(QIcon(str(icons_path.joinpath(icon_name))))
+
+    def document_contains_text(self) -> str | None:
         message_box = QMessageBox(self.parent)
         message_box.setWindowTitle(self.ui_text.get("documentContainsTextTitle"))
         message_box.setText(self.ui_text.get("documentContainsTextMessage"))
@@ -90,6 +96,7 @@ class MessageboxManager:
         message_box.exec()
         if message_box.clickedButton() == self.continue_button:
             return "continue"
+        return None
 
     def set_tooltips(self, parent) -> None:
         tooltips = DataProvider.get_tooltips("messageboxTooltips", self.language_code)

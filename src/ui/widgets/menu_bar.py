@@ -1,5 +1,4 @@
 import pathlib
-from typing import Optional
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction, QGuiApplication, QIcon, QKeySequence
@@ -8,13 +7,13 @@ from PyQt6.QtWidgets import QMenuBar, QMenu, QToolBar
 from src.ui.widgets.text_edit import TextEdit
 from src.utilities.data_provider import DataProvider
 from src.utilities.file_manager import FileManager
-from src.utilities.print_manager import Printmanager
+from src.utilities.print_manager import PrintManager
 from src.utilities.text_manager import TextManager
 
 
 # noinspection PyUnresolvedReferences
 class MenuBar(QMenuBar):
-    def __init__(self, language_code: str, text_edit: TextEdit, file_manager: FileManager, print_manager: Printmanager, text_manager: TextManager, parent=None):
+    def __init__(self, language_code: str, text_edit: TextEdit, file_manager: FileManager, print_manager: PrintManager, text_manager: TextManager, parent=None):
         super().__init__(parent)
         self.setObjectName("menuBar")
         self.language_code = language_code
@@ -134,21 +133,25 @@ class MenuBar(QMenuBar):
             action.setText(ui_text.get(action.objectName()))
 
     def set_icons(self) -> None:
-        file_icons_dict = DataProvider.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "file_icons"))
-        text_icons_dict = DataProvider.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "text_icons"))
-        close_app_icon = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "closeApplication")
-        self.close_application_action.setIcon(QIcon(str(close_app_icon)))
-        file_actions = [self.new_file_action, self.open_file_action, self.save_as_action, self.save_action, self.save_as_html_action,
-                   self.save_as_pdf_action, self.print_preview_action, self.print_document_action, self.close_application_action]
-        for action in file_actions:
-            if action.objectName() in file_icons_dict.keys():
-                action.setIcon(QIcon(str(file_icons_dict[action.objectName()])))
-        text_actions = [self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action, self.select_action,
-                        self.delete_action, self.bold_action, self.italic_action, self.underline_action, self.strikeout_action,
-                        self.align_left_action, self.align_center_action, self.align_right_action, self.align_justify_action]
-        for action in text_actions:
-            if action.objectName() in text_icons_dict.keys():
-                action.setIcon(QIcon(str(text_icons_dict[action.objectName()])))
+        file_icons_path = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "file_icons")
+        text_icons_path = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "text_icons")
+        if file_icons_path.exists() and text_icons_path.exists():
+            file_icons_dict = DataProvider.get_icons(file_icons_path)
+            text_icons_dict = DataProvider.get_icons(text_icons_path)
+            close_app_icon = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "closeApplication")
+            if close_app_icon.exists():
+                self.close_application_action.setIcon(QIcon(str(close_app_icon)))
+            file_actions = [self.new_file_action, self.open_file_action, self.save_as_action, self.save_action, self.save_as_html_action,
+                       self.save_as_pdf_action, self.print_preview_action, self.print_document_action, self.close_application_action]
+            for action in file_actions:
+                if action.objectName() in file_icons_dict.keys():
+                    action.setIcon(QIcon(str(file_icons_dict[action.objectName()])))
+            text_actions = [self.undo_action, self.redo_action, self.cut_action, self.copy_action, self.paste_action, self.select_action,
+                            self.delete_action, self.bold_action, self.italic_action, self.underline_action, self.strikeout_action,
+                            self.align_left_action, self.align_center_action, self.align_right_action, self.align_justify_action]
+            for action in text_actions:
+                if action.objectName() in text_icons_dict.keys():
+                    action.setIcon(QIcon(str(text_icons_dict[action.objectName()])))
 
     def create_connection(self) -> None:
         self.new_file_action.triggered.connect(self.new_file)
@@ -223,7 +226,7 @@ class MenuBar(QMenuBar):
         self.file_manager.open_file(self, self.parent.findChild(QToolBar, "fileToolbar"))
         self.parent.findChild(QToolBar, "textToolbar").reset_text_toolbar()
 
-    def save_file(self, file_type: Optional[str]) -> None:
+    def save_file(self, file_type: str | None) -> None:
         if file_type is None:
             self.file_manager.save_file()
         else:

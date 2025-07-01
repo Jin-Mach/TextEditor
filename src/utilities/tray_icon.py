@@ -12,18 +12,25 @@ class TrayIcon(QSystemTrayIcon):
     def __init__(self, language_code: str, parent=None) -> None:
         super().__init__(parent)
         self.language_code = language_code
-        self.setIcon(QIcon(str(self.icons_path.joinpath("applicationIcon.png"))))
+        if self.icons_path.exists():
+            self.setIcon(QIcon(str(self.icons_path.joinpath("applicationIcon.png"))))
         self.create_gui()
 
     def create_gui(self):
         ui_text = DataProvider().get_ui_text("trayicon", self.language_code)
         tray_menu = QMenu()
         self.new_file_action = QAction(ui_text.get("newFile"), self)
-        self.new_file_action.setIcon(QIcon(str(self.icons_path.joinpath("file_icons", "newFile.png"))))
+        new_file_icon_path = self.icons_path.joinpath("file_icons", "newFile.png")
+        if new_file_icon_path.exists():
+            self.new_file_action.setIcon(QIcon(str(new_file_icon_path)))
         self.open_file_action = QAction(ui_text.get("openFile"), self)
-        self.open_file_action.setIcon(QIcon(str(self.icons_path.joinpath("file_icons", "openFile"))))
+        open_file_icon_path = self.icons_path.joinpath("file_icons", "openFile.png")
+        if open_file_icon_path.exists():
+            self.open_file_action.setIcon(QIcon(str(open_file_icon_path)))
         self.quit_action = QAction(ui_text.get("closeApplication"), self)
-        self.quit_action.setIcon(QIcon(str(self.icons_path.joinpath("closeApplication.png"))))
+        quit_icon_path = self.icons_path.joinpath("closeApplication.png")
+        if quit_icon_path.exists():
+            self.quit_action.setIcon(QIcon(str(quit_icon_path)))
         tray_menu.addAction(self.new_file_action)
         tray_menu.addAction(self.open_file_action)
         tray_menu.addSeparator()

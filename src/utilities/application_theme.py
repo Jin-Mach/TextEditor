@@ -26,10 +26,11 @@ class ApplicationTheme:
         palette.setColor(QPalette.ColorRole.Highlight, QColor("#87CEFA"))
         palette.setColor(QPalette.ColorRole.HighlightedText, Qt.GlobalColor.black)
         application.setPalette(palette)
-        try:
-            with open(style_file_path, "r", encoding="utf-8") as file:
-                application.setStyleSheet(file.read())
-        except Exception as e:
-            setup_logger().error(str(e))
-            messagebox_manager = MessageboxManager(parent)
-            messagebox_manager.show_load_error_message(e, str(style_file_path))
+        if style_file_path.exists():
+            try:
+                with open(style_file_path, "r", encoding="utf-8") as file:
+                    application.setStyleSheet(file.read())
+            except Exception as e:
+                setup_logger().error(str(e))
+                messagebox_manager = MessageboxManager(parent)
+                messagebox_manager.show_load_error_message(e, str(style_file_path))

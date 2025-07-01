@@ -71,7 +71,7 @@ class FileManager:
         except Exception as e:
             ExceptionManager.exception_handler(e)
 
-    def save_file_as(self, menu_bar: QMenuBar, file_toolbar: QToolBar,  file_type: str) -> bool:
+    def save_file_as(self, menu_bar: QMenuBar, file_toolbar: QToolBar,  file_type: str) -> bool | None:
         try:
             if not self.text_edit.toPlainText():
                 self.messagebox_manager.show_empty_document_message(self.text_edit, self.messagebox_ui_text.get("emptytextText"))
@@ -86,6 +86,7 @@ class FileManager:
                 self.text_edit.setFocus()
         except Exception as e:
             ExceptionManager.exception_handler(e)
+            return None
 
     def save_file(self) -> None:
         try:

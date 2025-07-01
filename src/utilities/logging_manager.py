@@ -3,6 +3,7 @@ from logging.handlers import RotatingFileHandler
 import pathlib
 
 logging_file = pathlib.Path.joinpath(pathlib.Path(__file__).parent.parent, "data", "log_files", "texteditor_errors.log")
+logging_file.parent.mkdir(parents=True, exist_ok=True)
 
 def setup_logger() -> logging.Logger:
     formater = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')

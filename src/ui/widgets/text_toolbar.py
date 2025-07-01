@@ -11,8 +11,10 @@ from src.utilities.text_manager import TextManager
 
 # noinspection PyUnresolvedReferences
 class TextToolbar(QToolBar):
-    font_list = ["Arial", "Calibri", "Comic Sans MS", "Courier New", "Georgia", "Impact", "Tahoma", "Times New Roman", "Trebuchet MS", "Verdana"]
-    font_sizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
+    combobox_font = QFont()
+    combobox_font.setPointSize(18)
+    font_list = ["Arial", "Comic Sans MS", "Courier New", "Georgia", "Helvetica", "Impact", "Tahoma", "Times New Roman", "Trebuchet MS", "Verdana"]
+    font_sizes = [10, 12, 14, 16, 18, 20, 22, 26, 30, 34, 38, 42, 46, 50]
     combobox_colors = ["#000000", "#ffffff", "#1e90ff", "#32cd32", "#ff4500", "#ffa500", "#ffff00", "#9370db", "#8b4513", "#b22222"]
 
     def __init__(self, language_code: str, text_edit: TextEdit, parent=None) -> None:
@@ -49,15 +51,27 @@ class TextToolbar(QToolBar):
         font_layout = QHBoxLayout()
         self.font_family_combobox = QComboBox()
         self.font_family_combobox.setObjectName("fontFamily")
+        self.font_family_combobox.setFixedWidth(200)
+        self.font_family_combobox.setFixedHeight(30)
+        self.font_family_combobox.setFont(self.combobox_font)
+        self.font_family_combobox.view().setFont(self.combobox_font)
         for font in self.font_list:
             self.font_family_combobox.addItem(font)
             index = self.font_family_combobox.count() - 1
             self.font_family_combobox.setItemData(index, QFont(font), role=Qt.ItemDataRole.FontRole)
         self.font_size_combobox = QComboBox()
         self.font_size_combobox.setObjectName("fontSize")
+        self.font_size_combobox.setFixedWidth(100)
+        self.font_size_combobox.setFixedHeight(30)
+        self.font_size_combobox.setFont(self.combobox_font)
+        self.font_size_combobox.view().setFont(self.combobox_font)
         for size in self.font_sizes:
             self.font_size_combobox.addItem(str(size))
-        self.font_size_combobox.setCurrentText("14")
+            index = self.font_size_combobox.count() - 1
+            font_for_size = QFont()
+            font_for_size.setPointSize(20)
+            self.font_size_combobox.setItemData(index, font_for_size, role=Qt.ItemDataRole.FontRole)
+        self.font_size_combobox.setCurrentText("20")
         font_layout.addWidget(self.font_family_combobox)
         font_layout.addWidget(self.font_size_combobox)
         font_widget.setLayout(font_layout)
@@ -142,6 +156,7 @@ class TextToolbar(QToolBar):
         self.text_color_combobox.setObjectName("textColor")
         self.text_color_combobox.setFixedWidth(40)
         self.text_color_combobox.setFixedHeight(30)
+        self.text_color_combobox.setIconSize(QSize(25, 25))
         for color in self.combobox_colors:
             icon = self.create_color_icon(color)
             self.text_color_combobox.addItem(icon, color)
@@ -153,6 +168,7 @@ class TextToolbar(QToolBar):
         self.background_color_combobox.setObjectName("backgroundColor")
         self.background_color_combobox.setFixedWidth(40)
         self.background_color_combobox.setFixedHeight(30)
+        self.background_color_combobox.setIconSize(QSize(25, 25))
         for color in self.combobox_colors:
             icon = self.create_color_icon(color)
             self.background_color_combobox.addItem(icon, color)
@@ -166,13 +182,15 @@ class TextToolbar(QToolBar):
         return colors_widget
 
     def set_icons(self) -> None:
-        icons_dict = DataProvider.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "text_icons"))
-        buttons = self.findChildren(QPushButton)
-        for button in buttons:
-            name = button.objectName()
-            if name in icons_dict.keys():
-                button.setIcon(QIcon(str(icons_dict[name])))
-                button.setIconSize(QSize(25, 25))
+        icons_path = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "text_icons")
+        if icons_path.exists():
+            icons_dict = DataProvider.get_icons(icons_path)
+            buttons = self.findChildren(QPushButton)
+            for button in buttons:
+                name = button.objectName()
+                if name in icons_dict.keys():
+                    button.setIcon(QIcon(str(icons_dict[name])))
+                    button.setIconSize(QSize(25, 25))
 
     def set_tooltips(self) -> None:
         tooltips = DataProvider.get_tooltips("textTooltips", self.language_code)
@@ -218,7 +236,7 @@ class TextToolbar(QToolBar):
         buttons = [self.bold_text_button, self.italic_text_button, self.underline_text_button, self.strikeout_text_button,
                    self.align_left_button, self.align_center_button, self.align_right_button, self.align_justified_button]
         self.font_family_combobox.setCurrentIndex(self.font_family_combobox.findText("Arial"))
-        self.font_size_combobox.setCurrentIndex(self.font_size_combobox.findText("14"))
+        self.font_size_combobox.setCurrentIndex(self.font_size_combobox.findText("20"))
         for button in buttons:
             button.setChecked(False)
         self.text_color_combobox.setCurrentIndex(self.text_color_combobox.findText("#000000"))
@@ -273,7 +291,7 @@ class TextToolbar(QToolBar):
                 font_family = "Arial"
             font_size = font.pointSize()
             if not font_size:
-                font_size = 14
+                font_size = 20
             is_bold = font.bold()
             is_italic = font.italic()
             is_underline = font.underline()
@@ -285,7 +303,7 @@ class TextToolbar(QToolBar):
             if background_color == "#000000":
                 background_color = "#ffffff"
             return str(font_family), str(font_size), is_bold, is_italic, is_underline, is_strikeout, alignment_name, text_color, background_color
-        return "Arial", "14", False, False, False, False, "alignLeft", "#000000", "#ffffff"
+        return "Arial", "20", False, False, False, False, "alignLeft", "#000000", "#ffffff"
 
     @staticmethod
     def block_signals(widgets: list) -> None:

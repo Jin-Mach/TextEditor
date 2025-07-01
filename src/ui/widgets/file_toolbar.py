@@ -1,5 +1,4 @@
 import pathlib
-from typing import Optional
 
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
@@ -9,12 +8,12 @@ from src.ui.widgets.text_edit import TextEdit
 from src.utilities.data_provider import DataProvider
 from src.utilities.file_manager import FileManager
 from src.utilities.find_manager import FindManager
-from src.utilities.print_manager import Printmanager
+from src.utilities.print_manager import PrintManager
 
 
 # noinspection PyUnresolvedReferences
 class FileToolbar(QToolBar):
-    def __init__(self, language_code: str, text_edit: TextEdit, file_manager: FileManager, print_manager: Printmanager, tray_icon: QSystemTrayIcon, parent=None) -> None:
+    def __init__(self, language_code: str, text_edit: TextEdit, file_manager: FileManager, print_manager: PrintManager, tray_icon: QSystemTrayIcon, parent=None) -> None:
         super().__init__(parent)
         self.setObjectName("fileToolbar")
         self.language_code = language_code
@@ -104,13 +103,15 @@ class FileToolbar(QToolBar):
         return search_widget
 
     def set_icons(self) -> None:
-        icons_dict = DataProvider.get_icons(pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "file_icons"))
-        buttons = self.findChildren(QPushButton)
-        for button in buttons:
-            name = button.objectName()
-            if name in icons_dict.keys():
-                button.setIcon(QIcon(str(icons_dict[name])))
-                button.setIconSize(QSize(25, 25))
+        icons_path = pathlib.Path(__file__).parent.parent.parent.joinpath("icons", "file_icons")
+        if icons_path.exists():
+            icons_dict = DataProvider.get_icons(icons_path)
+            buttons = self.findChildren(QPushButton)
+            for button in buttons:
+                name = button.objectName()
+                if name in icons_dict.keys():
+                    button.setIcon(QIcon(str(icons_dict[name])))
+                    button.setIconSize(QSize(25, 25))
 
     def set_tooltips(self) -> None:
         tooltips = DataProvider.get_tooltips("fileTooltips", self.language_code)
@@ -149,7 +150,7 @@ class FileToolbar(QToolBar):
         self.file_manager.open_file(self.parent.findChild(QMenuBar, "menuBar"), self)
         self.parent.findChild(QToolBar, "textToolbar").reset_text_toolbar()
 
-    def save_file(self, file_type: Optional[str]) -> None:
+    def save_file(self, file_type: str | None) -> None:
         if file_type is None:
             self.file_manager.save_file()
         else:

@@ -14,7 +14,7 @@ class TextEdit(QTextEdit):
         self.language_code = language_code
         self.parent = parent
         self.status_bar = status_bar
-        self.setFont(QFont("Arial", 14))
+        self.setFont(QFont("Arial", 20))
         self.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.setLineWrapMode(QTextEdit.LineWrapMode.WidgetWidth)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
@@ -77,7 +77,7 @@ class TextEdit(QTextEdit):
     def reset_text_edit(self) -> None:
         self.clear()
         new_document = QTextDocument()
-        new_document.setDefaultFont(QFont("Arial", 14))
+        new_document.setDefaultFont(QFont("Arial", 20))
         self.setDocument(new_document)
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
